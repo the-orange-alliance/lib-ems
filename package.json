@@ -1,0 +1,7 @@
+{
+  "name": "lib-ems",
+  "description": "TypeScript library for TOA/EMS model classes and shared resources.",
+  "version": "0.0.1",
+  "author": "Kyle Flynn",
+  "license": "GPL-2.0"
+}
