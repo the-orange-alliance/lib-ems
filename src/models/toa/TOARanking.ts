@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class TOARanking implements IPostableObject {
   private _rankKey: string;
   private _eventKey: string;

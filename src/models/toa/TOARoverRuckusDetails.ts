@@ -1,3 +1,4 @@
+import IPostableObject from "../IPostableObject";
 import MatchDetails from "./TOAMatchDetails";
 
 export default class TOARoverRuckusDetails extends MatchDetails implements IPostableObject {

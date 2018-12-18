@@ -1,4 +1,4 @@
-import Team from "../models/Team";
+import Team from "../models/ems/Team";
 import TOAEventParticipant from "../models/toa/TOAEventParticipant";
 
 export default class TOAEventParticipantAdapter {

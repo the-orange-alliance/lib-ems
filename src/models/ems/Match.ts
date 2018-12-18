@@ -1,3 +1,4 @@
+import IPostableObject from "../IPostableObject";
 import * as moment from "moment";
 import MatchParticipant from "./MatchParticipant";
 import MatchDetails from "./MatchDetails";

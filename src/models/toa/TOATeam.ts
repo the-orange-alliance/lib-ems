@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class TOATeam  implements IPostableObject {
   private _teamKey: string;
   private _regionKey: string;

@@ -1,7 +1,7 @@
 export default class HttpError {
-  private _httpCode: number;
-  private _errorStr: string;
-  private _message: string;
+  private readonly _httpCode: number;
+  private readonly _errorStr: string;
+  private readonly _message: string;
 
   constructor(httpCode: number, errorStr: string, message: string) {
     this._httpCode = httpCode;

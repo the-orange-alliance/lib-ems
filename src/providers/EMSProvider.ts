@@ -1,14 +1,15 @@
+import IPostableObject from "../models/IPostableObject";
 import {default as Axios, AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse} from "axios";
-import HttpError from "../models/HttpError";
-import Event from "../models/Event";
-import {EMSEventTypes, TournamentLevels} from "../AppTypes";
-import Team from "../models/Team";
-import ScheduleItem from "../models/ScheduleItem";
-import Match from "../models/Match";
-import MatchParticipant from "../models/MatchParticipant";
-import Ranking from "../models/Ranking";
-import MatchDetails from "../models/MatchDetails";
-import AllianceMember from "../models/AllianceMember";
+import HttpError from "../models/ems/HttpError";
+import Event from "../models/ems/Event";
+import Team from "../models/ems/Team";
+import ScheduleItem from "../models/ems/ScheduleItem";
+import Match from "../models/ems/Match";
+import MatchParticipant from "../models/ems/MatchParticipant";
+import Ranking from "../models/ems/Ranking";
+import MatchDetails from "../models/ems/MatchDetails";
+import AllianceMember from "../models/ems/AllianceMember";
+import {EventType, TournamentType} from "../Types";
 
 const PORT = process.env.REACT_APP_EMS_API_PORT;
 
@@ -134,7 +135,7 @@ class EMSProvider {
     return this.get("ping");
   }
 
-  public createEvent(eventType: EMSEventTypes): Promise<AxiosResponse> {
+  public createEvent(eventType: EventType): Promise<AxiosResponse> {
     return this.get("api/event/create?type=" + eventType);
   }
 
@@ -150,7 +151,7 @@ class EMSProvider {
     return this.get("api/team");
   }
 
-  public getScheduleItems(type: TournamentLevels): Promise<AxiosResponse> {
+  public getScheduleItems(type: TournamentType): Promise<AxiosResponse> {
     return this.get("api/schedule/" + type);
   }
 
@@ -186,11 +187,11 @@ class EMSProvider {
     return this.get("api/match/" + matchKey + "/teams");
   }
 
-  public calculateRankings(tournamentLevel: number, eventType: EMSEventTypes): Promise<AxiosResponse> {
+  public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<AxiosResponse> {
     return this.get("api/ranking/calculate/" + tournamentLevel + "?type=" + eventType)
   }
 
-  public deleteScheduleItems(type: TournamentLevels): Promise<AxiosResponse> {
+  public deleteScheduleItems(type: TournamentType): Promise<AxiosResponse> {
     return this.delete("api/schedule/" + type);
   }
 

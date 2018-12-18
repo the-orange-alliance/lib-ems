@@ -3,5 +3,20 @@
   "description": "TypeScript library for TOA/EMS model classes and shared resources.",
   "version": "0.0.1",
   "author": "Kyle Flynn",
-  "license": "GPL-2.0"
+  "license": "GPL-2.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -- --watch"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "moment": "^2.23.0",
+    "socket.io-client": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/socket.io-client": "^1.4.32",
+    "typescript": "^3.2.2"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

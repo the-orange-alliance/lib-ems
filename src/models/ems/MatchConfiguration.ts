@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class MatchConfiguration implements IPostableObject {
   private _delayTime: number;
   private _autoTime: number;

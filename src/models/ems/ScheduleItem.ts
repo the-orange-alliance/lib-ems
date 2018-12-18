@@ -1,9 +1,10 @@
+import IPostableObject from "../IPostableObject";
 import * as moment from "moment";
-import {TournamentLevels} from "../AppTypes";
+import {TournamentType} from "../../Types";
 
 export default class ScheduleItem implements IPostableObject {
 
-  private readonly _type: TournamentLevels;
+  private readonly _type: TournamentType;
   private _key: string;
   private _name: string;
   private _day: number;
@@ -11,7 +12,7 @@ export default class ScheduleItem implements IPostableObject {
   private _duration: number;
   private _isMatch: boolean;
 
-  constructor(type: TournamentLevels) {
+  constructor(type: TournamentType) {
     this._type = type;
     this._key = "";
     this._name = "";
@@ -56,7 +57,7 @@ export default class ScheduleItem implements IPostableObject {
     this._key = value;
   }
 
-  get type(): TournamentLevels {
+  get type(): TournamentType {
     return this._type;
   }
 

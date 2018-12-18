@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import DayBreak from "./DayBreak";
+import IPostableObject from "../IPostableObject";
 
 export default class Day implements IPostableObject {
   private _id: number;

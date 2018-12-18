@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class TOAConfig implements IPostableObject {
   private _eventKey: string;
   private _apiKey: string;

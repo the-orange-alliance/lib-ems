@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class TOAMatchDetails implements IPostableObject {
   private _matchDetailKey: string;
   private _matchKey: string;

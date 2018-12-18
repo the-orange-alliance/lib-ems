@@ -1,4 +1,5 @@
-import {TeamIdentifier} from "../AppTypes";
+import IPostableObject from "../IPostableObject";
+import {TeamIdentifier} from "../../Types";
 
 export default class Team implements IPostableObject {
   private _teamKey: number;

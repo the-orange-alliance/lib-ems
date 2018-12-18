@@ -21,21 +21,15 @@ class SocketProvider {
     this._client.open();
   }
 
-  public emit(event: string, ...args: any[]): void {
+  public emit(event: string, ...args: any): void {
     if (typeof this._client !== "undefined") {
-      this._client.emit(event, args);
+      this._client.emit(event, ...args);
     }
   }
 
   public send(event: string, arg: any): void {
     if (typeof this._client !== "undefined") {
       this._client.emit(event, arg);
-    }
-  }
-
-  public sendTwo(event: string, arg: any, arg2: any): void {
-    if (typeof this._client !== "undefined") {
-      this._client.emit(event, arg, arg2);
     }
   }
 

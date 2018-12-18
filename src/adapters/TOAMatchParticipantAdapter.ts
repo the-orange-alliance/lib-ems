@@ -1,4 +1,4 @@
-import MatchParticipant from "../models/MatchParticipant";
+import MatchParticipant from "../models/ems/MatchParticipant";
 import TOAMatchParticipant from "../models/toa/TOAMatchParticipant";
 
 export default class TOAMatchParticipantAdapter {

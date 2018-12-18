@@ -1,8 +1,9 @@
-import {EliminationsFormats, EMSEventTypes, PostQualConfig, TeamIdentifier} from "../AppTypes";
+import IPostableObject from "../IPostableObject";
+import {EliminationFormat, EventType, PlayoffsType, TeamIdentifier} from "../../Types";
 
 export default class EventConfiguration implements IPostableObject {
-  private _eventType: EMSEventTypes;
-  private _postQualConfig: PostQualConfig;
+  private _eventType: EventType;
+  private _postQualConfig: PlayoffsType;
   private _teamIdentifier: TeamIdentifier;
   private _requiresTOA: boolean;
   private _teamsPerAlliance: number;
@@ -11,7 +12,7 @@ export default class EventConfiguration implements IPostableObject {
   // Variables that are post-qual specific
   private _allianceCaptains: number;
   private _rankingCutoff: number;
-  private _elimsFormat: EliminationsFormats;
+  private _elimsFormat: EliminationFormat;
 
   // Variables that aren't necessary in standard mode
   private _fieldsControlled: number[];
@@ -24,7 +25,7 @@ export default class EventConfiguration implements IPostableObject {
   public toJSON(): object {
     return {
       event_type: this.eventType,
-      post_qual_config: this.postQualConfig,
+      post_qual_config: this.playoffsConfig,
       team_identifier: this.teamIdentifier,
       requires_toa: this.requiresTOA,
       teams_per_alliance: this.teamsPerAlliance,
@@ -39,7 +40,7 @@ export default class EventConfiguration implements IPostableObject {
   public fromJSON(json: any): EventConfiguration {
     const config: EventConfiguration = new EventConfiguration();
     config.eventType = json.event_type;
-    config.postQualConfig = json.post_qual_config;
+    config.playoffsConfig = json.post_qual_config;
     config.teamIdentifier = json.team_identifier;
     config.requiresTOA = json.requires_toa;
     config.teamsPerAlliance = json.teams_per_alliance;
@@ -51,19 +52,19 @@ export default class EventConfiguration implements IPostableObject {
     return config;
   }
 
-  get eventType(): EMSEventTypes {
+  get eventType(): EventType {
     return this._eventType;
   }
 
-  set eventType(value: EMSEventTypes) {
+  set eventType(value: EventType) {
     this._eventType = value;
   }
 
-  get postQualConfig(): PostQualConfig {
+  get playoffsConfig(): PlayoffsType {
     return this._postQualConfig;
   }
 
-  set postQualConfig(value: PostQualConfig) {
+  set playoffsConfig(value: PlayoffsType) {
     this._postQualConfig = value;
   }
 
@@ -123,18 +124,18 @@ export default class EventConfiguration implements IPostableObject {
     this._fieldsControlled = value;
   }
 
-  get elimsFormat(): EliminationsFormats {
+  get elimsFormat(): EliminationFormat {
     return this._elimsFormat;
   }
 
-  set elimsFormat(value: EliminationsFormats) {
+  set elimsFormat(value: EliminationFormat) {
     this._elimsFormat = value;
   }
 }
 
 export const FGC_EI_PRESET = new EventConfiguration();
 FGC_EI_PRESET.eventType = "fgc_2018";
-FGC_EI_PRESET.postQualConfig = "finals";
+FGC_EI_PRESET.playoffsConfig = "finals";
 FGC_EI_PRESET.teamIdentifier = "country";
 FGC_EI_PRESET.requiresTOA = false;
 FGC_EI_PRESET.teamsPerAlliance = 3;
@@ -143,7 +144,7 @@ FGC_EI_PRESET.rankingCutoff = 32;
 
 export const FTC_RELIC_PRESET = new EventConfiguration();
 FTC_RELIC_PRESET.eventType = "ftc_1718";
-FTC_RELIC_PRESET.postQualConfig = "elims";
+FTC_RELIC_PRESET.playoffsConfig = "elims";
 FTC_RELIC_PRESET.teamIdentifier = "team_key";
 FTC_RELIC_PRESET.requiresTOA = true;
 FTC_RELIC_PRESET.allianceCaptains = 4;
@@ -152,7 +153,7 @@ FTC_RELIC_PRESET.postQualTeamsPerAlliance = 3;
 
 export const FTC_ROVER_PRESET = new EventConfiguration();
 FTC_ROVER_PRESET.eventType = "ftc_1819";
-FTC_ROVER_PRESET.postQualConfig = "elims";
+FTC_ROVER_PRESET.playoffsConfig = "elims";
 FTC_ROVER_PRESET.teamIdentifier = "team_key";
 FTC_ROVER_PRESET.requiresTOA = true;
 FTC_RELIC_PRESET.allianceCaptains = 4;
@@ -161,7 +162,7 @@ FTC_ROVER_PRESET.postQualTeamsPerAlliance = 3;
 
 export const DEFAULT_RESET = new EventConfiguration();
 DEFAULT_RESET.eventType = "ftc_1819";
-DEFAULT_RESET.postQualConfig = "elims";
+DEFAULT_RESET.playoffsConfig = "elims";
 DEFAULT_RESET.teamIdentifier = "team_key";
 DEFAULT_RESET.requiresTOA = true;
 DEFAULT_RESET.allianceCaptains = 4;

@@ -1,11 +1,14 @@
+import IPostableObject from "../models/IPostableObject";
 import {default as Axios, AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse} from "axios";
-import HttpError from "../models/HttpError";
-import TOAConfig from "../models/TOAConfig";
+import HttpError from "../models/ems/HttpError";
+import TOAConfig from "../models/toa/TOAConfig";
 import TOAEventParticipant from "../models/toa/TOAEventParticipant";
 import TOAMatch from "../models/toa/TOAMatch";
 import TOAMatchDetails from "../models/toa/TOAMatchDetails";
 import TOAMatchParticipant from "../models/toa/TOAMatchParticipant";
 import TOARanking from "../models/toa/TOARanking";
+import TOAEvent from "../models/toa/TOAEvent";
+import TOATeam from "../models/toa/TOATeam";
 
 class TOAProvider {
   private static _instance: TOAProvider;
@@ -43,10 +46,14 @@ class TOAProvider {
     this._axios = Axios.create(this._config);
   }
 
-  private get(url: string): Promise<AxiosResponse> {
+  private get(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this._axios.get(url, {data: {}}).then((response: AxiosResponse) => {
-        resolve(response);
+        if (typeof response.data !== "undefined" && response.data.length > 0) {
+          resolve(response.data);
+        } else {
+          reject(new HttpError(500, "ERR_NO_DATA", this._host + url));
+        }
       }).catch((error: AxiosError) => {
         if (error.response) {
           reject(new HttpError(error.response.data.message, error.response.data.code, this._host + url));
@@ -126,16 +133,32 @@ class TOAProvider {
     });
   }
 
-  public ping(): Promise<AxiosResponse> {
-    return this.get("ping");
+  /**
+   * Testing method that simply 'pings' the orange alliance API.
+   * @returns The 'ping' response from the orange alliance API.
+   */
+  public ping(): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.get("ping").then((data: any) => {
+        resolve(data + "");
+      }).catch((err: HttpError) => reject(err));
+    });
   }
 
-  public getEvent(eventKey: string): Promise<AxiosResponse> {
-    return this.get("api/event/" + eventKey);
+  public getEvent(eventKey: string): Promise<TOAEvent> {
+    return new Promise<TOAEvent>((resolve, reject) => {
+      this.get("api/event/" + eventKey).then((eventJSON: any) => {
+        resolve(new TOAEvent().fromJSON(eventJSON));
+      }).catch((err: HttpError) => reject(err));
+    });
   }
 
-  public getTeams(eventKey: string): Promise<AxiosResponse> {
-    return this.get("api/event/" + eventKey + "/teams");
+  public getTeams(eventKey: string): Promise<TOATeam[]> {
+    return new Promise<TOATeam[]>((resolve, reject) => {
+      this.get("api/event/" + eventKey + "/teams").then((teamsJSON: any[]) => {
+        resolve(teamsJSON.map((teamJSON: any) => new TOATeam().fromJSON(teamJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
   }
 
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {

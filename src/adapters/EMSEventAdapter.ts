@@ -1,5 +1,5 @@
 import TOAEvent from "../models/toa/TOAEvent";
-import Event from "../models/Event";
+import Event from "../models/ems/Event";
 import {getFromSeasonKey} from "../data/Seasons";
 import {getFromRegionKey} from "../data/Regions";
 

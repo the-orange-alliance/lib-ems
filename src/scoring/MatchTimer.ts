@@ -1,12 +1,10 @@
 import {MatchMode} from "./MatchMode";
 import * as events from "events";
-import MatchConfiguration from "../models/MatchConfiguration";
+import MatchConfiguration from "../models/ems/MatchConfiguration";
 
 export default class MatchTimer extends events.EventEmitter {
-  // Time/state variables
   private _matchConfig: MatchConfiguration;
 
-  // Dynamic timer variables
   private _mode: MatchMode;
   private _timerID: any;
   private _timeLeft: number;
@@ -39,7 +37,6 @@ export default class MatchTimer extends events.EventEmitter {
       }
       this._timeLeft = this.matchConfig.totalTime;
       this.emit("match-start", this._timeLeft);
-      console.log("Starting a match.");
       this._timerID = global.setInterval(() => {
         this.tick();
       }, 1000);
@@ -53,7 +50,6 @@ export default class MatchTimer extends events.EventEmitter {
       this._mode = MatchMode.ENDED;
       this._timeLeft = 0;
       this.emit("match-end");
-      console.log("Ended a match");
     }
   }
 
@@ -64,7 +60,6 @@ export default class MatchTimer extends events.EventEmitter {
       this._mode = MatchMode.ABORTED;
       this._timeLeft = 0;
       this.emit("match-abort");
-      console.log("Aborted a match");
     }
   }
 
@@ -73,7 +68,6 @@ export default class MatchTimer extends events.EventEmitter {
   }
 
   private tick() {
-    // logger.info(this._modeTimeLeft + "s");
     if (this._timeLeft === 0) {
       this.stop();
     }
@@ -88,12 +82,10 @@ export default class MatchTimer extends events.EventEmitter {
             this._mode = MatchMode.AUTONOMOUS;
             this._modeTimeLeft = this.matchConfig.autoTime;
             this.emit("match-auto");
-            console.log("Autonomous period started.");
           } else {
             this._mode = MatchMode.TELEOPERATED;
             this._modeTimeLeft = this.matchConfig.teleTime;
             this.emit("match-tele");
-            console.log("Teleoperated period started.");
           }
           break;
         case MatchMode.AUTONOMOUS:
@@ -101,12 +93,10 @@ export default class MatchTimer extends events.EventEmitter {
             this._mode = MatchMode.TRANSITION;
             this._modeTimeLeft = this.matchConfig.transitionTime;
             this.emit("match-transition");
-            console.log("Transition period started.");
           } else if (this.matchConfig.teleTime > 0) {
             this._mode = MatchMode.TELEOPERATED;
             this._modeTimeLeft = this.matchConfig.teleTime;
             this.emit("match-tele");
-            console.log("Teleoperated period started.");
           } else {
             this.stop();
           }
@@ -116,15 +106,14 @@ export default class MatchTimer extends events.EventEmitter {
             this._mode = MatchMode.TELEOPERATED;
             this._modeTimeLeft = this.matchConfig.teleTime;
             this.emit("match-tele");
-            console.log("Teleoperated period started.");
           } else {
             this.stop();
           }
       }
     } else {
       if (this.matchConfig.endTime > 0 && this._timeLeft === this.matchConfig.endTime) {
+        this._mode = MatchMode.ENDGAME;
         this.emit("match-endgame");
-        console.log("Endgame started.")
       }
     }
   }

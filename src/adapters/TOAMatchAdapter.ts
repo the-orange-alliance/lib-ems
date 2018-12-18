@@ -1,7 +1,7 @@
-import Match from "../models/Match";
+import Match from "../models/ems/Match";
 import TOAMatch from "../models/toa/TOAMatch";
 import * as moment from "moment";
-import MatchDetails from "../models/MatchDetails";
+import MatchDetails from "../models/ems/MatchDetails";
 
 export default class TOAMatchAdapter {
   private _match: Match;

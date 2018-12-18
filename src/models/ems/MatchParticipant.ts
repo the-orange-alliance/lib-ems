@@ -1,3 +1,4 @@
+import IPostableObject from "../IPostableObject";
 import Team from "./Team";
 
 export default class MatchParticipant implements IPostableObject {

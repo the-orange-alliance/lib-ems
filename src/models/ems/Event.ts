@@ -1,7 +1,8 @@
+import IPostableObject from "../IPostableObject";
 import Region from "./Region";
 import Season from "./Season";
-import * as Regions from "../data/Regions";
-import * as Seasons from "../data/Seasons";
+import * as Regions from "../../data/Regions";
+import * as Seasons from "../../data/Seasons";
 
 export default class Event implements IPostableObject {
 

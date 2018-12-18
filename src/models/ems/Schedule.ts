@@ -1,11 +1,12 @@
+import IPostableObject from "../IPostableObject";
 import Day from "./Day";
-import {TournamentLevels} from "../AppTypes";
 import * as moment from "moment";
 import ScheduleItem from "./ScheduleItem";
 import Event from "./Event";
+import {TournamentType} from "../../Types";
 
 export default class Schedule implements IPostableObject {
-  private readonly _type: TournamentLevels;
+  private readonly _type: TournamentType;
   private _days: Day[];
   private _matchConcurrency: number;
   private _teamsParticipating: number;
@@ -17,7 +18,7 @@ export default class Schedule implements IPostableObject {
   // This is kind of a loner variable.
   private _validationMessage: string;
 
-  constructor(type: TournamentLevels) {
+  constructor(type: TournamentType) {
     this._type = type;
     this._days = [];
     this._matchConcurrency = 1;
@@ -228,7 +229,7 @@ export default class Schedule implements IPostableObject {
     this._days = value;
   }
 
-  get type(): TournamentLevels {
+  get type(): TournamentType {
     return this._type;
   }
 

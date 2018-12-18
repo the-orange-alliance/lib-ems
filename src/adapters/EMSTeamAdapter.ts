@@ -1,5 +1,5 @@
 import TOATeam from "../models/toa/TOATeam";
-import Team from "../models/Team";
+import Team from "../models/ems/Team";
 
 export default class EMSTeamAdapter {
   private _toaTeam: TOATeam;

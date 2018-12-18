@@ -1,3 +1,4 @@
+import IPostableObject from "../IPostableObject";
 import MatchDetails from "./MatchDetails";
 
 export default class RoverRuckusMatchDetails extends MatchDetails implements IPostableObject {

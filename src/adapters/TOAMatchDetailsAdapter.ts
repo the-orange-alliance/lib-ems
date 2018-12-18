@@ -1,8 +1,8 @@
-import MatchDetails from "../models/MatchDetails";
+import MatchDetails from "../models/ems/MatchDetails";
 import TOAMatchDetails from "../models/toa/TOAMatchDetails";
-import Match from "../models/Match";
+import Match from "../models/ems/Match";
 import TOARoverRuckusDetails from "../models/toa/TOARoverRuckusDetails";
-import RoverRuckusMatchDetails from "../models/RoverRuckusMatchDetails";
+import RoverRuckusMatchDetails from "../models/ems/RoverRuckusMatchDetails";
 
 export default class TOAMatchDetailsAdapter {
   private _match: Match;

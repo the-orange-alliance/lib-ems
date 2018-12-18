@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class AllianceMember implements IPostableObject {
   private _allianceKey: string;
   private _allianceRank: number;

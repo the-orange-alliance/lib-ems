@@ -1,3 +1,5 @@
+import IPostableObject from "../IPostableObject";
+
 export default class TOAEventParticipant implements IPostableObject {
   private _eventParticipantKey: string;
   private _eventKey: string;

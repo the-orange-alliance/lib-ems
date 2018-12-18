@@ -1,6 +1,6 @@
-import Ranking from "../models/Ranking";
+import Ranking from "../models/ems/Ranking";
 import TOARanking from "../models/toa/TOARanking";
-import RoverRuckusRank from "../models/RoverRuckusRank";
+import RoverRuckusRank from "../models/ems/RoverRuckusRank";
 
 export default class TOARankingAdapter {
   private _ranking: Ranking;
