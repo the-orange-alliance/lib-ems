@@ -2,8 +2,8 @@ import IPostableObject from "../IPostableObject";
 import * as moment from "moment";
 import MatchParticipant from "./MatchParticipant";
 import MatchDetails from "./MatchDetails";
-import RoverRuckusMatchDetails from "./RoverRuckusMatchDetails";
-import EnergyImpactMatchDetails from "./EnergyImpactMatchDetails";
+import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetails";
+import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDetails";
 
 export default class Match implements IPostableObject {
   private _matchKey: string;

@@ -1,5 +1,5 @@
-import IPostableObject from "../IPostableObject";
-import MatchDetails from "./MatchDetails";
+import IPostableObject from "../../../IPostableObject";
+import MatchDetails from "../../MatchDetails";
 
 export default class EnergyImpactMatchDetails extends MatchDetails implements IPostableObject {
   private _redSolarPanelOwnerships: number[];

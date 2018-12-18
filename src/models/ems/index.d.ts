@@ -28,9 +28,9 @@ export * from "./Process";
 
 // Game-Specific Classes
 // Energy Impact
-export * from "./EnergyImpactMatchDetails";
-export * from "./EnergyImpactRanking";
+export * from "./games/energy-impact/EnergyImpactMatchDetails";
+export * from "./games/energy-impact/EnergyImpactRanking";
 
 // Rover Ruckus
-export * from "./RoverRuckusMatchDetails";
-export * from "./RoverRuckusRank";
+export * from "./games/rover-ruckus/RoverRuckusMatchDetails";
+export * from "./games/rover-ruckus/RoverRuckusRank";

@@ -1,4 +1,4 @@
-import Ranking from "./Ranking";
+import Ranking from "../../Ranking";
 
 export default class EnergyImpactRanking extends Ranking {
   private _rankingPoints: number;
