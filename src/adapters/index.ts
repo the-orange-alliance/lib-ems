@@ -1,10 +1,20 @@
 // TOA Adapter Classes to EMS Objects
-export * from "./EMSEventAdapter";
-export * from "./EMSTeamAdapter";
+import EMSEventAdapter from "./EMSEventAdapter";
+import EMSTeamAdapter from "./EMSTeamAdapter";
 
 // EMS Adapter Classes to TOA Objects
-export * from "./TOARankingAdapter";
-export * from "./TOAMatchParticipantAdapter";
-export * from "./TOAMatchDetailsAdapter";
-export * from "./TOAEventParticipantAdapter";
-export * from "./TOAMatchAdapter";
+import TOARankingAdapter from "./TOARankingAdapter";
+import TOAMatchParticipantAdapter from "./TOAMatchParticipantAdapter";
+import TOAMatchDetailsAdapter from "./TOAMatchDetailsAdapter";
+import TOAEventParticipantAdapter from "./TOAEventParticipantAdapter";
+import TOAMatchAdapter from "./TOAMatchAdapter";
+
+export {
+  EMSEventAdapter,
+  EMSTeamAdapter,
+  TOARankingAdapter,
+  TOAMatchParticipantAdapter,
+  TOAMatchDetailsAdapter,
+  TOAEventParticipantAdapter,
+  TOAMatchAdapter
+};

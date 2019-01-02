@@ -1,36 +1,63 @@
 // Error Classes
-export * from "./AppError";
-export * from "./HttpError";
+import AppError from "./AppError";
+import HttpError from "./HttpError";
 
 // Scheduling Classes
-export * from "./Day";
-export * from "./DayBreak";
-export * from "./Schedule";
-export * from "./ScheduleItem";
-export * from "./EliminationsSchedule";
+import Day from "./Day";
+import DayBreak from "./DayBreak";
+import Schedule from "./Schedule";
+import ScheduleItem from "./ScheduleItem";
+import EliminationsSchedule from "./EliminationsSchedule";
 
 // EMS API Classes
-export * from "./AllianceMember";
-export * from "./Event";
-export * from "./Match";
-export * from "./MatchDetails";
-export * from "./MatchParticipant";
-export * from "./Ranking";
-export * from "./Season";
-export * from "./Region";
-export * from "./Team";
+import AllianceMember from "./AllianceMember";
+import Event from "./Event";
+import Match from "./Match";
+import MatchDetails from "./MatchDetails";
+import MatchParticipant from "./MatchParticipant";
+import Ranking from "./Ranking";
+import Season from "./Season";
+import Region from "./Region";
+import Team from "./Team";
 
 // Miscellaneous Classes
-export * from "./MatchState";
-export * from "./EventConfiguration";
-export * from "./MatchConfiguration";
-export * from "./Process";
+import {MatchState} from "./MatchState";
+import EventConfiguration from "./EventConfiguration";
+import MatchConfiguration from "./MatchConfiguration";
+import Process from "./Process";
 
 // Game-Specific Classes
 // Energy Impact
-export * from "./games/energy-impact/EnergyImpactMatchDetails";
-export * from "./games/energy-impact/EnergyImpactRanking";
+import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDetails";
+import EnergyImpactRanking from "./games/energy-impact/EnergyImpactRanking";
 
 // Rover Ruckus
-export * from "./games/rover-ruckus/RoverRuckusMatchDetails";
-export * from "./games/rover-ruckus/RoverRuckusRank";
+import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetails";
+import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
+
+export {
+  AppError,
+  HttpError,
+  Day,
+  DayBreak,
+  Schedule,
+  ScheduleItem,
+  EliminationsSchedule,
+  AllianceMember,
+  Event,
+  Match,
+  MatchDetails,
+  MatchParticipant,
+  Ranking,
+  Season,
+  Region,
+  Team,
+  MatchState,
+  EventConfiguration,
+  MatchConfiguration,
+  Process,
+  EnergyImpactMatchDetails,
+  EnergyImpactRanking,
+  RoverRuckusMatchDetails,
+  RoverRuckusRank
+};

@@ -1,3 +1,9 @@
-export * from "./DropdownItemOptions";
-export * from "./Regions";
-export * from "./Seasons";
+import * as DropdownData from "./DropdownItemOptions";
+import * as RegionData from "./Regions";
+import * as SeasonData from "./Seasons";
+
+export {
+  DropdownData,
+  RegionData,
+  SeasonData
+};
