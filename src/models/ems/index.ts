@@ -35,6 +35,10 @@ import EnergyImpactRanking from "./games/energy-impact/EnergyImpactRanking";
 import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetails";
 import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
 
+// Destination: Deep Space
+import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
+import DeepSpaceRanking from "./games/deep-space/DeepSpaceRanking";
+
 export {
   AppError,
   HttpError,
@@ -59,5 +63,7 @@ export {
   EnergyImpactMatchDetails,
   EnergyImpactRanking,
   RoverRuckusMatchDetails,
-  RoverRuckusRank
+  RoverRuckusRank,
+  DeepSpaceMatchDetails,
+  DeepSpaceRanking
 };

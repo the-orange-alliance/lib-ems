@@ -179,6 +179,14 @@ class EMSProvider {
     return this.get("api/match/" + matchKey + "/details");
   }
 
+  public getMatchTeams(matchKey: string): Promise<AxiosResponse> {
+    return this.get("api/match/" + matchKey + "/teams");
+  }
+
+  public getMatchTeamRanks(matchKey: string): Promise<AxiosResponse> {
+    return this.get("api/match/" + matchKey + "/teamranks");
+  }
+
   public getAlliances(): Promise<AxiosResponse> {
     return this.get("api/alliance");
   }

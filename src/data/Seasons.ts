@@ -14,6 +14,10 @@ const seasonsList = [
   {
     "season_key": 1819,
     "season_desc": "FTC Rover Ruckus"
+  },
+  {
+    "season_key": 19,
+    "season_desc": "FRC Destination: Deep Space"
   }
 ];
 
@@ -28,6 +32,8 @@ export function getFromEventType(eventType: EventType): DropdownProps {
       return SeasonItems[1];
     case "ftc_1819":
       return SeasonItems[2];
+    case "frc_19":
+      return SeasonItems[3];
     default:
       return SeasonItems[2];
   }

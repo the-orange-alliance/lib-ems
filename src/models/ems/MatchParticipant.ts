@@ -1,5 +1,7 @@
-import IPostableObject from "../IPostableObject";
+
 import Team from "./Team";
+import Ranking from "./Ranking";
+import IPostableObject from "../IPostableObject";
 
 export default class MatchParticipant implements IPostableObject {
   private _matchParticipantKey: string;
@@ -12,7 +14,9 @@ export default class MatchParticipant implements IPostableObject {
   private _noShow: boolean;
   private _allianceKey: string;
 
+  // Every match participant is a team. In the audience display, we link these two together.
   private _team: Team;
+  private _teamRank: Ranking;
 
   constructor() {
     this._matchParticipantKey = "";
@@ -36,7 +40,7 @@ export default class MatchParticipant implements IPostableObject {
       card_status: this.cardStatus,
       surrogate: this.surrogate ? 1 : 0,
       no_show: this.noShow ? 1 : 0,
-      alliance_key: this._allianceKey
+      alliance_key: this.allianceKey
     };
   }
 
@@ -48,10 +52,25 @@ export default class MatchParticipant implements IPostableObject {
     participant.station = json.station;
     participant.disqualified = json.disqualified === 1;
     participant.cardStatus = json.card_status;
-    participant.surrogate = json.surrogate === 1;
+    participant.surrogate = json.surrogated === 1;
     participant.noShow = json.no_show === 1;
     participant.allianceKey = json.alliance_key;
+    try {
+      participant.team = new Team().fromJSON(json);
+    } catch {
+      console.log();
+    }
+    participant.teamRank = new Ranking().fromJSON(json);
     return participant;
+  }
+
+  public getAllianceRankFromKey(): number {
+    if (typeof this.allianceKey === "undefined") {
+      return 0;
+    } else {
+      const alliance = this.allianceKey.split("-")[3];
+      return parseInt(alliance.replace("A", ""), 10);
+    }
   }
 
   get matchParticipantKey(): string {
@@ -124,6 +143,14 @@ export default class MatchParticipant implements IPostableObject {
 
   set team(value: Team) {
     this._team = value;
+  }
+
+  get teamRank(): Ranking {
+    return this._teamRank;
+  }
+
+  set teamRank(value: Ranking) {
+    this._teamRank = value;
   }
 
   get allianceKey(): string {
