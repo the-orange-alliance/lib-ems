@@ -24,6 +24,7 @@ export default class Match implements IPostableObject {
   private _blueMinPen: number;
   private _blueMajPen: number;
   private _active: number;
+  private _result: number;
   private _uploaded: boolean;
 
   // This item is separate, and not recorded directly in the 'Match' table.
@@ -38,8 +39,19 @@ export default class Match implements IPostableObject {
     this._matchName = "";
     this._tournamentLevel = -1;
     this._scheduledStartTime = moment();
-    this._fieldNumber = -1;
+    this._startTime = moment();
+    this._prestartTime = moment();
+    this._fieldNumber = 0;
+    this._cycleTime = 0;
+    this._redScore = 0;
+    this._blueScore = 0;
+    this._redMinPen = 0;
+    this._redMajPen = 0;
+    this._blueMinPen = 0;
+    this._blueMajPen = 0;
+    this._result = -1;
     this._active = 0;
+    this._uploaded = false;
   }
 
   public static getDetailsFromSeasonKey(seasonKey: number | string): MatchDetails {
@@ -74,6 +86,7 @@ export default class Match implements IPostableObject {
       blue_min_pen: this.blueMinPen,
       blue_maj_pen: this.blueMajPen,
       active: this.active,
+      result: this.result,
       uploaded: this.uploaded ? 1 : 0
     };
   }
@@ -96,6 +109,7 @@ export default class Match implements IPostableObject {
     match.blueMinPen = json.blue_min_pen;
     match.blueMajPen = json.blue_maj_pen;
     match.active = json.active;
+    match.result = json.result;
     match.uploaded = json.uploaded === 1;
     return match;
   }
@@ -259,6 +273,14 @@ export default class Match implements IPostableObject {
 
   set blueMajPen(value: number) {
     this._blueMajPen = value;
+  }
+
+  get result(): number {
+    return this._result;
+  }
+
+  set result(value: number) {
+    this._result = value;
   }
 
   get active(): number {
