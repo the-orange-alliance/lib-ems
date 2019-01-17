@@ -1,4 +1,5 @@
 import IPostableObject from "../IPostableObject";
+import TOATeam from "./TOATeam";
 
 export default class TOAEventParticipant implements IPostableObject {
   private _eventParticipantKey: string;
@@ -6,6 +7,8 @@ export default class TOAEventParticipant implements IPostableObject {
   private _teamKey: number;
   private _isActive: number;
   private _cardStatus: number;
+
+  private _team: TOATeam;
 
   constructor() {
     this._eventParticipantKey = "";
@@ -73,5 +76,13 @@ export default class TOAEventParticipant implements IPostableObject {
 
   set cardStatus(value: number) {
     this._cardStatus = value;
+  }
+
+  get team(): TOATeam {
+    return this._team;
+  }
+
+  set team(value: TOATeam) {
+    this._team = value;
   }
 }

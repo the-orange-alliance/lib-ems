@@ -21,7 +21,6 @@ export default class EventConfiguration implements IPostableObject {
     this._elimsFormat = "bo3";
   }
 
-
   public toJSON(): object {
     return {
       event_type: this.eventType,
