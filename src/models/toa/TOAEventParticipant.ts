@@ -24,7 +24,8 @@ export default class TOAEventParticipant implements IPostableObject {
       event_key: this.eventKey,
       team_key: this.teamKey,
       is_active: this.isActive,
-      card_status: this.cardStatus
+      card_status: this.cardStatus,
+      team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined
     };
   }
 
@@ -35,6 +36,7 @@ export default class TOAEventParticipant implements IPostableObject {
     participant.teamKey = json.team_key;
     participant.isActive = json.is_active;
     participant.cardStatus = json.card_status;
+    participant.team = typeof json.team !== "undefined" ? new TOATeam().fromJSON(json.team) : undefined;
     return participant;
   }
 

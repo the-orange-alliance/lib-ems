@@ -22,8 +22,8 @@ import Team from "./Team";
 
 // Miscellaneous Classes
 import {MatchState} from "./MatchState";
-import EventConfiguration from "./EventConfiguration";
-import MatchConfiguration from "./MatchConfiguration";
+import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_EI_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
+import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
 
 // Game-Specific Classes
@@ -65,5 +65,11 @@ export {
   RoverRuckusMatchDetails,
   RoverRuckusRank,
   DeepSpaceMatchDetails,
-  DeepSpaceRanking
+  DeepSpaceRanking,
+  FGC_CONFIG,
+  FTC_CONFIG,
+  FTC_ROVER_PRESET,
+  FGC_EI_PRESET,
+  FTC_RELIC_PRESET,
+  DEFAULT_RESET
 };

@@ -8,7 +8,6 @@ import TOAMatchDetails from "../models/toa/TOAMatchDetails";
 import TOAMatchParticipant from "../models/toa/TOAMatchParticipant";
 import TOARanking from "../models/toa/TOARanking";
 import TOAEvent from "../models/toa/TOAEvent";
-import TOATeam from "../models/toa/TOATeam";
 
 class TOAProvider {
   private static _instance: TOAProvider;
@@ -153,10 +152,10 @@ class TOAProvider {
     });
   }
 
-  public getTeams(eventKey: string): Promise<TOATeam[]> {
-    return new Promise<TOATeam[]>((resolve, reject) => {
+  public getTeams(eventKey: string): Promise<TOAEventParticipant[]> {
+    return new Promise<TOAEventParticipant[]>((resolve, reject) => {
       this.get("api/event/" + eventKey + "/teams").then((teamsJSON: any[]) => {
-        resolve(teamsJSON.map((teamJSON: any) => new TOATeam().fromJSON(teamJSON)));
+        resolve(teamsJSON.map((teamJSON: any) => new TOAEventParticipant().fromJSON(teamJSON)));
       }).catch((err: HttpError) => reject(err));
     });
   }
