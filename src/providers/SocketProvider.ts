@@ -21,7 +21,7 @@ class SocketProvider {
     this._client.open();
   }
 
-  public emit(event: string, ...args: any): void {
+  public emit(event: string, ...args: any[]): void {
     if (typeof this._client !== "undefined") {
       this._client.emit(event, ...args);
     }
