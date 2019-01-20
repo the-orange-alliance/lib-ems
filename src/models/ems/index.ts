@@ -30,10 +30,13 @@ import Process from "./Process";
 // Energy Impact
 import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDetails";
 import EnergyImpactRanking from "./games/energy-impact/EnergyImpactRanking";
+import EnergyImpactRanker from "./games/energy-impact/EnergyImpactRanker";
 
 // Rover Ruckus
 import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetails";
 import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
+import RoverRuckusRanker from "./games/rover-ruckus/RoverRuckusRanker";
+import RoverRuckusRefereeData from "./games/rover-ruckus/RoverRuckusRefereeData";
 
 // Destination: Deep Space
 import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
@@ -62,8 +65,11 @@ export {
   Process,
   EnergyImpactMatchDetails,
   EnergyImpactRanking,
+  EnergyImpactRanker,
   RoverRuckusMatchDetails,
   RoverRuckusRank,
+  RoverRuckusRanker,
+  RoverRuckusRefereeData,
   DeepSpaceMatchDetails,
   DeepSpaceRanking,
   FGC_CONFIG,

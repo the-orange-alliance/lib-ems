@@ -1,7 +1,7 @@
 {
   "name": "@the-orange-alliance/lib-ems",
   "description": "TypeScript library for TOA/EMS model classes and shared resources.",
-  "version": "0.1.13",
+  "version": "0.1.20",
   "author": "Kyle Flynn",
   "license": "GPL-2.0",
   "repository": {
@@ -11,16 +11,16 @@
   "scripts": {
     "docs": "typedoc --out docs/ src/models --excludePrivate --name TheOrangeAlliance --hideGenerator && type NUL > docs/.nojekyll",
     "build": "tsc && npm run docs",
-    "watch": "tsc -- --watch"
+    "dist": "npm install && npm run build && npm publish"
   },
   "dependencies": {
+    "@types/node": "^10.12.18",
+    "@types/socket.io-client": "^1.4.32",
     "axios": "^0.18.0",
     "moment": "^2.23.0",
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "@types/socket.io-client": "^1.4.32",
     "typedoc": "^0.14.0",
     "typescript": "^3.2.2"
   },

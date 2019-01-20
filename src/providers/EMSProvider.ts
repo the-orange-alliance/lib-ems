@@ -195,6 +195,10 @@ class EMSProvider {
     return this.get("api/match/" + matchKey + "/teams");
   }
 
+  public getActiveMatch(id: number): Promise<AxiosResponse> {
+    return this.get("/api/match?active=" + id);
+  }
+
   public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<AxiosResponse> {
     return this.get("api/ranking/calculate/" + tournamentLevel + "?type=" + eventType)
   }
