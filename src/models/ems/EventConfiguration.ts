@@ -18,7 +18,13 @@ export default class EventConfiguration implements IPostableObject {
   private _fieldsControlled: number[];
 
   constructor() {
+    this._requiresTOA = false;
+    this._teamsPerAlliance = 0;
+    this._postQualTeamsPerAlliance = 0;
+    this._allianceCaptains = 0;
+    this._rankingCutoff = 0;
     this._elimsFormat = "bo3";
+    this._fieldsControlled = [];
   }
 
   public toJSON(): object {

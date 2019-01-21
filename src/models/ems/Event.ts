@@ -16,8 +16,23 @@ export default class Event implements IPostableObject {
   private _stateProv: string;
   private _country: string;
   private _fieldCount: number;
-  private _website?: string;
-  private _divisionName?: string;
+  private _website: string;
+  private _divisionName: string;
+
+  constructor() {
+    this._season = new Season(0, "");
+    this._region = new Region("", "");
+    this._eventType = "";
+    this._eventCode = "";
+    this._eventName = "";
+    this._venue = "";
+    this._city = "";
+    this._stateProv = "";
+    this._country = "";
+    this._fieldCount = 0;
+    this._website = "";
+    this._divisionName = "";
+  }
 
   public toJSON(): object {
     return {
@@ -148,9 +163,6 @@ export default class Event implements IPostableObject {
   }
 
   set fieldCount(value: number) {
-    if (value < 1) {
-      value = 1;
-    }
     this._fieldCount = value;
   }
 
