@@ -261,19 +261,27 @@ class EMSProvider {
   }
 
   public getAlliances(): Promise<AllianceMember[]> {
-    return this.get("api/alliance");
+    return new Promise<AllianceMember[]>((resolve, reject) => {
+      this.get("api/alliance").then((res: any) => {
+        resolve(res.map((allianceJSON: any) => new AllianceMember().fromJSON(allianceJSON)));
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public getMatchParticipantTeams(matchKey: string): Promise<AxiosResponse> {
-    return this.get("api/match/" + matchKey + "/teams");
+  public getActiveMatch(id: number): Promise<Match> {
+    return new Promise<Match>((resolve, reject) => {
+      this.get("/api/match?active=" + id).then((res: any) => {
+        resolve(res.map((matchJSON: any) => new Match().fromJSON(matchJSON)));
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public getActiveMatch(id: number): Promise<AxiosResponse> {
-    return this.get("/api/match?active=" + id);
-  }
-
-  public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<AxiosResponse> {
-    return this.get("api/ranking/calculate/" + tournamentLevel + "?type=" + eventType)
+  public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.get("api/ranking/calculate/" + tournamentLevel + "?type=" + eventType).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
   public deleteScheduleItems(type: TournamentType): Promise<AxiosResponse> {
