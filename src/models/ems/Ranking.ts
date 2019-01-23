@@ -1,5 +1,7 @@
 import IPostableObject from "../IPostableObject";
 import Team from "./Team";
+import {EnergyImpactRanking, RoverRuckusRank} from "./";
+import {EventType} from "../../Types";
 
 export default class Ranking implements IPostableObject {
   private _rankKey: string;
@@ -121,5 +123,16 @@ export default class Ranking implements IPostableObject {
 
   set team(value: Team) {
     this._team = value;
+  }
+}
+
+export function getRankingByEventType(eventType?: EventType): Ranking {
+  switch (eventType) {
+    case "fgc_2018":
+      return new EnergyImpactRanking();
+    case "ftc_1819":
+      return new RoverRuckusRank();
+    default:
+      return new Ranking();
   }
 }

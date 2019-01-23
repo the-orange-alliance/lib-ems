@@ -40,7 +40,9 @@ export default class MatchParticipant implements IPostableObject {
       card_status: this.cardStatus,
       surrogate: this.surrogate ? 1 : 0,
       no_show: this.noShow ? 1 : 0,
-      alliance_key: this.allianceKey
+      alliance_key: this.allianceKey,
+      team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined,
+      team_rank: typeof this.teamRank !== "undefined" ? this.teamRank.toJSON() : undefined
     };
   }
 
@@ -58,9 +60,13 @@ export default class MatchParticipant implements IPostableObject {
     try {
       participant.team = new Team().fromJSON(json);
     } catch {
-      console.log();
+      participant.team = undefined;
     }
-    participant.teamRank = new Ranking().fromJSON(json);
+    try {
+      participant.teamRank = new Ranking().fromJSON(json);
+    } catch {
+      participant.teamRank = undefined;
+    }
     return participant;
   }
 

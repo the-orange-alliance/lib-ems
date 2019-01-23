@@ -1,4 +1,4 @@
-export declare enum MatchMode {
+export enum MatchMode {
   PRESTART = 0,
   AUTONOMOUS = 1,
   TRANSITION = 7,

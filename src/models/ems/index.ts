@@ -15,7 +15,7 @@ import Event from "./Event";
 import Match from "./Match";
 import MatchDetails from "./MatchDetails";
 import MatchParticipant from "./MatchParticipant";
-import Ranking from "./Ranking";
+import Ranking, {getRankingByEventType} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
 import Team from "./Team";
@@ -77,5 +77,6 @@ export {
   FTC_ROVER_PRESET,
   FGC_EI_PRESET,
   FTC_RELIC_PRESET,
-  DEFAULT_RESET
+  DEFAULT_RESET,
+  getRankingByEventType
 };
