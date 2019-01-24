@@ -9,7 +9,7 @@
     "url": "https://github.com/orange-alliance/lib-ems.git"
   },
   "scripts": {
-    "docs": "typedoc --out docs/ src/models --excludePrivate --name TheOrangeAlliance --hideGenerator && type NUL > docs/.nojekyll",
+    "docs": "typedoc --out docs/ src/ --excludePrivate --name TheOrangeAlliance --hideGenerator && type NUL > docs/.nojekyll",
     "build": "tsc && npm run docs",
     "dist": "npm install && npm run build && npm publish"
   },
