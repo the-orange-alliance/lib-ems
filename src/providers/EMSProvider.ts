@@ -276,7 +276,7 @@ class EMSProvider {
     });
   }
 
-  public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<any> {
+  public calculateRankings(tournamentLevel: number, eventType: EventType): Promise<string> {
     return new Promise<any>((resolve, reject) => {
       this.get("api/ranking/calculate/" + tournamentLevel + "?type=" + eventType).then((res: any) => {
         resolve(res);
@@ -284,60 +284,116 @@ class EMSProvider {
     });
   }
 
-  public deleteScheduleItems(type: TournamentType): Promise<AxiosResponse> {
-    return this.delete("api/schedule/" + type);
+  public deleteScheduleItems(type: TournamentType): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.delete("api/schedule/" + type).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public deleteRankings(): Promise<AxiosResponse> {
-    return this.delete("api/ranking");
+  public deleteRankings(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.delete("api/ranking").then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postEvent(event: Event): Promise<AxiosResponse> {
-    return this.post("api/event", event);
+  public postEvent(event: Event): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.post("api/event", event).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postTeams(teams: Team[]): Promise<AxiosResponse> {
-    return this.post("api/team", teams);
+  public postTeams(teams: Team[]): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.post("api/team", teams).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postScheduleItems(scheduleItems: ScheduleItem[]): Promise<AxiosResponse> {
-    return this.post("api/schedule", scheduleItems);
+  public postScheduleItems(scheduleItems: ScheduleItem[]): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.post("api/schedule", scheduleItems).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postMatchSchedule(matches: Match[]): Promise<AxiosResponse> {
-    return this.post("api/match", matches);
+  public postMatchSchedule(matches: Match[]): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.post("api/match", matches).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postMatchScheduleParticipants(participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.post("api/match/participants", participants);
+  public postMatchScheduleParticipants(participants: MatchParticipant[]): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.post("api/match/participants", participants).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postRankings(rankings: Ranking[]): Promise<AxiosResponse> {
-    return this.post("api/ranking", rankings);
+  public postRankings(rankings: Ranking[]): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.post("api/ranking", rankings).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public postAllianceMembers(members: AllianceMember[]): Promise<AxiosResponse> {
-    return this.post("api/alliance", members);
+  public postAllianceMembers(members: AllianceMember[]): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.post("api/alliance", members).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public putActiveMatch(match: Match): Promise<AxiosResponse> {
-    return this.put("api/match/" + match.matchKey, match);
+  public putActiveMatch(match: Match): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.put("api/match/" + match.matchKey, match).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public putMatchResult(match: Match): Promise<AxiosResponse> {
-    return this.put("api/match/" + match.matchKey + "/results", match);
+  public putMatchResult(match: Match): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.put("api/match/" + match.matchKey + "/results", match).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public putMatchDetails(details: MatchDetails): Promise<AxiosResponse> {
-    return this.put("api/match/" + details.matchKey + "/details", details);
+  public putMatchDetails(details: MatchDetails): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.put("api/match/" + details.matchKey + "/details", details).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public putMatchParticipants(participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.put("api/match/" + participants[0].matchKey + "/participants", participants);
+  public putMatchParticipants(participants: MatchParticipant[]): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.put("api/match/" + participants[0].matchKey + "/participants", participants).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
-  public resetCardStatuses(): Promise<AxiosResponse> {
-    return this.get("api/team/cards/reset");
+  public resetCardStatuses(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.get("api/team/cards/reset").then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
   }
 
 }
