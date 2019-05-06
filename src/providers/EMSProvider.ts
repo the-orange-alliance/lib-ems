@@ -46,8 +46,12 @@ class EMSProvider {
         reject(new HttpError(500, "ERR_PROVIDER_UNDEFINED", "The provider's host address has not been initialized."));
       }
       this._axios.get(url, {data: {}}).then((response: AxiosResponse) => {
-        if (typeof response.data !== "undefined" && typeof response.data.payload !== "undefined") {
-          resolve(response.data.payload);
+        if (typeof response.data !== "undefined") {
+          if (typeof response.data.payload !== "undefined") {
+            resolve(response.data.payload);
+          } else {
+            resolve(response.data);
+          }
         } else {
           reject(new HttpError(500, "ERR_NO_DATA", this._host + url));
         }
@@ -69,7 +73,7 @@ class EMSProvider {
         reject(new HttpError(500, "ERR_PROVIDER_UNDEFINED", "The provider's host address has not been initialized."));
       }
       this._axios.delete(url, {data: {}}).then((response: AxiosResponse) => {
-        if (typeof response.data !== "undefined" && typeof response.data.payload !== "undefined") {
+        if (typeof response.data !== "undefined") {
           resolve(response.data.payload);
         } else {
           reject(new HttpError(500, "ERR_NO_DATA", this._host + url));
@@ -134,7 +138,7 @@ class EMSProvider {
     });
   }
 
-  public ping(): Promise<string> {
+  public ping(timeout?: number): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       this.get("ping").then((res: any) => {
         resolve(res.res);
