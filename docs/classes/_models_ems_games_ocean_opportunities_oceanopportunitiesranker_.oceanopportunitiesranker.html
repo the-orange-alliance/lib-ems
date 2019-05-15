@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IMatchRanker | TheOrangeAlliance</title>
+	<title>OceanOpportunitiesRanker | TheOrangeAlliance</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_models_imatchranker_.html">&quot;models/IMatchRanker&quot;</a>
+					<a href="../modules/_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.html">&quot;models/ems/games/ocean-opportunities/OceanOpportunitiesRanker&quot;</a>
 				</li>
 				<li>
-					<a href="_models_imatchranker_.imatchranker.html">IMatchRanker</a>
+					<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html">OceanOpportunitiesRanker</a>
 				</li>
 			</ul>
-			<h1>Interface IMatchRanker</h1>
+			<h1>Class OceanOpportunitiesRanker</h1>
 		</div>
 	</div>
 </header>
@@ -73,16 +73,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IMatchRanker</span>
+						<span class="target">OceanOpportunitiesRanker</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
-				<h3>Implemented by</h3>
+				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/_models_ems_games_energy_impact_energyimpactranker_.energyimpactranker.html" class="tsd-signature-type">EnergyImpactRanker</a></li>
-					<li><a href="../classes/_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html" class="tsd-signature-type">OceanOpportunitiesRanker</a></li>
-					<li><a href="../classes/_models_ems_games_rover_ruckus_roverruckusranker_.roverruckusranker.html" class="tsd-signature-type">RoverRuckusRanker</a></li>
+					<li><a href="../interfaces/_models_imatchranker_.imatchranker.html" class="tsd-signature-type">IMatchRanker</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -92,9 +90,10 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_models_imatchranker_.imatchranker.html#execute" class="tsd-kind-icon">execute</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_models_imatchranker_.imatchranker.html#prepare" class="tsd-kind-icon">prepare</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_models_imatchranker_.imatchranker.html#sort" class="tsd-kind-icon">sort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#execute" class="tsd-kind-icon">execute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#prepare" class="tsd-kind-icon">prepare</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#sort" class="tsd-kind-icon">sort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,17 +101,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="execute" class="tsd-anchor"></a>
 					<h3>execute</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>matchJSON<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>matchJSON<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_models_imatchranker_.imatchranker.html">IMatchRanker</a>.<a href="../interfaces/_models_imatchranker_.imatchranker.html#execute">execute</a></p>
 								<ul>
-									<li>Defined in models/IMatchRanker.ts:6</li>
+									<li>Defined in models/ems/games/ocean-opportunities/OceanOpportunitiesRanker.ts:17</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -121,21 +121,22 @@
 									<h5>matchJSON: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="prepare" class="tsd-anchor"></a>
 					<h3>prepare</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">prepare<span class="tsd-signature-symbol">(</span>matchJSON<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">prepare<span class="tsd-signature-symbol">(</span>matchJSON<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_models_imatchranker_.imatchranker.html">IMatchRanker</a>.<a href="../interfaces/_models_imatchranker_.imatchranker.html#prepare">prepare</a></p>
 								<ul>
-									<li>Defined in models/IMatchRanker.ts:4</li>
+									<li>Defined in models/ems/games/ocean-opportunities/OceanOpportunitiesRanker.ts:26</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -144,27 +145,27 @@
 									<h5>matchJSON: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="sort" class="tsd-anchor"></a>
 					<h3>sort</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">sort<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span>, left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, right<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sort<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">[]</span>, left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, right<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/IMatchRanker.ts:5</li>
+									<li>Defined in models/ems/games/ocean-opportunities/OceanOpportunitiesRanker.ts:71</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>items: <a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>items: <a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
 									<h5>left: <span class="tsd-signature-type">number</span></h5>
@@ -173,7 +174,24 @@
 									<h5>right: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_models_ipostableobject_.ipostableobject.html" class="tsd-signature-type">IPostableObject</a><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_models_ems_games_ocean_opportunities_oceanopportunitiesrank_.oceanopportunitiesrank.html" class="tsd-signature-type">OceanOpportunitiesRank</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getinstance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Instance</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Instance<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html" class="tsd-signature-type">OceanOpportunitiesRanker</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in models/ems/games/ocean-opportunities/OceanOpportunitiesRanker.ts:8</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html" class="tsd-signature-type">OceanOpportunitiesRanker</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -186,7 +204,7 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_models_imatchranker_.html">"models/IMatch<wbr>Ranker"</a>
+						<a href="../modules/_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.html">"models/ems/games/ocean-<wbr>opportunities/<wbr>Ocean<wbr>Opportunities<wbr>Ranker"</a>
 					</li>
 				</ul>
 			</nav>
@@ -194,17 +212,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_models_imatchranker_.imatchranker.html" class="tsd-kind-icon">IMatch<wbr>Ranker</a>
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html" class="tsd-kind-icon">Ocean<wbr>Opportunities<wbr>Ranker</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_models_imatchranker_.imatchranker.html#execute" class="tsd-kind-icon">execute</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#execute" class="tsd-kind-icon">execute</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_models_imatchranker_.imatchranker.html#prepare" class="tsd-kind-icon">prepare</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#prepare" class="tsd-kind-icon">prepare</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_models_imatchranker_.imatchranker.html#sort" class="tsd-kind-icon">sort</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#sort" class="tsd-kind-icon">sort</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_models_ems_games_ocean_opportunities_oceanopportunitiesranker_.oceanopportunitiesranker.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a>
 							</li>
 						</ul>
 					</li>

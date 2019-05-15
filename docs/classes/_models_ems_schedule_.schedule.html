@@ -107,6 +107,7 @@
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#matchesperteam" class="tsd-kind-icon">matches<wbr>Per<wbr>Team</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#maxtotalmatches" class="tsd-kind-icon">max<wbr>Total<wbr>Matches</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#remainingmatches" class="tsd-kind-icon">remaining<wbr>Matches</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#teams" class="tsd-kind-icon">teams</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#teamsparticipating" class="tsd-kind-icon">teams<wbr>Participating</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#teamsperalliance" class="tsd-kind-icon">teams<wbr>Per<wbr>Alliance</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_models_ems_schedule_.schedule.html#totalmatches" class="tsd-kind-icon">total<wbr>Matches</a></li>
@@ -142,7 +143,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:19</li>
+									<li>Defined in models/ems/Schedule.ts:20</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -169,7 +170,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:216</li>
+									<li>Defined in models/ems/Schedule.ts:225</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -177,7 +178,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:220</li>
+									<li>Defined in models/ems/Schedule.ts:229</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -201,7 +202,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:224</li>
+									<li>Defined in models/ems/Schedule.ts:233</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_models_ems_day_.day.html" class="tsd-signature-type">Day</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -209,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:228</li>
+									<li>Defined in models/ems/Schedule.ts:237</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -233,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:176</li>
+									<li>Defined in models/ems/Schedule.ts:185</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -241,7 +242,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:180</li>
+									<li>Defined in models/ems/Schedule.ts:189</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -265,7 +266,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:200</li>
+									<li>Defined in models/ems/Schedule.ts:209</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -273,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:204</li>
+									<li>Defined in models/ems/Schedule.ts:213</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -296,7 +297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:172</li>
+									<li>Defined in models/ems/Schedule.ts:181</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -313,10 +314,42 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:164</li>
+									<li>Defined in models/ems/Schedule.ts:173</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="teams" class="tsd-anchor"></a>
+					<h3>teams</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> teams<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> teams<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in models/ems/Schedule.ts:241</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in models/ems/Schedule.ts:245</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -331,7 +364,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:184</li>
+									<li>Defined in models/ems/Schedule.ts:193</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -339,7 +372,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:188</li>
+									<li>Defined in models/ems/Schedule.ts:197</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -363,7 +396,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:192</li>
+									<li>Defined in models/ems/Schedule.ts:201</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -371,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:196</li>
+									<li>Defined in models/ems/Schedule.ts:205</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -395,7 +428,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:208</li>
+									<li>Defined in models/ems/Schedule.ts:217</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -403,7 +436,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:212</li>
+									<li>Defined in models/ems/Schedule.ts:221</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -426,7 +459,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:232</li>
+									<li>Defined in models/ems/Schedule.ts:249</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../modules/_types_.html#tournamenttype" class="tsd-signature-type">TournamentType</a></h4>
@@ -443,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:236</li>
+									<li>Defined in models/ems/Schedule.ts:253</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -463,7 +496,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:135</li>
+									<li>Defined in models/ems/Schedule.ts:144</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -480,7 +513,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:99</li>
+									<li>Defined in models/ems/Schedule.ts:103</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -497,7 +530,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:152</li>
+									<li>Defined in models/ems/Schedule.ts:161</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -515,7 +548,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_models_ipostableobject_.ipostableobject.html">IPostableObject</a>.<a href="../interfaces/_models_ipostableobject_.ipostableobject.html#fromjson">fromJSON</a></p>
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:45</li>
+									<li>Defined in models/ems/Schedule.ts:48</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -538,7 +571,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:56</li>
+									<li>Defined in models/ems/Schedule.ts:60</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -561,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:103</li>
+									<li>Defined in models/ems/Schedule.ts:107</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -578,7 +611,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:146</li>
+									<li>Defined in models/ems/Schedule.ts:155</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -596,7 +629,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_models_ipostableobject_.ipostableobject.html">IPostableObject</a>.<a href="../interfaces/_models_ipostableobject_.ipostableobject.html#tojson">toJSON</a></p>
 								<ul>
-									<li>Defined in models/ems/Schedule.ts:33</li>
+									<li>Defined in models/ems/Schedule.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
@@ -643,6 +676,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_models_ems_schedule_.schedule.html#remainingmatches" class="tsd-kind-icon">remaining<wbr>Matches</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="_models_ems_schedule_.schedule.html#teams" class="tsd-kind-icon">teams</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="_models_ems_schedule_.schedule.html#teamsparticipating" class="tsd-kind-icon">teams<wbr>Participating</a>

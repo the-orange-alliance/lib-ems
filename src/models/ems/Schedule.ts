@@ -8,6 +8,7 @@ import {TournamentType} from "../../Types";
 export default class Schedule implements IPostableObject {
   private readonly _type: TournamentType;
   private _days: Day[];
+  private _teams: number[];
   private _matchConcurrency: number;
   private _teamsParticipating: number;
   private _teamsPerAlliance: number;
@@ -21,6 +22,7 @@ export default class Schedule implements IPostableObject {
   constructor(type: TournamentType) {
     this._type = type;
     this._days = [];
+    this._teams = [];
     this._matchConcurrency = 1;
     this._teamsParticipating = 0;
     this._teamsPerAlliance = 3;
@@ -38,6 +40,7 @@ export default class Schedule implements IPostableObject {
       matchesPerTeam: this.matchesPerTeam,
       totalMatches: this.totalMatches,
       cycleTime: this.cycleTime,
+      teams: this.teams,
       days: this.days.map(day => day.toJSON())
     };
   }
@@ -49,6 +52,7 @@ export default class Schedule implements IPostableObject {
     schedule.matchesPerTeam = json.matchesPerTeam;
     schedule.totalMatches = json.totalMatches;
     schedule.cycleTime = json.cycleTime;
+    schedule.teams = json.teams;
     schedule.days = json.days.map((day: any) => new Day().fromJSON(day));
     return schedule;
   }
@@ -101,6 +105,7 @@ export default class Schedule implements IPostableObject {
   }
 
   public isValid(): boolean {
+    let participantsSelected: boolean = true;
     let allMatchesScheduled: boolean = true;
     let daysAreAfterEachOther: boolean = true;
     let daysHaveAtLeastOneMatch: boolean = true;
@@ -129,7 +134,11 @@ export default class Schedule implements IPostableObject {
     } else {
       this._validationMessage = "";
     }
-    return allMatchesScheduled && daysAreAfterEachOther && daysHaveAtLeastOneMatch;
+    if (typeof this._teams === "undefined" || this._teams.length < this._teamsPerAlliance) {
+      this._validationMessage = "There are not enough teams for this schedule.";
+      participantsSelected = false;
+    }
+    return participantsSelected && allMatchesScheduled && daysAreAfterEachOther && daysHaveAtLeastOneMatch;
   }
 
   public addDay(): void {
@@ -227,6 +236,14 @@ export default class Schedule implements IPostableObject {
 
   set days(value: Day[]) {
     this._days = value;
+  }
+
+  get teams(): number[] {
+    return this._teams;
+  }
+
+  set teams(value: number[]) {
+    this._teams = value;
   }
 
   get type(): TournamentType {

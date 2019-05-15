@@ -42,6 +42,11 @@ import RoverRuckusRefereeData from "./games/rover-ruckus/RoverRuckusRefereeData"
 import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
 import DeepSpaceRanking from "./games/deep-space/DeepSpaceRanking";
 
+// Oceanic Opportunities
+import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
+import OceanOpportunitiesRank from "./games/ocean-opportunities/OceanOpportunitiesRank";
+import OceanOpportunitiesRanker from "./games/ocean-opportunities/OceanOpportunitiesRanker";
+
 export {
   AppError,
   HttpError,
@@ -72,6 +77,9 @@ export {
   RoverRuckusRefereeData,
   DeepSpaceMatchDetails,
   DeepSpaceRanking,
+  OceanOpportunitiesMatchDetails,
+  OceanOpportunitiesRank,
+  OceanOpportunitiesRanker,
   FGC_CONFIG,
   FTC_CONFIG,
   FTC_ROVER_PRESET,
