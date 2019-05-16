@@ -6,6 +6,7 @@ import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetail
 import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDetails";
 import AllianceMember from "./AllianceMember";
 import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
+import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 
 export default class Match implements IPostableObject {
   private _matchKey: string;
@@ -59,6 +60,8 @@ export default class Match implements IPostableObject {
     switch (key) {
       case 2018:
         return new EnergyImpactMatchDetails();
+      case 2019:
+        return new OceanOpportunitiesMatchDetails();
       case 1819:
         return new RoverRuckusMatchDetails();
       case 19:
