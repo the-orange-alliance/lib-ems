@@ -138,14 +138,14 @@ export default class EventConfiguration implements IPostableObject {
   }
 }
 
-export const FGC_EI_PRESET = new EventConfiguration();
-FGC_EI_PRESET.eventType = "fgc_2018";
-FGC_EI_PRESET.playoffsConfig = "finals";
-FGC_EI_PRESET.teamIdentifier = "country";
-FGC_EI_PRESET.requiresTOA = false;
-FGC_EI_PRESET.teamsPerAlliance = 3;
-FGC_EI_PRESET.postQualTeamsPerAlliance = 3;
-FGC_EI_PRESET.rankingCutoff = 32;
+export const FGC_PRESET = new EventConfiguration();
+FGC_PRESET.eventType = "fgc_2019";
+FGC_PRESET.playoffsConfig = "finals";
+FGC_PRESET.teamIdentifier = "country";
+FGC_PRESET.requiresTOA = false;
+FGC_PRESET.teamsPerAlliance = 3;
+FGC_PRESET.postQualTeamsPerAlliance = 3;
+FGC_PRESET.rankingCutoff = 32;
 
 export const FTC_RELIC_PRESET = new EventConfiguration();
 FTC_RELIC_PRESET.eventType = "ftc_1718";

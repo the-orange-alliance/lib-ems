@@ -28,8 +28,8 @@ class EMSProvider {
    * This method must be called before retrieving data. Since this class implements the singleton design
    * and the network of EMS may change, the provider must be manually initialized at runtime.
    */
-  public initialize(host: string): void {
-    this._host = "http://" + host + ":" + PORT + "/";
+  public initialize(host: string, port?: number): void {
+    this._host = "http://" + host + ":" + (port ? port : PORT) + "/";
     this._config = {
       baseURL: this._host,
       timeout: 5000,
@@ -227,6 +227,14 @@ class EMSProvider {
     return new Promise<Match>((resolve, reject) => {
       this.get("api/match/" + matchKey).then((res: any) => {
         resolve(res.map((matchJSON: any) => new Match().fromJSON(matchJSON))[0]);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public getMatchParticipants(matchKey: string): Promise<MatchParticipant[]> {
+    return new Promise<MatchParticipant[]>((resolve, reject) => {
+      this.get("api/match/" + matchKey + "/participants").then((res: any) => {
+        resolve(res.map((participantJSON: any) => new MatchParticipant().fromJSON(participantJSON)));
       }).catch((error: HttpError) => reject(error));
     });
   }

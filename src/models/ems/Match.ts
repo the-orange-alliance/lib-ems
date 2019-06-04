@@ -9,6 +9,16 @@ import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 
 export default class Match implements IPostableObject {
+  public static TEST_LEVEL: number = -1;
+  public static PRACTICE_LEVEL: number = 0;
+  public static QUALIFICATION_LEVEL: number = 1;
+  public static FINALS_LEVEL: number = 4;
+
+  public static RESULT_NOT_PLAYED: number = -1;
+  public static RESULT_TIE: number = 0;
+  public static RESULT_RED_WIN: number = 1;
+  public static RESULT_BLUE_WIN: number = 2;
+
   private _matchKey: string;
   private _matchDetailKey: string;
   private _matchName: string;
@@ -38,7 +48,7 @@ export default class Match implements IPostableObject {
     this._matchKey = "";
     this._matchDetailKey = "";
     this._matchName = "";
-    this._tournamentLevel = -1;
+    this._tournamentLevel = Match.TEST_LEVEL;
     this._scheduledStartTime = moment();
     this._startTime = moment();
     this._prestartTime = moment();
@@ -50,7 +60,7 @@ export default class Match implements IPostableObject {
     this._redMajPen = 0;
     this._blueMinPen = 0;
     this._blueMajPen = 0;
-    this._result = -1;
+    this._result = Match.RESULT_NOT_PLAYED;
     this._active = 0;
     this._uploaded = false;
   }

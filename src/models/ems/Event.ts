@@ -3,12 +3,14 @@ import Region from "./Region";
 import Season from "./Season";
 import * as Regions from "../../data/Regions";
 import * as Seasons from "../../data/Seasons";
+import {EventType} from "../../";
 
 export default class Event implements IPostableObject {
 
   private _season: Season;
   private _region: Region;
-  private _eventType: string;
+  private _eventType: EventType;
+  private _eventTypeKey: string;
   private _eventCode: string;
   private _eventName: string;
   private _venue: string;
@@ -22,7 +24,8 @@ export default class Event implements IPostableObject {
   constructor() {
     this._season = new Season(0, "");
     this._region = new Region("", "");
-    this._eventType = "";
+    this._eventType = "generic";
+    this._eventTypeKey = "";
     this._eventCode = "";
     this._eventName = "";
     this._venue = "";
@@ -38,7 +41,8 @@ export default class Event implements IPostableObject {
     return {
       season_key: this.season.seasonKey,
       region_key: this.region.regionKey,
-      event_type_key: this.eventType,
+      event_type: this.eventType,
+      event_type_key: this.eventTypeKey,
       event_key: this.eventKey,
       event_name: this.eventName,
       venue: this.venue,
@@ -55,7 +59,8 @@ export default class Event implements IPostableObject {
     const e: Event = new Event();
     e.season = Seasons.getFromSeasonKey(json.season_key);
     e.region = Regions.getFromRegionKey(json.region_key);
-    e.eventType = json.event_type_key;
+    e.eventType = json.event_type;
+    e.eventTypeKey = json.event_type_key;
     e.eventCode = json.event_key.split("-")[2];
     e.eventName = json.event_name;
     e.venue = json.venue;
@@ -84,12 +89,20 @@ export default class Event implements IPostableObject {
     this._region = value;
   }
 
-  get eventType(): string {
+  get eventType(): EventType {
     return this._eventType;
   }
 
-  set eventType(value: string) {
+  set eventType(value: EventType) {
     this._eventType = value;
+  }
+
+  get eventTypeKey(): string {
+    return this._eventTypeKey;
+  }
+
+  set eventTypeKey(value: string) {
+    this._eventTypeKey = value;
   }
 
   get eventCode(): string {

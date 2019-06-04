@@ -52,7 +52,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
       blue_processing_barge_reuse: this.blueProcessingBargeReuse,
       blue_processing_barge_recycle: this.blueProcessingBargeRecycle,
       blue_processing_barge_recovery: this.blueProcessingBargeRecovery,
-      blue_blue_reduction_processing: this.blueReductionProcessing,
+      blue_reduction_processing: this.blueReductionProcessing,
       blue_end_robot_one_docking: this.blueEndRobotOneDocking,
       blue_end_robot_two_docking: this.blueEndRobotTwoDocking,
       blue_end_robot_three_docking: this.blueEndRobotTwoDocking,

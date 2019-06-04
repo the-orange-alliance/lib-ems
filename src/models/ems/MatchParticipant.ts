@@ -4,6 +4,20 @@ import Ranking from "./Ranking";
 import IPostableObject from "../IPostableObject";
 
 export default class MatchParticipant implements IPostableObject {
+  public static TEST_TEAM_KEY: number = -1;
+
+  public static RED_ALLIANCE_ONE: number = 11;
+  public static RED_ALLIANCE_TWO: number = 12;
+  public static RED_ALLIANCE_THREE: number = 13;
+
+  public static BLUE_ALLIANCE_ONE: number = 21;
+  public static BLUE_ALLIANCE_TWO: number = 22;
+  public static BLUE_ALLIANCE_THREE: number = 23;
+
+  public static NO_CARD: number = 0;
+  public static YELLOW_CARD: number = 1;
+  public static RED_CARD: number = 2;
+
   private _matchParticipantKey: string;
   private _matchKey: string;
   private _teamKey: number;
@@ -21,10 +35,10 @@ export default class MatchParticipant implements IPostableObject {
   constructor() {
     this._matchParticipantKey = "";
     this._matchKey = "";
-    this._teamKey = -1;
+    this._teamKey = MatchParticipant.TEST_TEAM_KEY;
     this._station = -1;
     this._disqualified = false;
-    this._cardStatus = 0;
+    this._cardStatus = MatchParticipant.NO_CARD;
     this._surrogate = false;
     this._noShow = false;
     this._allianceKey = "";
@@ -69,7 +83,7 @@ export default class MatchParticipant implements IPostableObject {
     }
     return participant;
   }
-
+  
   public getAllianceRankFromKey(): number {
     if (typeof this.allianceKey === "undefined") {
       return 0;

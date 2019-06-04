@@ -14,7 +14,6 @@ export default class EMSEventAdapter {
     const event: Event = new Event();
     event.season = getFromSeasonKey(parseInt(this._toaEvent.seasonKey, 10));
     event.region = getFromRegionKey(this._toaEvent.regionKey);
-    console.log(event);
     event.eventCode = this._toaEvent.eventCode;
     event.eventName = this._toaEvent.eventName;
     event.fieldCount = this._toaEvent.fieldCount;
@@ -24,7 +23,7 @@ export default class EMSEventAdapter {
     event.stateProv = this._toaEvent.stateProv;
     event.city = this._toaEvent.city;
     event.divisionName = this._toaEvent.divisionName;
-    event.eventType = this.getEventType(this._toaEvent.eventTypeKey);
+    event.eventTypeKey = this.getEventType(this._toaEvent.eventTypeKey);
     return event;
   }
 

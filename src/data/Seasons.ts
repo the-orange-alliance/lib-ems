@@ -4,8 +4,8 @@ import {DropdownProps} from "../Props";
 
 const seasonsList = [
   {
-    "season_key": 2018,
-    "season_desc": "FGC Energy Impact"
+    "season_key": 2019,
+    "season_desc": "FGC Ocean Opportunities"
   },
   {
     "season_key": 1718,
@@ -26,7 +26,7 @@ export const SeasonItems: any[] = Seasons.map(season => ({text: season.seasonDes
 
 export function getFromEventType(eventType: EventType): DropdownProps {
   switch (eventType) {
-    case "fgc_2018":
+    case "fgc_2019":
       return SeasonItems[0];
     case "ftc_1718":
       return SeasonItems[1];
@@ -41,7 +41,7 @@ export function getFromEventType(eventType: EventType): DropdownProps {
 
 export function getFromSeasonKey(seasonKey: number | string | boolean): Season {
   for (const season of Seasons) {
-    if (season.seasonKey === seasonKey) {
+    if ((season.seasonKey + "") === (seasonKey + "")) {
       return season;
     }
   }
