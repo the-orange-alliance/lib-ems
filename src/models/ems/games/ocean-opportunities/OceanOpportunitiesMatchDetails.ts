@@ -138,7 +138,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
     } else if (state === 2) {
       return 10;
     } else if (state === 3) {
-      return 25;
+      return 20;
     } else {
       return 0;
     }
