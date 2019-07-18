@@ -90,4 +90,4 @@ export const FGC_CONFIG = new MatchConfiguration();
 FGC_CONFIG.delayTime = 0;
 FGC_CONFIG.autoTime = 0;
 FGC_CONFIG.teleTime = 150;
-FGC_CONFIG.endTime = 0;
+FGC_CONFIG.endTime = 30;

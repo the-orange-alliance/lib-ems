@@ -100,7 +100,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
   }
 
   public getRedPenalty(minPen: number, majPen: number): number {
-    return majPen * 10;
+    return minPen * 10;
   }
 
   public getRedScore(minPen: number, majPen: number): number {

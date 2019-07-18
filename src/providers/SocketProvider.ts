@@ -47,7 +47,7 @@ class SocketProvider {
 
   public off(event: string) {
     if (typeof this._client !== "undefined") {
-      this._client.off("match-start");
+      this._client.off(event);
     }
   }
 

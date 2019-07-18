@@ -133,3 +133,22 @@ export const RoverRuckusEndItems = [
       value: 3
     }
 ];
+
+export const OceanOpportunitiesEndItems = [
+  {
+    text: "None",
+    value: 0
+  },
+  {
+    text: "Partially",
+    value: 1
+  },
+  {
+    text: "Fully",
+    value: 2
+  },
+  {
+    text: "Elevated",
+    value: 3
+  }
+];
