@@ -48,14 +48,14 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
       red_reduction_processing: this.redReductionProcessing,
       red_end_robot_one_docking: this.redEndRobotOneDocking,
       red_end_robot_two_docking: this.redEndRobotTwoDocking,
-      red_end_robot_three_docking: this.redEndRobotTwoDocking,
+      red_end_robot_three_docking: this.redEndRobotThreeDocking,
       blue_processing_barge_reuse: this.blueProcessingBargeReuse,
       blue_processing_barge_recycle: this.blueProcessingBargeRecycle,
       blue_processing_barge_recovery: this.blueProcessingBargeRecovery,
       blue_reduction_processing: this.blueReductionProcessing,
       blue_end_robot_one_docking: this.blueEndRobotOneDocking,
       blue_end_robot_two_docking: this.blueEndRobotTwoDocking,
-      blue_end_robot_three_docking: this.blueEndRobotTwoDocking,
+      blue_end_robot_three_docking: this.blueEndRobotThreeDocking,
       coopertition_bonus: this.coopertitionBonus ? 1 : 0
     };
   }
@@ -111,8 +111,8 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
     let sum: number = 0;
     sum += this.blueProcessingBargeReuse * 6;
     sum += this.blueProcessingBargeRecovery * 3;
-    sum += this.redProcessingBargeRecycle * 2;
-    sum += this.redReductionProcessing;
+    sum += this.blueProcessingBargeRecycle * 2;
+    sum += this.blueReductionProcessing;
     return sum;
   }
 
@@ -125,7 +125,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
   }
 
   public getBluePenalty(minPen: number, majPen: number): number {
-    return majPen * 10;
+    return minPen * 10;
   }
 
   public getBlueScore(minPen: number, majPen: number): number {
