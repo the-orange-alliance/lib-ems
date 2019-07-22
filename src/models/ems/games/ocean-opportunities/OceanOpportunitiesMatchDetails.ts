@@ -85,8 +85,8 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
   public getRedTeleScore(): number {
     let sum: number = 0;
     sum += this.redProcessingBargeReuse * 6;
-    sum += this.redProcessingBargeRecovery * 3;
-    sum += this.redProcessingBargeRecycle * 2;
+    sum += this.redProcessingBargeRecycle * 3;
+    sum += this.redProcessingBargeRecovery * 2;
     sum += this.redReductionProcessing;
     return sum;
   }
@@ -110,8 +110,8 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
   public getBlueTeleScore(): number {
     let sum: number = 0;
     sum += this.blueProcessingBargeReuse * 6;
-    sum += this.blueProcessingBargeRecovery * 3;
-    sum += this.blueProcessingBargeRecycle * 2;
+    sum += this.blueProcessingBargeRecycle * 3;
+    sum += this.blueProcessingBargeRecovery * 2;
     sum += this.blueReductionProcessing;
     return sum;
   }
