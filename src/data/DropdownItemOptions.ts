@@ -6,8 +6,12 @@ export const PostQualItems = [
   {
     text: "Finals",
     value: "finals"
+  },
+  {
+    text: "Round Robin",
+    value: "rr"
   }
-]; // TODO - Maybe round robin?
+];
 
 export const AllianceCaptainItems = [
   {

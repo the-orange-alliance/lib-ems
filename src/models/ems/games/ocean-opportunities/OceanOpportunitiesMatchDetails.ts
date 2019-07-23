@@ -3,6 +3,9 @@ import IPostableObject from "../../../IPostableObject";
 
 export default class OceanOpportunitiesMatchDetails  extends MatchDetails implements IPostableObject {
 
+  public static MAX_POLLUTANTS: number = 80;
+  public static MAX_POLLUTANTS_PLAYOFFS: number = 90;
+
   private _redProcessingBargeReuse: number;
   private _redProcessingBargeRecycle: number;
   private _redProcessingBargeRecovery: number;
@@ -78,7 +81,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
     matchDetails.blueEndRobotOneDocking = json.blue_end_robot_one_docking;
     matchDetails.blueEndRobotTwoDocking = json.blue_end_robot_two_docking;
     matchDetails.blueEndRobotThreeDocking = json.blue_end_robot_three_docking;
-    matchDetails.coopertitionBonus = json.coopertition_bonis === 1;
+    matchDetails.coopertitionBonus = json.coopertition_bonus === 1;
     return matchDetails;
   }
 

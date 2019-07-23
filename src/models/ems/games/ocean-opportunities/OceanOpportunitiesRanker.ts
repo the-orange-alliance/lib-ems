@@ -41,7 +41,7 @@ class OceanOpportunitiesRanker implements IMatchRanker {
         const cardStatus: number = JSON.parse("[" + match.cards + "]")[i];
         const isDisqualified: boolean = JSON.parse("[" + match.disqualifieds + "]")[i] === 1;
         const ranking = rankingsMap.get(parseInt(participants[i])) as OceanOpportunitiesRank;
-        if (!isSurrogate && cardStatus <= 1 && !isDisqualified && match.red_score >= 0 && match.blue_score >= 0) {
+        if (!isSurrogate && cardStatus <= 1 && !isDisqualified && match.red_score >= 0 && match.blue_score >= 0) { // TODO - Implement the cleaner 'result' way
           const redTeam = i < (participants.length / 2);
 
           const rp = redTeam && redWin ? 2 : tie ? 1 : !redTeam && !redWin ? 2 : 0;

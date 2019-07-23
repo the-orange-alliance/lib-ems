@@ -9,15 +9,24 @@ import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 
 export default class Match implements IPostableObject {
+
+  // Tournament Levels
   public static TEST_LEVEL: number = -1;
   public static PRACTICE_LEVEL: number = 0;
   public static QUALIFICATION_LEVEL: number = 1;
-  public static FINALS_LEVEL: number = 4;
+  public static ROUND_ROBIN_LEVEL: number = 2;
+  public static FINALS_LEVEL: number = 3;
+  public static OCTOFINALS_LEVEL: number = 10;
+  public static QUARTERFINALS_LEVEL: number = 20;
+  public static SEMIFINALS_level: number = 30;
+  public static FINAL_LEVEL: number = 40;
 
+  // Different Result Types
   public static RESULT_NOT_PLAYED: number = -1;
   public static RESULT_TIE: number = 0;
   public static RESULT_RED_WIN: number = 1;
   public static RESULT_BLUE_WIN: number = 2;
+  public static RESULT_GAME_SPECIFIC: number = 3;
 
   private _matchKey: string;
   private _matchDetailKey: string;
