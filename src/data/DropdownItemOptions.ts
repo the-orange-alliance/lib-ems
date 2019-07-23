@@ -10,6 +10,10 @@ export const PostQualItems = [
   {
     text: "Round Robin",
     value: "rr"
+  },
+  {
+    text: "Custom",
+    value: "custom"
   }
 ];
 

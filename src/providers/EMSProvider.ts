@@ -205,7 +205,7 @@ class EMSProvider {
   public getRankings(eventType?: EventType): Promise<Ranking[]> {
     return new Promise<Ranking[]>((resolve, reject) => {
       this.get("api/ranking").then((res: any) => {
-        resolve(res.map((rankingJSON: any) => getRankingByEventType(eventType).fromJSON(res)));
+        resolve(res.map((rankingJSON: any) => getRankingByEventType(eventType).fromJSON(rankingJSON)));
       }).catch((error: HttpError) => reject(error));
     });
   }
@@ -266,7 +266,7 @@ class EMSProvider {
 
   public getMatchTeamRanks(matchKey: string): Promise<MatchParticipant[]> {
     return new Promise<MatchParticipant[]>((resolve, reject) => {
-      this.get("api/match/" + matchKey + "/teams").then((res: any) => {
+      this.get("api/match/" + matchKey + "/teamranks").then((res: any) => {
         resolve(res.map((participantJSON: any) => new MatchParticipant().fromJSON(participantJSON)));
       }).catch((error: HttpError) => reject(error));
     });

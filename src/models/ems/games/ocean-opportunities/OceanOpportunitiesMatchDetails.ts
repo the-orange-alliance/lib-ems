@@ -5,6 +5,7 @@ export default class OceanOpportunitiesMatchDetails  extends MatchDetails implem
 
   public static MAX_POLLUTANTS: number = 80;
   public static MAX_POLLUTANTS_PLAYOFFS: number = 90;
+  public static COOPERTITION_PLAYOFFS_POINTS: number = 75;
 
   private _redProcessingBargeReuse: number;
   private _redProcessingBargeRecycle: number;
