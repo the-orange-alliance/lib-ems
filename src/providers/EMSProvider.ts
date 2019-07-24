@@ -213,12 +213,7 @@ class EMSProvider {
   public getRankingTeams(eventType?: EventType): Promise<Ranking[]> {
     return new Promise<Ranking[]>((resolve, reject) => {
       this.get("api/ranking/teams").then((res: any) => {
-        const rankings: Ranking[] = [];
-        for (const rankJSON of res) {
-          const rank: Ranking = getRankingByEventType(eventType).fromJSON(rankJSON);
-          rank.team = new Team().fromJSON(rankJSON);
-        }
-        resolve(rankings);
+        resolve(res.map((rankingJSON: any) => getRankingByEventType(eventType).fromJSON(rankingJSON)));
       }).catch((error: HttpError) => reject(error));
     });
   }

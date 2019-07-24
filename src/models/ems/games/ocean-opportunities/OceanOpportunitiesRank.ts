@@ -1,4 +1,5 @@
 import Ranking from "../../Ranking";
+import Team from "../../Team";
 
 export default class OceanOpportunitiesRank extends Ranking {
   private _rankingPoints: number;
@@ -21,7 +22,8 @@ export default class OceanOpportunitiesRank extends Ranking {
       played: this.played,
       ranking_points: this.rankingPoints,
       total_points: this.totalPoints,
-      coopertition_points: this.coopertitionPoints
+      coopertition_points: this.coopertitionPoints,
+      team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined
     };
   }
 
@@ -35,6 +37,11 @@ export default class OceanOpportunitiesRank extends Ranking {
     rank.rankingPoints = json.ranking_points;
     rank.totalPoints = json.total_points;
     rank.coopertitionPoints = json.coopertition_points;
+    try {
+      rank.team = new Team().fromJSON(json);
+    } catch {
+      rank.team = undefined;
+    }
     return rank;
   }
 

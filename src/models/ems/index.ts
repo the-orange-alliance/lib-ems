@@ -9,6 +9,10 @@ import Schedule from "./Schedule";
 import ScheduleItem from "./ScheduleItem";
 import EliminationsSchedule from "./EliminationsSchedule";
 
+// Tournament Classes
+import TournamentRound, {ELIMINATIONS_PRESET, RANKING_PRESET, ROUND_ROBIN_PRESET} from "./TournamentRound";
+import {TournamentFormat, EliminationMatchesFormat, RankingMatchesFormat, RoundRobinFormat} from "./TournamentFormat";
+
 // EMS API Classes
 import AllianceMember from "./AllianceMember";
 import Event from "./Event";
@@ -55,6 +59,11 @@ export {
   Schedule,
   ScheduleItem,
   EliminationsSchedule,
+  TournamentRound,
+  TournamentFormat,
+  RoundRobinFormat,
+  RankingMatchesFormat,
+  EliminationMatchesFormat,
   AllianceMember,
   Event,
   Match,
@@ -86,5 +95,8 @@ export {
   FGC_PRESET,
   FTC_RELIC_PRESET,
   DEFAULT_RESET,
+  ELIMINATIONS_PRESET,
+  ROUND_ROBIN_PRESET,
+  RANKING_PRESET,
   getRankingByEventType
 };

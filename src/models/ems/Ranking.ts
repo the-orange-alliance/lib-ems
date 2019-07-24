@@ -36,7 +36,8 @@ export default class Ranking implements IPostableObject {
       played: this.played,
       wins: this.wins,
       losses: this.losses,
-      ties: this.ties
+      ties: this.ties,
+      team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined
     };
   }
 
@@ -50,6 +51,11 @@ export default class Ranking implements IPostableObject {
     ranking.wins = json.wins;
     ranking.losses = json.losses;
     ranking.ties = json.ties;
+    try {
+      ranking.team = new Team().fromJSON(json);
+    } catch {
+      ranking.team = undefined;
+    }
     return ranking;
   }
 

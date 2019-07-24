@@ -4,8 +4,8 @@ export const PostQualItems = [
     value: "elims"
   },
   {
-    text: "Finals",
-    value: "finals"
+    text: "Ranking",
+    value: "ranking"
   },
   {
     text: "Round Robin",
@@ -36,7 +36,7 @@ export const AllianceCaptainItems = [
   }
 ];
 
-export const EliminationsFormatItems = [
+export const SeriesTypeItems = [
   {
     text: "Best of 1 (Bo1)",
     value: "bo1"

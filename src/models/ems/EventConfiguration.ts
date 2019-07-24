@@ -1,18 +1,16 @@
 import IPostableObject from "../IPostableObject";
-import {EliminationFormat, EventType, PlayoffsType, TeamIdentifier} from "../../Types";
+import {AdvancementType, EventType, TeamIdentifier} from "../../Types";
+import TournamentRound, {ELIMINATIONS_PRESET, RANKING_PRESET} from "./TournamentRound";
 
 export default class EventConfiguration implements IPostableObject {
   private _eventType: EventType;
-  private _postQualConfig: PlayoffsType;
   private _teamIdentifier: TeamIdentifier;
   private _requiresTOA: boolean;
   private _teamsPerAlliance: number;
-  private _postQualTeamsPerAlliance: number;
 
-  // Variables that are post-qual specific
-  private _allianceCaptains: number;
-  private _rankingCutoff: number;
-  private _elimsFormat: EliminationFormat;
+  // Tournament Advancement Fields
+  private _advancementConfig: AdvancementType;
+  private _advancementRounds: TournamentRound[];
 
   // Variables that aren't necessary in standard mode
   private _fieldsControlled: number[];
@@ -20,40 +18,39 @@ export default class EventConfiguration implements IPostableObject {
   constructor() {
     this._requiresTOA = false;
     this._teamsPerAlliance = 0;
-    this._postQualTeamsPerAlliance = 0;
-    this._allianceCaptains = 0;
-    this._rankingCutoff = 0;
-    this._elimsFormat = "bo3";
+
+    this._advancementConfig = "elims";
+    this._advancementRounds = [new TournamentRound()];
+
     this._fieldsControlled = [];
   }
 
   public toJSON(): object {
     return {
       event_type: this.eventType,
-      post_qual_config: this.playoffsConfig,
       team_identifier: this.teamIdentifier,
       requires_toa: this.requiresTOA,
       teams_per_alliance: this.teamsPerAlliance,
-      post_qual_teams_per_alliance: this.postQualTeamsPerAlliance,
-      alliance_captains: this.allianceCaptains,
-      ranking_cutoff: this.rankingCutoff,
+      advancement_config: this.advancementConfig,
+      advancement_rounds: this.advancementRounds.map((r: TournamentRound) => r.toJSON()),
       fields_controlled: this.fieldsControlled,
-      elims_format: this.elimsFormat
     };
   }
 
   public fromJSON(json: any): EventConfiguration {
     const config: EventConfiguration = new EventConfiguration();
     config.eventType = json.event_type;
-    config.playoffsConfig = json.post_qual_config;
     config.teamIdentifier = json.team_identifier;
     config.requiresTOA = json.requires_toa;
     config.teamsPerAlliance = json.teams_per_alliance;
-    config.postQualTeamsPerAlliance = json.post_qual_teams_per_alliance;
-    config.allianceCaptains = json.alliance_captains;
-    config.rankingCutoff = json.ranking_cutoff;
+    try {
+      config.advancementConfig = json.advancement_config;
+      config.advancementRounds = json.advancement_rounds.map((rJSON: any) => new TournamentRound().fromJSON(rJSON));
+    } catch {
+      config.advancementConfig = "elims";
+      config.advancementRounds = [ELIMINATIONS_PRESET];
+    }
     config.fieldsControlled = json.fields_controlled;
-    config.elimsFormat = json.elims_format;
     return config;
   }
 
@@ -65,13 +62,6 @@ export default class EventConfiguration implements IPostableObject {
     this._eventType = value;
   }
 
-  get playoffsConfig(): PlayoffsType {
-    return this._postQualConfig;
-  }
-
-  set playoffsConfig(value: PlayoffsType) {
-    this._postQualConfig = value;
-  }
 
   get teamIdentifier(): TeamIdentifier {
     return this._teamIdentifier;
@@ -97,28 +87,20 @@ export default class EventConfiguration implements IPostableObject {
     this._teamsPerAlliance = value;
   }
 
-  get postQualTeamsPerAlliance(): number {
-    return this._postQualTeamsPerAlliance;
+  get advancementConfig(): AdvancementType {
+    return this._advancementConfig;
   }
 
-  set postQualTeamsPerAlliance(value: number) {
-    this._postQualTeamsPerAlliance = value;
+  set advancementConfig(value: AdvancementType) {
+    this._advancementConfig = value;
   }
 
-  get allianceCaptains(): number {
-    return this._allianceCaptains;
+  get advancementRounds(): TournamentRound[] {
+    return this._advancementRounds;
   }
 
-  set allianceCaptains(value: number) {
-    this._allianceCaptains = value;
-  }
-
-  get rankingCutoff(): number {
-    return this._rankingCutoff;
-  }
-
-  set rankingCutoff(value: number) {
-    this._rankingCutoff = value;
+  set advancementRounds(value: TournamentRound[]) {
+    this._advancementRounds = value;
   }
 
   get fieldsControlled(): number[] {
@@ -128,48 +110,36 @@ export default class EventConfiguration implements IPostableObject {
   set fieldsControlled(value: number[]) {
     this._fieldsControlled = value;
   }
-
-  get elimsFormat(): EliminationFormat {
-    return this._elimsFormat;
-  }
-
-  set elimsFormat(value: EliminationFormat) {
-    this._elimsFormat = value;
-  }
 }
 
 export const FGC_PRESET = new EventConfiguration();
 FGC_PRESET.eventType = "fgc_2019";
-FGC_PRESET.playoffsConfig = "finals";
 FGC_PRESET.teamIdentifier = "country";
 FGC_PRESET.requiresTOA = false;
 FGC_PRESET.teamsPerAlliance = 3;
-FGC_PRESET.postQualTeamsPerAlliance = 3;
-FGC_PRESET.rankingCutoff = 32;
+FGC_PRESET.advancementConfig = "ranking";
+FGC_PRESET.advancementRounds = [RANKING_PRESET];
 
 export const FTC_RELIC_PRESET = new EventConfiguration();
 FTC_RELIC_PRESET.eventType = "ftc_1718";
-FTC_RELIC_PRESET.playoffsConfig = "elims";
 FTC_RELIC_PRESET.teamIdentifier = "team_key";
 FTC_RELIC_PRESET.requiresTOA = true;
-FTC_RELIC_PRESET.allianceCaptains = 4;
 FTC_RELIC_PRESET.teamsPerAlliance = 2;
-FTC_RELIC_PRESET.postQualTeamsPerAlliance = 3;
+FTC_RELIC_PRESET.advancementConfig = "elims";
+FTC_RELIC_PRESET.advancementRounds = [ELIMINATIONS_PRESET];
 
 export const FTC_ROVER_PRESET = new EventConfiguration();
 FTC_ROVER_PRESET.eventType = "ftc_1819";
-FTC_ROVER_PRESET.playoffsConfig = "elims";
 FTC_ROVER_PRESET.teamIdentifier = "team_key";
 FTC_ROVER_PRESET.requiresTOA = true;
-FTC_RELIC_PRESET.allianceCaptains = 4;
 FTC_ROVER_PRESET.teamsPerAlliance = 2;
-FTC_ROVER_PRESET.postQualTeamsPerAlliance = 3;
+FTC_ROVER_PRESET.advancementConfig = "elims";
+FTC_ROVER_PRESET.advancementRounds = [ELIMINATIONS_PRESET];
 
 export const DEFAULT_RESET = new EventConfiguration();
 DEFAULT_RESET.eventType = "ftc_1819";
-DEFAULT_RESET.playoffsConfig = "elims";
 DEFAULT_RESET.teamIdentifier = "team_key";
 DEFAULT_RESET.requiresTOA = true;
-DEFAULT_RESET.allianceCaptains = 4;
 DEFAULT_RESET.teamsPerAlliance = 2;
-DEFAULT_RESET.postQualTeamsPerAlliance = 3;
+DEFAULT_RESET.advancementConfig = "elims";
+DEFAULT_RESET.advancementRounds = [ELIMINATIONS_PRESET];

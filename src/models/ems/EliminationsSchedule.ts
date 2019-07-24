@@ -2,11 +2,11 @@ import Schedule from "./Schedule";
 import ScheduleItem from "./ScheduleItem";
 import Event from "./Event";
 import Day from "./Day";
-import {EliminationFormat} from "../../Types";
+import {SeriesType} from "../../Types";
 
 export default class EliminationsSchedule extends Schedule {
   private _allianceCaptains: number;
-  private _elimsFormat: EliminationFormat;
+  private _elimsFormat: SeriesType;
 
   // Inheritance is cool!
   constructor() {
@@ -122,11 +122,11 @@ export default class EliminationsSchedule extends Schedule {
     this._allianceCaptains = value;
   }
 
-  get eliminationsFormat(): EliminationFormat {
+  get eliminationsFormat(): SeriesType {
     return this._elimsFormat;
   }
 
-  set eliminationsFormat(value: EliminationFormat) {
+  set eliminationsFormat(value: SeriesType) {
     this._elimsFormat = value;
   }
 }
