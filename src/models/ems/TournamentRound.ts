@@ -5,7 +5,7 @@ import {PlayoffsType} from "../../Types";
 export default class TournamentRound implements IPostableObject {
   private _id: number;
   private _format: TournamentFormat;
-
+  // TODO - v0.4.1 add TournamentSettings for customization
   constructor() {
     this._id = -1;
     this._format = new EliminationMatchesFormat();

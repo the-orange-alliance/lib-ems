@@ -9,8 +9,8 @@ export default class EventConfiguration implements IPostableObject {
   private _teamsPerAlliance: number;
 
   // Tournament Advancement Fields
-  private _advancementConfig: AdvancementType;
-  private _advancementRounds: TournamentRound[];
+  private _tournamentConfig: AdvancementType;
+  private _tournament: TournamentRound | TournamentRound[];
 
   // Variables that aren't necessary in standard mode
   private _fieldsControlled: number[];
@@ -19,8 +19,8 @@ export default class EventConfiguration implements IPostableObject {
     this._requiresTOA = false;
     this._teamsPerAlliance = 0;
 
-    this._advancementConfig = "elims";
-    this._advancementRounds = [new TournamentRound()];
+    this._tournamentConfig = "elims";
+    this._tournament = new TournamentRound();
 
     this._fieldsControlled = [];
   }
@@ -31,8 +31,8 @@ export default class EventConfiguration implements IPostableObject {
       team_identifier: this.teamIdentifier,
       requires_toa: this.requiresTOA,
       teams_per_alliance: this.teamsPerAlliance,
-      advancement_config: this.advancementConfig,
-      advancement_rounds: this.advancementRounds.map((r: TournamentRound) => r.toJSON()),
+      tournament_config: this.tournamentConfig,
+      tournament: Array.isArray(this.tournament) ? this.tournament.map((r: TournamentRound) => r.toJSON()) : this.tournament.toJSON(),
       fields_controlled: this.fieldsControlled,
     };
   }
@@ -44,11 +44,15 @@ export default class EventConfiguration implements IPostableObject {
     config.requiresTOA = json.requires_toa;
     config.teamsPerAlliance = json.teams_per_alliance;
     try {
-      config.advancementConfig = json.advancement_config;
-      config.advancementRounds = json.advancement_rounds.map((rJSON: any) => new TournamentRound().fromJSON(rJSON));
+      config.tournamentConfig = json.tournament_config;
+      if (Array.isArray(json.tournament)) {
+        config.tournament = json.tournament.map((rJSON: any) => new TournamentRound().fromJSON(rJSON));
+      } else {
+        config.tournament = new TournamentRound().fromJSON(json.tournament);
+      }
     } catch {
-      config.advancementConfig = "elims";
-      config.advancementRounds = [ELIMINATIONS_PRESET];
+      config.tournamentConfig = "elims";
+      config.tournament = ELIMINATIONS_PRESET;
     }
     config.fieldsControlled = json.fields_controlled;
     return config;
@@ -87,20 +91,20 @@ export default class EventConfiguration implements IPostableObject {
     this._teamsPerAlliance = value;
   }
 
-  get advancementConfig(): AdvancementType {
-    return this._advancementConfig;
+  get tournamentConfig(): AdvancementType {
+    return this._tournamentConfig;
   }
 
-  set advancementConfig(value: AdvancementType) {
-    this._advancementConfig = value;
+  set tournamentConfig(value: AdvancementType) {
+    this._tournamentConfig = value;
   }
 
-  get advancementRounds(): TournamentRound[] {
-    return this._advancementRounds;
+  get tournament(): TournamentRound | TournamentRound[] {
+    return this._tournament;
   }
 
-  set advancementRounds(value: TournamentRound[]) {
-    this._advancementRounds = value;
+  set tournament(value: TournamentRound | TournamentRound[]) {
+    this._tournament = value;
   }
 
   get fieldsControlled(): number[] {
@@ -117,29 +121,29 @@ FGC_PRESET.eventType = "fgc_2019";
 FGC_PRESET.teamIdentifier = "country";
 FGC_PRESET.requiresTOA = false;
 FGC_PRESET.teamsPerAlliance = 3;
-FGC_PRESET.advancementConfig = "ranking";
-FGC_PRESET.advancementRounds = [RANKING_PRESET];
+FGC_PRESET.tournamentConfig = "ranking";
+FGC_PRESET.tournament = RANKING_PRESET;
 
 export const FTC_RELIC_PRESET = new EventConfiguration();
 FTC_RELIC_PRESET.eventType = "ftc_1718";
 FTC_RELIC_PRESET.teamIdentifier = "team_key";
 FTC_RELIC_PRESET.requiresTOA = true;
 FTC_RELIC_PRESET.teamsPerAlliance = 2;
-FTC_RELIC_PRESET.advancementConfig = "elims";
-FTC_RELIC_PRESET.advancementRounds = [ELIMINATIONS_PRESET];
+FTC_RELIC_PRESET.tournamentConfig = "elims";
+FTC_RELIC_PRESET.tournament = ELIMINATIONS_PRESET;
 
 export const FTC_ROVER_PRESET = new EventConfiguration();
 FTC_ROVER_PRESET.eventType = "ftc_1819";
 FTC_ROVER_PRESET.teamIdentifier = "team_key";
 FTC_ROVER_PRESET.requiresTOA = true;
 FTC_ROVER_PRESET.teamsPerAlliance = 2;
-FTC_ROVER_PRESET.advancementConfig = "elims";
-FTC_ROVER_PRESET.advancementRounds = [ELIMINATIONS_PRESET];
+FTC_ROVER_PRESET.tournamentConfig = "elims";
+FTC_ROVER_PRESET.tournament = [ELIMINATIONS_PRESET];
 
 export const DEFAULT_RESET = new EventConfiguration();
 DEFAULT_RESET.eventType = "ftc_1819";
 DEFAULT_RESET.teamIdentifier = "team_key";
 DEFAULT_RESET.requiresTOA = true;
 DEFAULT_RESET.teamsPerAlliance = 2;
-DEFAULT_RESET.advancementConfig = "elims";
-DEFAULT_RESET.advancementRounds = [ELIMINATIONS_PRESET];
+DEFAULT_RESET.tournamentConfig = "elims";
+DEFAULT_RESET.tournament = [ELIMINATIONS_PRESET];
