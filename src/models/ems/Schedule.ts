@@ -70,7 +70,7 @@ export default class Schedule implements IPostableObject {
 
         let matchIndex = dayMatches;
         if (this.matchConcurrency > 1) {
-          matchIndex = dayMatches - 1;
+          matchIndex = dayMatches - this.matchConcurrency + 1;
         }
 
         item.key = event.eventKey + "-" + this.type.substring(0, 1) + ((scheduleItems.length + 1));
