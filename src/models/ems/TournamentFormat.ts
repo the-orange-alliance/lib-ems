@@ -52,7 +52,7 @@ export class RoundRobinFormat extends TournamentFormat {
     return {
       type: this.type,
       teams_per_alliance: this.teamsPerAlliance,
-      alliance: this.alliances
+      alliances: this.alliances
     };
   }
 

@@ -23,6 +23,7 @@ export default class OceanOpportunitiesRank extends Ranking {
       ranking_points: this.rankingPoints,
       total_points: this.totalPoints,
       coopertition_points: this.coopertitionPoints,
+      alliance_key: this.allianceKey,
       team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined
     };
   }
@@ -37,6 +38,7 @@ export default class OceanOpportunitiesRank extends Ranking {
     rank.rankingPoints = json.ranking_points;
     rank.totalPoints = json.total_points;
     rank.coopertitionPoints = json.coopertition_points;
+    rank.allianceKey = json.alliance_key;
     try {
       rank.team = new Team().fromJSON(json);
     } catch {

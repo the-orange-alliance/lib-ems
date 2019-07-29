@@ -12,6 +12,7 @@ export default class Ranking implements IPostableObject {
   private _wins: number;
   private _losses: number;
   private _ties: number;
+  private _allianceKey: string;
 
   // This item is separate, and not recorded directly in the 'Ranking' table.
   private _team: Team;
@@ -25,6 +26,7 @@ export default class Ranking implements IPostableObject {
     this._wins = 0;
     this._losses = 0;
     this._ties = 0;
+    this._allianceKey = "";
   }
 
   public toJSON(): object {
@@ -37,6 +39,7 @@ export default class Ranking implements IPostableObject {
       wins: this.wins,
       losses: this.losses,
       ties: this.ties,
+      alliance_key: this.allianceKey,
       team: typeof this.team !== "undefined" ? this.team.toJSON() : undefined
     };
   }
@@ -51,6 +54,7 @@ export default class Ranking implements IPostableObject {
     ranking.wins = json.wins;
     ranking.losses = json.losses;
     ranking.ties = json.ties;
+    ranking.allianceKey = json.alliance_key;
     try {
       ranking.team = new Team().fromJSON(json);
     } catch {
@@ -121,6 +125,14 @@ export default class Ranking implements IPostableObject {
 
   set ties(value: number) {
     this._ties = value;
+  }
+
+  get allianceKey(): string {
+    return this._allianceKey;
+  }
+
+  set allianceKey(value: string) {
+    this._allianceKey = value;
   }
 
   get team(): Team {

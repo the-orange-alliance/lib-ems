@@ -11,6 +11,7 @@ export default class EventConfiguration implements IPostableObject {
   // Tournament Advancement Fields
   private _tournamentConfig: AdvancementType;
   private _tournament: TournamentRound | TournamentRound[];
+  private _activeTournamentID: number;
 
   // Variables that aren't necessary in standard mode
   private _fieldsControlled: number[];
@@ -21,6 +22,7 @@ export default class EventConfiguration implements IPostableObject {
 
     this._tournamentConfig = "elims";
     this._tournament = new TournamentRound();
+    this._activeTournamentID = -1;
 
     this._fieldsControlled = [];
   }
@@ -33,6 +35,7 @@ export default class EventConfiguration implements IPostableObject {
       teams_per_alliance: this.teamsPerAlliance,
       tournament_config: this.tournamentConfig,
       tournament: Array.isArray(this.tournament) ? this.tournament.map((r: TournamentRound) => r.toJSON()) : this.tournament.toJSON(),
+      active_tournament_id: this.activeTournamentID,
       fields_controlled: this.fieldsControlled,
     };
   }
@@ -43,6 +46,7 @@ export default class EventConfiguration implements IPostableObject {
     config.teamIdentifier = json.team_identifier;
     config.requiresTOA = json.requires_toa;
     config.teamsPerAlliance = json.teams_per_alliance;
+    config._activeTournamentID = json.active_tournament_id;
     try {
       config.tournamentConfig = json.tournament_config;
       if (Array.isArray(json.tournament)) {
@@ -105,6 +109,14 @@ export default class EventConfiguration implements IPostableObject {
 
   set tournament(value: TournamentRound | TournamentRound[]) {
     this._tournament = value;
+  }
+
+  get activeTournamentID(): number {
+    return this._activeTournamentID;
+  }
+
+  set activeTournamentID(value: number) {
+    this._activeTournamentID = value;
   }
 
   get fieldsControlled(): number[] {
