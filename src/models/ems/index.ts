@@ -6,6 +6,7 @@ import HttpError from "./HttpError";
 import Day from "./Day";
 import DayBreak from "./DayBreak";
 import Schedule from "./Schedule";
+import RoundRobinSchedule from "./RoundRobinSchedule";
 import ScheduleItem from "./ScheduleItem";
 import EliminationsSchedule from "./EliminationsSchedule";
 
@@ -57,6 +58,7 @@ export {
   Day,
   DayBreak,
   Schedule,
+  RoundRobinSchedule,
   ScheduleItem,
   EliminationsSchedule,
   TournamentRound,
