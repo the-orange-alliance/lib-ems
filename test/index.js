@@ -1,3 +1,3 @@
 const EMS = require("../");
 
-new EMS.RoundRobinSchedule();
+EMS.FGCProvider.initialize("127.0.0.1", 8088);

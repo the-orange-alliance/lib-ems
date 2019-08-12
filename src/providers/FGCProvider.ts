@@ -19,7 +19,7 @@ class FGCProvider {
     if (typeof FGCProvider._instance === "undefined") {
       FGCProvider._instance = new FGCProvider();
     }
-    return FGCProvider.getInstance();
+    return FGCProvider._instance;
   }
 
   private constructor() {}
@@ -159,12 +159,12 @@ class FGCProvider {
     return this.delete("api/event/" + eventKey + "/teams");
   }
 
-  public deleteMatchData(eventKey: string, tournamentLevel: string): Promise<AxiosResponse> {
-    return this.delete("api/event/" + eventKey + "/matches/all?level=" + tournamentLevel);
+  public deleteMatchData(eventKey: string, tournamentLevel: number): Promise<AxiosResponse> {
+    return this.delete("api/match/" + eventKey + "/all?level=" + tournamentLevel);
   }
 
   public deleteRankings(eventKey: string): Promise<AxiosResponse> {
-    return this.delete("api/event/" + eventKey + "/rankings");
+    return this.delete("api/rank/" + eventKey);
   }
 
   public postEventParticipants(eventKey: string, participants: Team[]): Promise<AxiosResponse> {
@@ -184,19 +184,19 @@ class FGCProvider {
   }
 
   public postRankings(eventKey: string, rankings: Ranking[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/rankings", rankings);
+    return this.post("api/rank/" + eventKey, rankings);
   }
 
   public putMatchResults(eventKey: string, match: Match): Promise<AxiosResponse> {
-    return this.put("api/event/" + eventKey + "/matches/" + match.matchKey, match);
+    return this.put("api/match/" + match.matchKey, match);
   }
 
   public putMatchDetails(eventKey: string, matchDetails: MatchDetails): Promise<AxiosResponse> {
-    return this.put("api/event/" + eventKey + "/matches/" + matchDetails.matchKey + "/details", matchDetails)
+    return this.put("api/match/" + matchDetails.matchKey + "/details", matchDetails)
   }
 
   public putMatchParticipants(eventKey: string, participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.put("api/event/" + eventKey + "/matches/" + participants[0].matchKey + "/participants", participants);
+    return this.put("api/match/" + participants[0].matchKey + "/participants", participants);
   }
 }
 
