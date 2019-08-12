@@ -89,7 +89,7 @@ class FGCProvider {
       } else {
         records.push(body.toJSON());
       }
-      this._axios.post(url, records).then((response: AxiosResponse) => {
+      this._axios.post(url, {records}).then((response: AxiosResponse) => {
         resolve(response);
       }).catch((error) => {
         if (error.response) {
@@ -113,7 +113,7 @@ class FGCProvider {
       } else {
         records.push(body.toJSON());
       }
-      this._axios.put(url, records).then((response: AxiosResponse) => {
+      this._axios.put(url, {records}).then((response: AxiosResponse) => {
         resolve(response);
       }).catch((error) => {
         if (error.response) {
@@ -141,22 +141,23 @@ class FGCProvider {
 
   public getEvent(eventKey: string): Promise<Event> {
     return new Promise<Event>((resolve, reject) => {
-      this.get("api/event/" + eventKey).then((eventJSON: any) => {
-        resolve(new Event().fromJSON(eventJSON));
+      this.get("api/event/" + eventKey).then((eventsJSON: any) => {
+        const events: Event[] = eventsJSON.map((eventJSON: any) => new Event().fromJSON(eventJSON));
+        resolve(events.length > 0 ? events[0] : new Event());
       }).catch((err: HttpError) => reject(err));
     });
   }
 
   public getTeams(eventKey: string): Promise<Team[]> {
     return new Promise<Team[]>((resolve, reject) => {
-      this.get("api/event/" + eventKey + "/teams").then((teamsJSON: any[]) => {
+      this.get("api/event/" + eventKey + "/participants").then((teamsJSON: any[]) => {
         resolve(teamsJSON.map((teamJSON: any) => new Team().fromJSON(teamJSON)));
       }).catch((err: HttpError) => reject(err));
     });
   }
 
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
-    return this.delete("api/event/" + eventKey + "/teams");
+    return this.delete("api/event/" + eventKey + "/participants");
   }
 
   public deleteMatchData(eventKey: string, tournamentLevel: number): Promise<AxiosResponse> {
@@ -168,7 +169,7 @@ class FGCProvider {
   }
 
   public postEventParticipants(eventKey: string, participants: Team[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/teams", participants);
+    return this.post("api/event/" + eventKey + "/participants", participants);
   }
 
   public postMatches(eventKey: string, matches: Match[]): Promise<AxiosResponse> {
