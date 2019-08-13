@@ -7,6 +7,7 @@ import Match from "../models/ems/Match";
 import MatchDetails from "../models/ems/MatchDetails";
 import MatchParticipant from "../models/ems/MatchParticipant";
 import Ranking from "../models/ems/Ranking";
+import LiveStream from "../models/ems/LiveStream";
 
 class FGCProvider {
   private static _instance: FGCProvider;
@@ -127,14 +128,27 @@ class FGCProvider {
     });
   }
 
-  /**
-   * Testing method that simply 'pings' the orange alliance API.
-   * @returns The 'ping' response from the orange alliance API.
-   */
+  /* GET requests. */
   public ping(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       this.get("ping").then((data: any) => {
         resolve(data + "");
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
+  public getLiveStreams(): Promise<LiveStream> {
+    return new Promise<LiveStream>((resolve, reject) => {
+      this.get("api/streams").then((streamsJSON: any) => {
+        resolve(streamsJSON.map((streamJSON: any) => new LiveStream().fromJSON(streamJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
+  public getActiveLiveStreams(): Promise<LiveStream> {
+    return new Promise<LiveStream>((resolve, reject) => {
+      this.get("api/streams?live=true").then((streamsJSON: any) => {
+        resolve(streamsJSON.map((streamJSON: any) => new LiveStream().fromJSON(streamJSON)));
       }).catch((err: HttpError) => reject(err));
     });
   }
@@ -148,6 +162,23 @@ class FGCProvider {
     });
   }
 
+  public getEventBySeason(seasonKey: string): Promise<Event> {
+    return new Promise<Event>((resolve, reject) => {
+      this.get(`api/event?season=${seasonKey}`).then((eventsJSON: any) => {
+        const events: Event[] = eventsJSON.map((eventJSON: any) => new Event().fromJSON(eventJSON));
+        resolve(events.length > 0 ? events[0] : new Event());
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
+  public getAllTeams(): Promise<Team[]> {
+    return new Promise<Team[]>((resolve, reject) => {
+      this.get("api/teams").then((teamsJSON: any[]) => {
+        resolve(teamsJSON.map((teamJSON: any) => new Team().fromJSON(teamJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
   public getTeams(eventKey: string): Promise<Team[]> {
     return new Promise<Team[]>((resolve, reject) => {
       this.get("api/event/" + eventKey + "/participants").then((teamsJSON: any[]) => {
@@ -156,6 +187,15 @@ class FGCProvider {
     });
   }
 
+  public getTeamsBySeason(seasonKey: string): Promise<Team[]> {
+    return new Promise<Team[]>((resolve, reject) => {
+      this.get(`api/teams?season=${seasonKey}`).then((teamsJSON: any[]) => {
+        resolve(teamsJSON.map((teamJSON: any) => new Team().fromJSON(teamJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
+  /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/event/" + eventKey + "/participants");
   }

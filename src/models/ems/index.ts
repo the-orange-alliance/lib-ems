@@ -30,6 +30,7 @@ import {MatchState} from "./MatchState";
 import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
 import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
+import LiveStream from "./LiveStream";
 
 // Game-Specific Classes
 // Energy Impact
@@ -79,6 +80,7 @@ export {
   EventConfiguration,
   MatchConfiguration,
   Process,
+  LiveStream,
   EnergyImpactMatchDetails,
   EnergyImpactRanking,
   EnergyImpactRanker,
