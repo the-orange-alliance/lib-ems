@@ -181,7 +181,7 @@ class FGCProvider {
 
   public getTeams(eventKey: string): Promise<Team[]> {
     return new Promise<Team[]>((resolve, reject) => {
-      this.get("api/event/" + eventKey + "/participants").then((teamsJSON: any[]) => {
+      this.get("api/event/" + eventKey + "/participants/teams").then((teamsJSON: any[]) => {
         resolve(teamsJSON.map((teamJSON: any) => new Team().fromJSON(teamJSON)));
       }).catch((err: HttpError) => reject(err));
     });
@@ -213,15 +213,15 @@ class FGCProvider {
   }
 
   public postMatches(eventKey: string, matches: Match[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/matches", matches);
+    return this.post("api/match/" + eventKey, matches);
   }
 
   public postMatchDetails(eventKey: string, matches: MatchDetails[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/matches/details", matches);
+    return this.post("api/match/" + eventKey + "/details", matches);
   }
 
   public postMatchParticipants(eventKey: string, participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/matches/participants", participants);
+    return this.post("api/match/" + eventKey + "/participants", participants);
   }
 
   public postRankings(eventKey: string, rankings: Ranking[]): Promise<AxiosResponse> {
