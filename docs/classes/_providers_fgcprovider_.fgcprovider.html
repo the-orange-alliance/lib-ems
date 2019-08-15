@@ -86,6 +86,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#deletematchdata" class="tsd-kind-icon">delete<wbr>Match<wbr>Data</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#deleterankings" class="tsd-kind-icon">delete<wbr>Rankings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#deleterankingsbylevel" class="tsd-kind-icon">delete<wbr>Rankings<wbr>ByLevel</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#deleteteams" class="tsd-kind-icon">delete<wbr>Teams</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getactivelivestreams" class="tsd-kind-icon">get<wbr>Active<wbr>Live<wbr>Streams</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getalleventmatches" class="tsd-kind-icon">get<wbr>All<wbr>Event<wbr>Matches</a></li>
@@ -93,6 +94,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getevent" class="tsd-kind-icon">get<wbr>Event</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#geteventbyseason" class="tsd-kind-icon">get<wbr>Event<wbr>BySeason</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getlivestreams" class="tsd-kind-icon">get<wbr>Live<wbr>Streams</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getrankingteams" class="tsd-kind-icon">get<wbr>Ranking<wbr>Teams</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getteams" class="tsd-kind-icon">get<wbr>Teams</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getteamsbyseason" class="tsd-kind-icon">get<wbr>Teams<wbr>BySeason</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#getupcomingmatches" class="tsd-kind-icon">get<wbr>Upcoming<wbr>Matches</a></li>
@@ -104,6 +106,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#postmatchparticipants" class="tsd-kind-icon">post<wbr>Match<wbr>Participants</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#postmatches" class="tsd-kind-icon">post<wbr>Matches</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#postrankings" class="tsd-kind-icon">post<wbr>Rankings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#postrankingsbylevel" class="tsd-kind-icon">post<wbr>Rankings<wbr>ByLevel</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#put" class="tsd-kind-icon">put</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#putmatchdetails" class="tsd-kind-icon">put<wbr>Match<wbr>Details</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_providers_fgcprovider_.fgcprovider.html#putmatchparticipants" class="tsd-kind-icon">put<wbr>Match<wbr>Participants</a></li>
@@ -126,7 +129,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:230</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L240">providers/FGCProvider.ts:240</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -152,13 +155,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:234</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L244">providers/FGCProvider.ts:244</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>eventKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="deleterankingsbylevel" class="tsd-anchor"></a>
+					<h3>delete<wbr>Rankings<wbr>ByLevel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>Rankings<wbr>ByLevel<span class="tsd-signature-symbol">(</span>eventKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tournamentLevel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L248">providers/FGCProvider.ts:248</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>tournamentLevel: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -175,7 +204,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:226</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L236">providers/FGCProvider.ts:236</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -198,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:148</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L150">providers/FGCProvider.ts:150</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_ems_livestream_.livestream.html" class="tsd-signature-type">LiveStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -215,7 +244,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:198</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L200">providers/FGCProvider.ts:200</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -238,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:174</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L176">providers/FGCProvider.ts:176</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_ems_team_.team.html" class="tsd-signature-type">Team</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -255,7 +284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:156</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L158">providers/FGCProvider.ts:158</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -278,7 +307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:165</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L167">providers/FGCProvider.ts:167</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -301,10 +330,36 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:140</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L142">providers/FGCProvider.ts:142</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_ems_livestream_.livestream.html" class="tsd-signature-type">LiveStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getrankingteams" class="tsd-anchor"></a>
+					<h3>get<wbr>Ranking<wbr>Teams</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ranking<wbr>Teams<span class="tsd-signature-symbol">(</span>eventKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, eventType<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_.html#eventtype" class="tsd-signature-type">EventType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_ems_ranking_.ranking.html" class="tsd-signature-type">Ranking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L227">providers/FGCProvider.ts:227</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> eventType: <a href="../modules/_types_.html#eventtype" class="tsd-signature-type">EventType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_models_ems_ranking_.ranking.html" class="tsd-signature-type">Ranking</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -318,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:182</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L184">providers/FGCProvider.ts:184</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -341,7 +396,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:190</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L192">providers/FGCProvider.ts:192</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -364,7 +419,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:216</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L218">providers/FGCProvider.ts:218</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -390,7 +445,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:32</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L34">providers/FGCProvider.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -422,7 +477,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:132</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L134">providers/FGCProvider.ts:134</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -439,7 +494,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:83</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L85">providers/FGCProvider.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -465,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:238</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L252">providers/FGCProvider.ts:252</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -491,7 +546,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:246</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L260">providers/FGCProvider.ts:260</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -517,7 +572,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:250</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L264">providers/FGCProvider.ts:264</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -543,7 +598,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:242</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L256">providers/FGCProvider.ts:256</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -569,7 +624,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:254</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L268">providers/FGCProvider.ts:268</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -586,6 +641,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="postrankingsbylevel" class="tsd-anchor"></a>
+					<h3>post<wbr>Rankings<wbr>ByLevel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">post<wbr>Rankings<wbr>ByLevel<span class="tsd-signature-symbol">(</span>eventKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, rankings<span class="tsd-signature-symbol">: </span><a href="_models_ems_ranking_.ranking.html" class="tsd-signature-type">Ranking</a><span class="tsd-signature-symbol">[]</span>, tournamentLevel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L272">providers/FGCProvider.ts:272</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>eventKey: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>rankings: <a href="_models_ems_ranking_.ranking.html" class="tsd-signature-type">Ranking</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>tournamentLevel: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="put" class="tsd-anchor"></a>
 					<h3>put</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -595,7 +679,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:107</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L109">providers/FGCProvider.ts:109</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -621,7 +705,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:262</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L280">providers/FGCProvider.ts:280</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -647,7 +731,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:266</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L284">providers/FGCProvider.ts:284</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -673,7 +757,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:258</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L276">providers/FGCProvider.ts:276</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -699,7 +783,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in providers/FGCProvider.ts:19</li>
+									<li>Defined in <a href="https://github.com/orange-alliance/lib-ems/blob/d515641/src/providers/FGCProvider.ts#L21">providers/FGCProvider.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_providers_fgcprovider_.fgcprovider.html" class="tsd-signature-type">FGCProvider</a></h4>
@@ -733,6 +817,9 @@
 								<a href="_providers_fgcprovider_.fgcprovider.html#deleterankings" class="tsd-kind-icon">delete<wbr>Rankings</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_providers_fgcprovider_.fgcprovider.html#deleterankingsbylevel" class="tsd-kind-icon">delete<wbr>Rankings<wbr>ByLevel</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_providers_fgcprovider_.fgcprovider.html#deleteteams" class="tsd-kind-icon">delete<wbr>Teams</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -752,6 +839,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_providers_fgcprovider_.fgcprovider.html#getlivestreams" class="tsd-kind-icon">get<wbr>Live<wbr>Streams</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_providers_fgcprovider_.fgcprovider.html#getrankingteams" class="tsd-kind-icon">get<wbr>Ranking<wbr>Teams</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_providers_fgcprovider_.fgcprovider.html#getteams" class="tsd-kind-icon">get<wbr>Teams</a>
@@ -785,6 +875,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_providers_fgcprovider_.fgcprovider.html#postrankings" class="tsd-kind-icon">post<wbr>Rankings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_providers_fgcprovider_.fgcprovider.html#postrankingsbylevel" class="tsd-kind-icon">post<wbr>Rankings<wbr>ByLevel</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_providers_fgcprovider_.fgcprovider.html#put" class="tsd-kind-icon">put</a>

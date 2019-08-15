@@ -20,6 +20,9 @@ export default class OceanOpportunitiesRank extends Ranking {
       rank: this.rank,
       rank_change: this.rankChange,
       played: this.played,
+      wins: this.wins,
+      losses: this.losses,
+      ties: this.ties,
       ranking_points: this.rankingPoints,
       total_points: this.totalPoints,
       coopertition_points: this.coopertitionPoints,
@@ -34,6 +37,9 @@ export default class OceanOpportunitiesRank extends Ranking {
     rank.teamKey = json.team_key;
     rank.rank = json.rank;
     rank.rankChange = json.rank_change;
+    rank.wins = json.wins;
+    rank.losses = json.losses;
+    rank.ties = json.ties;
     rank.played = json.played;
     rank.rankingPoints = json.ranking_points;
     rank.totalPoints = json.total_points;

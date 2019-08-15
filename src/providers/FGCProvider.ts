@@ -8,6 +8,8 @@ import MatchDetails from "../models/ems/MatchDetails";
 import MatchParticipant from "../models/ems/MatchParticipant";
 import Ranking from "../models/ems/Ranking";
 import LiveStream from "../models/ems/LiveStream";
+import {getRankingByEventType} from "../models/ems";
+import {EventType} from "../Types";
 
 class FGCProvider {
   private static _instance: FGCProvider;
@@ -222,6 +224,14 @@ class FGCProvider {
     });
   }
 
+  public getRankingTeams(eventKey: string, eventType?: EventType): Promise<Ranking[]> {
+    return new Promise<Ranking[]>((resolve, reject) => {
+      this.get(`api/rank/${eventKey}/teams`).then((rankingsJSON: any) => {
+        resolve(rankingsJSON.map((rankJSON: any) => getRankingByEventType(eventType).fromJSON(rankJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
   /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/event/" + eventKey + "/participants");
@@ -233,6 +243,10 @@ class FGCProvider {
 
   public deleteRankings(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/rank/" + eventKey);
+  }
+
+  public deleteRankingsByLevel(eventKey: string, tournamentLevel: number): Promise<AxiosResponse> {
+    return this.delete(`api/rank/${eventKey}?level=${tournamentLevel}`);
   }
 
   public postEventParticipants(eventKey: string, participants: Team[]): Promise<AxiosResponse> {
@@ -253,6 +267,10 @@ class FGCProvider {
 
   public postRankings(eventKey: string, rankings: Ranking[]): Promise<AxiosResponse> {
     return this.post("api/rank/" + eventKey, rankings);
+  }
+
+  public postRankingsByLevel(eventKey: string, rankings: Ranking[], tournamentLevel: number): Promise<AxiosResponse> {
+    return this.post(`api/rank/${eventKey}?level=${tournamentLevel}`, rankings);
   }
 
   public putMatchResults(eventKey: string, match: Match): Promise<AxiosResponse> {

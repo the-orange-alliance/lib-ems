@@ -203,7 +203,7 @@ class EMSProvider {
   }
 
   public getRankings(eventType?: EventType): Promise<Ranking[]> {
-    return new Promise<Ranking[]>((resolve, reject) => {
+    return new Promise<any[]>((resolve, reject) => {
       this.get("api/ranking").then((res: any) => {
         resolve(res.map((rankingJSON: any) => getRankingByEventType(eventType).fromJSON(rankingJSON)));
       }).catch((error: HttpError) => reject(error));
