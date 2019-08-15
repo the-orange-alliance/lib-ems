@@ -195,6 +195,33 @@ class FGCProvider {
     });
   }
 
+  public getAllEventMatches(eventKey: string): Promise<Match[]> {
+    return new Promise<Match[]>((resolve, reject) => {
+      this.get(`api/match/event/${eventKey}/all`).then((matchesJSON: any) => {
+        const matches: Match[] = [];
+        for (const matchJSON of matchesJSON) {
+          const seasonKey: string = eventKey.split("-")[0];
+          const match: Match = new Match().fromJSON(matchJSON);
+          match.matchDetails = Match.getDetailsFromSeasonKey(seasonKey).fromJSON(matchJSON);
+          if (typeof matchJSON.participants !== "undefined") {
+            match.participants = matchJSON.participants.map((participantJSON: any) => new MatchParticipant().fromJSON(participantJSON));
+          }
+          matches.push(match);
+        }
+        resolve(matches);
+      });
+    });
+  }
+
+  public getUpcomingMatches(seasonKey: string, length?: number): Promise<Match[]> {
+    return new Promise<Match[]>((resolve, reject) => {
+      const lengthQuery: string = length ? `?length=${length}` : '';
+      this.get(`api/match/${seasonKey}/upcoming${lengthQuery}`).then((matchesJSON: any) => {
+        resolve(matchesJSON.map((matchJSON: any) => new Match().fromJSON(matchJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
   /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/event/" + eventKey + "/participants");
