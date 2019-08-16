@@ -232,6 +232,17 @@ class FGCProvider {
     });
   }
 
+  public getCompleteMatch(matchKey: string): Promise<Match> {
+    return new Promise<Match>((resolve, reject) => {
+      this.get(`api/match/${matchKey}/all`).then((matchJSON: any[]) => {
+        const match: Match = new Match().fromJSON(matchJSON[0][0]);
+        match.matchDetails = Match.getDetailsFromSeasonKey(match.matchKey.split("-")[0]).fromJSON(matchJSON[0][0]);
+        match.participants = matchJSON[1].map((pJSON: any) => new MatchParticipant().fromJSON(pJSON));
+        resolve(match);
+      });
+    });
+  }
+
   /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/event/" + eventKey + "/participants");
