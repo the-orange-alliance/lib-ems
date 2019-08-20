@@ -156,3 +156,16 @@ export function getRankingByEventType(eventType?: EventType): Ranking {
       return new Ranking();
   }
 }
+
+export function getRankingBySeasonKey(seasonKey: string): Ranking {
+  switch (seasonKey) {
+    case "2018":
+      return new EnergyImpactRanking();
+    case "2019":
+      return new OceanOpportunitiesRank();
+    case "1819":
+      return new RoverRuckusRank();
+    default:
+      return new Ranking();
+  }
+}

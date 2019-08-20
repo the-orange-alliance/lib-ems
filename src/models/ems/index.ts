@@ -20,7 +20,7 @@ import Event from "./Event";
 import Match from "./Match";
 import MatchDetails from "./MatchDetails";
 import MatchParticipant from "./MatchParticipant";
-import Ranking, {getRankingByEventType} from "./Ranking";
+import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
 import Team from "./Team";
@@ -102,5 +102,6 @@ export {
   ELIMINATIONS_PRESET,
   ROUND_ROBIN_PRESET,
   RANKING_PRESET,
-  getRankingByEventType
+  getRankingByEventType,
+  getRankingBySeasonKey
 };

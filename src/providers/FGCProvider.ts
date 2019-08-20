@@ -6,10 +6,15 @@ import Team from "../models/ems/Team";
 import Match from "../models/ems/Match";
 import MatchDetails from "../models/ems/MatchDetails";
 import MatchParticipant from "../models/ems/MatchParticipant";
-import Ranking from "../models/ems/Ranking";
+import Ranking, {getRankingBySeasonKey, getRankingByEventType} from "../models/ems/Ranking";
 import LiveStream from "../models/ems/LiveStream";
-import {getRankingByEventType} from "../models/ems";
 import {EventType} from "../Types";
+
+export interface ICompleteTeamResponse {
+  team: Team;
+  matches: Match[];
+  rankings: Ranking[];
+}
 
 class FGCProvider {
   private static _instance: FGCProvider;
@@ -240,6 +245,51 @@ class FGCProvider {
         match.participants = matchJSON[1].map((pJSON: any) => new MatchParticipant().fromJSON(pJSON));
         resolve(match);
       });
+    });
+  }
+
+  public getTeam(teamKey: string): Promise<Team> {
+    return new Promise<Team>((resolve, reject) => {
+      this.get("api/teams/" + teamKey).then((teamsJSON: any) => {
+        const teams: Team[] = teamsJSON.map((teamJSON: any) => new Team().fromJSON(teamJSON));
+        resolve(teams.length > 0 ? teams[0] : new Team());
+      }).catch((err: HttpError) => reject(err));
+    });
+  }
+
+  public getTeamMatches(teamKey: string, seasonKey: string): Promise<Match[]> {
+    return new Promise<Match[]>((resolve, reject) => {
+      this.get(`api/match/team/${teamKey}?season=${seasonKey}`).then((matchesJSON: any) => {
+        const matches: Match[] = [];
+        for (const matchJSON of matchesJSON) {
+          const match: Match = new Match().fromJSON(matchJSON);
+          if (typeof matchJSON.participants !== "undefined") {
+            match.participants = matchJSON.participants.map((participantJSON: any) => new MatchParticipant().fromJSON(participantJSON));
+          }
+          matches.push(match);
+        }
+        resolve(matches);
+      });
+    });
+  }
+
+  public getTeamRankings(teamKey: string, seasonKey: string): Promise<Ranking[]> {
+    return new Promise<Ranking[]>((resolve, reject) => {
+      this.get(`api/rank/team/${teamKey}?season=${seasonKey}`).then((rankingsJSON: any) => {
+        resolve(rankingsJSON.map((rankJSON: any) => getRankingBySeasonKey(seasonKey).fromJSON(rankJSON)));
+      }).catch((err: HttpError) => reject(err));
+    });
+  };
+
+  public getCompleteTeam(teamKey: string, seasonKey: string): Promise<ICompleteTeamResponse> {
+    return new Promise<ICompleteTeamResponse>((resolve, reject) => {
+      const promises: Array<Promise<any>> = [];
+      promises.push(this.getTeam(teamKey));
+      promises.push(this.getTeamMatches(teamKey, seasonKey));
+      promises.push(this.getTeamRankings(teamKey, seasonKey));
+      Promise.all(promises).then((values: any[]) => {
+        resolve({team: values[0], matches: values[1], rankings: values[2]});
+      }).catch((err: HttpError) => reject(err));
     });
   }
 
