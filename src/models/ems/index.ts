@@ -24,6 +24,7 @@ import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
 import Team from "./Team";
+import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./IFieldControl";
 
 // Miscellaneous Classes
 import {MatchState} from "./MatchState";
@@ -76,6 +77,10 @@ export {
   Season,
   Region,
   Team,
+  IFieldControlPacket,
+  HubFunctions,
+  IHubMessage,
+  IHubParameters,
   MatchState,
   EventConfiguration,
   MatchConfiguration,

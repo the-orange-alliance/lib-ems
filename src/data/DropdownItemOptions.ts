@@ -160,3 +160,14 @@ export const OceanOpportunitiesEndItems = [
     value: 3
   }
 ];
+
+export const HubFunctionItems = [
+  {
+    text: "Motor",
+    value: "motor",
+  },
+  {
+    text: "Servo",
+    value: "servo"
+  }
+];

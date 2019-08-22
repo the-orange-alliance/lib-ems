@@ -293,6 +293,16 @@ class FGCProvider {
     });
   }
 
+  public getHighestScoringMatch(seasonKey: string, type: string, withPenalty: boolean): Promise<Match> {
+    return new Promise<Match>((resolve, reject) => {
+      this.get(`api/match/${seasonKey}/high-scores?type=${type}&penalty=${withPenalty}`).then((matchJSON: any) => {
+        const match: Match = new Match().fromJSON(matchJSON[0]);
+        match.participants = matchJSON[1].map((pJSON: any) => new MatchParticipant().fromJSON(pJSON));
+        resolve(match);
+      });
+    });
+  }
+
   /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {
     return this.delete("api/event/" + eventKey + "/participants");
