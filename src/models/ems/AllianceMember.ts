@@ -4,6 +4,7 @@ export default class AllianceMember implements IPostableObject {
   private _allianceKey: string;
   private _allianceRank: number;
   private _teamKey: number;
+  private _tournamentLevel: number;
   private _allianceNameShort: string;
   private _allianceNameLong: string;
   private _isCaptain: boolean;
@@ -12,6 +13,7 @@ export default class AllianceMember implements IPostableObject {
     this._allianceKey = "";
     this._allianceRank = 0;
     this._teamKey = 0;
+    this._tournamentLevel = -1;
     this._allianceNameShort = "";
     this._allianceNameLong = "";
     this._isCaptain = false;
@@ -22,6 +24,7 @@ export default class AllianceMember implements IPostableObject {
       alliance_key: this.allianceKey,
       alliance_rank: this.allianceRank,
       team_key: this.teamKey,
+      tournament_level: this.tournamentLevel,
       alliance_name_short: this.allianceNameShort,
       alliance_name_long: this.allianceNameLong,
       is_captain: this.isCaptain ? 1 : 0
@@ -33,6 +36,7 @@ export default class AllianceMember implements IPostableObject {
     member.allianceKey = json.alliance_key;
     member.allianceRank = json.alliance_rank;
     member.teamKey = json.team_key;
+    member.tournamentLevel = json.tournament_level;
     member.allianceNameShort = json.alliance_name_short;
     member.allianceNameLong = json.alliance_name_long;
     member.isCaptain = json.is_captain === 1;
@@ -61,6 +65,14 @@ export default class AllianceMember implements IPostableObject {
 
   set teamKey(value: number) {
     this._teamKey = value;
+  }
+
+  get tournamentLevel(): number {
+    return this._tournamentLevel;
+  }
+
+  set tournamentLevel(value: number) {
+    this._tournamentLevel = value;
   }
 
   get allianceNameShort(): string {

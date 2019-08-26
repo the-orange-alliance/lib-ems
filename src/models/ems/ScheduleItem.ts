@@ -11,6 +11,7 @@ export default class ScheduleItem implements IPostableObject {
   private _startTime: moment.Moment;
   private _duration: number;
   private _isMatch: boolean;
+  private _tournamentId: number;
 
   constructor(type: TournamentType) {
     this._type = type;
@@ -20,6 +21,7 @@ export default class ScheduleItem implements IPostableObject {
     this._startTime = moment();
     this._duration = -1;
     this._isMatch = false;
+    this._tournamentId = -1;
   }
 
   public toJSON(): object {
@@ -30,7 +32,8 @@ export default class ScheduleItem implements IPostableObject {
       schedule_day: this.day,
       start_time: this.formattedStartTime,
       duration: this.duration,
-      is_match: this.isMatch ? 1 : 0
+      is_match: this.isMatch ? 1 : 0,
+      tournament_id: this.tournamentId
     };
   }
 
@@ -42,6 +45,7 @@ export default class ScheduleItem implements IPostableObject {
     item.startTime = moment(json.start_time, "dddd, MMMM Do YYYY, h:mm a");
     item.duration = json.duration;
     item.isMatch = json.is_match === 1;
+    item.tournamentId = json.tournament_id;
     return item;
   };
 
@@ -99,5 +103,13 @@ export default class ScheduleItem implements IPostableObject {
 
   set isMatch(value: boolean) {
     this._isMatch = value;
+  }
+
+  get tournamentId(): number {
+    return this._tournamentId;
+  }
+
+  set tournamentId(value: number) {
+    this._tournamentId = value;
   }
 }

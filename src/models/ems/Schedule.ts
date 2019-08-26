@@ -15,6 +15,7 @@ export default class Schedule implements IPostableObject {
   private _matchesPerTeam: number;
   private _totalMatches: number;
   private _cycleTime: number;
+  private _tournamentId: number;
 
   // This is kind of a loner variable.
   private _validationMessage: string;
@@ -29,6 +30,7 @@ export default class Schedule implements IPostableObject {
     this._matchesPerTeam = 5;
     this._totalMatches = this.maxTotalMatches;
     this._cycleTime = 7;
+    this._tournamentId = -1;
     this.addDay();
   }
 
@@ -79,6 +81,7 @@ export default class Schedule implements IPostableObject {
         item.name = this.type + " Match " + (totalMatches + 1);
         item.startTime = moment(day.startTime).add((Math.ceil(matchIndex / this.matchConcurrency) * this.cycleTime) + breakPadding, "minutes");
         item.isMatch = true;
+        item.tournamentId = this.tournamentId;
         scheduleItems.push(item);
         dayMatches++;
         totalMatches++;
@@ -91,6 +94,7 @@ export default class Schedule implements IPostableObject {
           breakItem.name = day.breaks[breakIndex].name;
           breakItem.startTime = day.breaks[breakIndex].startTime;
           breakItem.isMatch = false;
+          item.tournamentId = this.tournamentId;
           scheduleItems.push(breakItem);
           breakPadding += day.breaks[breakIndex].duration;
         }
@@ -252,5 +256,13 @@ export default class Schedule implements IPostableObject {
 
   get validationMessage(): string {
     return this._validationMessage;
+  }
+
+  get tournamentId(): number {
+    return this._tournamentId;
+  }
+
+  set tournamentId(value: number) {
+    this._tournamentId = value;
   }
 }
