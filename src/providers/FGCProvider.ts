@@ -51,7 +51,7 @@ class FGCProvider {
   private get(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this._axios.get(url, {data: {}}).then((response: AxiosResponse) => {
-        if (typeof response.data !== "undefined" && response.data.length > 0) {
+        if (typeof response.data !== "undefined") {
           resolve(response.data);
         } else {
           reject(new HttpError(500, "ERR_NO_DATA", this._host + url));
