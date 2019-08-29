@@ -1,7 +1,7 @@
 {
   "name": "@the-orange-alliance/lib-ems",
   "description": "TypeScript library for TOA/EMS model classes and shared resources.",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "author": "Kyle Flynn",
   "license": "GPL-2.0",
   "repository": {

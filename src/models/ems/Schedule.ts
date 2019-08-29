@@ -75,7 +75,7 @@ export default class Schedule implements IPostableObject {
           matchIndex = dayMatches - this.matchConcurrency + 1;
         }
 
-        item.key = event.eventKey + "-" + (this.tournamentId > -1 ? this.tournamentId : "") + this.type.substring(0, 1) + ((scheduleItems.length + 1));
+        item.key = event.eventKey + "-" + this.type.substring(0, 1) + (this.tournamentId > -1 ? this.tournamentId : "") + (scheduleItems.length + 1).toString().padStart(3, '0');
         item.day = day.id;
         item.duration = this.cycleTime;
         item.name = this.type + " Match " + (totalMatches + 1);
@@ -88,7 +88,7 @@ export default class Schedule implements IPostableObject {
 
         if (breakIndex !== -1) {
           const breakItem: ScheduleItem = new ScheduleItem(this.type);
-          breakItem.key = event.eventKey + "-" + (this.tournamentId > -1 ? this.tournamentId : "") + this.type.substring(0, 1) + (scheduleItems.length + 1);
+          breakItem.key = event.eventKey + "-" + this.type.substring(0, 1) + (this.tournamentId > -1 ? this.tournamentId : "") + (scheduleItems.length + 1).toString().padStart(3, '0');
           breakItem.day = day.id;
           breakItem.duration = day.breaks[breakIndex].duration;
           breakItem.name = day.breaks[breakIndex].name;
