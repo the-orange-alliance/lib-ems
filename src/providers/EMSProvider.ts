@@ -186,6 +186,14 @@ class EMSProvider {
     });
   }
 
+  public getPlayoffsScheduleItems(type: TournamentType, keyPartial: string, tournamentId: number): Promise<ScheduleItem[]> {
+    return new Promise<ScheduleItem[]>((resolve, reject) => {
+      this.get(`api/schedule/playoffs/${keyPartial}?id=${tournamentId}`).then((res: any) => {
+        resolve(res.map((scheduleItemJSON: any) => new ScheduleItem(type).fromJSON(scheduleItemJSON)));
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
   public getMatchesAndParticipants(matchKeyPrtial: string): Promise<Match[]> {
     return new Promise<Match[]>((resolve, reject) => {
       this.get("api/match?match_key_partial=" + matchKeyPrtial).then((res: any) => {
