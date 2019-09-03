@@ -194,9 +194,10 @@ class EMSProvider {
     });
   }
 
-  public getMatchesAndParticipants(matchKeyPrtial: string): Promise<Match[]> {
+  public getMatchesAndParticipants(matchKeyPartial: string, tournamentLevel?: number): Promise<Match[]> {
+    const tournamentQuery: string = tournamentLevel ? `&tournament_level=${tournamentLevel}` : ``;
     return new Promise<Match[]>((resolve, reject) => {
-      this.get("api/match?match_key_partial=" + matchKeyPrtial).then((res: any) => {
+      this.get(`api/match?match_key_partial=${matchKeyPartial}${tournamentQuery}`).then((res: any) => {
         const matches: Match[] = [];
         for (const matchJSON of res) {
           const match: Match = new Match().fromJSON(matchJSON);
