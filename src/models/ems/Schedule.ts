@@ -15,6 +15,7 @@ export default class Schedule implements IPostableObject {
   private _matchesPerTeam: number;
   private _totalMatches: number;
   private _cycleTime: number;
+  private _hasPremiereField: boolean;
   private _tournamentId: number;
 
   // This is kind of a loner variable.
@@ -30,6 +31,7 @@ export default class Schedule implements IPostableObject {
     this._matchesPerTeam = 5;
     this._totalMatches = this.maxTotalMatches;
     this._cycleTime = 7;
+    this._hasPremiereField = false;
     this._tournamentId = -1;
     this.addDay();
   }
@@ -42,6 +44,7 @@ export default class Schedule implements IPostableObject {
       matchesPerTeam: this.matchesPerTeam,
       totalMatches: this.totalMatches,
       cycleTime: this.cycleTime,
+      hasPremiereField: this.hasPremiereField,
       teams: this.teams,
       days: this.days.map(day => day.toJSON())
     };
@@ -54,6 +57,7 @@ export default class Schedule implements IPostableObject {
     schedule.matchesPerTeam = json.matchesPerTeam;
     schedule.totalMatches = json.totalMatches;
     schedule.cycleTime = json.cycleTime;
+    schedule.hasPremiereField = json.hasPremiereField;
     schedule.teams = json.teams;
     schedule.days = json.days.map((day: any) => new Day().fromJSON(day));
     return schedule;
@@ -77,8 +81,8 @@ export default class Schedule implements IPostableObject {
 
         item.key = event.eventKey + "-" + this.type.substring(0, 1) + (this.tournamentId > -1 ? this.tournamentId : "") + (scheduleItems.length + 1).toString().padStart(3, '0');
         item.day = day.id;
-        item.duration = this.cycleTime;
         item.name = this.type + " Match " + (totalMatches + 1);
+        item.duration = this.cycleTime;
         item.startTime = moment(day.startTime).add((Math.ceil(matchIndex / this.matchConcurrency) * this.cycleTime) + breakPadding, "minutes");
         item.isMatch = true;
         item.tournamentId = this.tournamentId;
@@ -232,6 +236,14 @@ export default class Schedule implements IPostableObject {
 
   set cycleTime(value: number) {
     this._cycleTime = value;
+  }
+
+  get hasPremiereField(): boolean {
+    return this._hasPremiereField;
+  }
+
+  set hasPremiereField(value: boolean) {
+    this._hasPremiereField = value;
   }
 
   get days(): Day[] {
