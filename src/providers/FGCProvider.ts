@@ -308,8 +308,9 @@ class FGCProvider {
     return this.delete("api/event/" + eventKey + "/participants");
   }
 
-  public deleteMatchData(eventKey: string, tournamentLevel: number): Promise<AxiosResponse> {
-    return this.delete("api/match/" + eventKey + "/all?level=" + tournamentLevel);
+  public deleteMatchData(eventKey: string, tournamentLevel: number, tournamentKey: string): Promise<AxiosResponse> {
+    const keyQuery: string = tournamentKey ? `&tournament_key=${tournamentKey}` : ``;
+    return this.delete(`api/match/${eventKey}/all?level=${tournamentLevel}${keyQuery}`);
   }
 
   public deleteRankings(eventKey: string): Promise<AxiosResponse> {
