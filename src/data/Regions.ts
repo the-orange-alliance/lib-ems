@@ -7,6 +7,10 @@ const regionsList = [
     "description": "FIRST Global"
   },
   {
+    "region_key": "FCC",
+    "description": "FIRST Collegiate"
+  },
+  {
     "region_key": "AK",
     "description": "Alaska"
   },

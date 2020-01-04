@@ -63,6 +63,10 @@ export const TeamIdentifierItems = [
   {
     text: "Team Country (3 Letter Code)",
     value: "country"
+  },
+  {
+    text: "Combined (Country - Country Code)",
+    value: "combined_country"
   }
 ];
 

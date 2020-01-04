@@ -299,9 +299,17 @@ class FGCProvider {
         const match: Match = new Match().fromJSON(matchJSON[0]);
         match.participants = matchJSON[1].map((pJSON: any) => new MatchParticipant().fromJSON(pJSON));
         resolve(match);
-      });
+      }).catch((err: HttpError) => reject(err));
     });
   }
+
+  public getPlayedMatchCount(seasonKey: string): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      this.get(`api/match/size?season=${seasonKey}`).then((sizeJSON: any) => {
+        resolve(sizeJSON.size);
+      }).catch((err: HttpError) => reject(err));
+    });
+  };
 
   /* PUT, DELETE, and POST requests. */
   public deleteTeams(eventKey: string): Promise<AxiosResponse> {

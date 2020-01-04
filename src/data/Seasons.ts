@@ -16,8 +16,8 @@ const seasonsList = [
     "season_desc": "FTC Rover Ruckus"
   },
   {
-    "season_key": 19,
-    "season_desc": "FRC Destination: Deep Space"
+    "season_key": 20,
+    "season_desc": "FRC Infinite Recharge"
   }
 ];
 
@@ -32,7 +32,7 @@ export function getFromEventType(eventType: EventType): DropdownProps {
       return SeasonItems[1];
     case "ftc_1819":
       return SeasonItems[2];
-    case "frc_19":
+    case "frc_20":
       return SeasonItems[3];
     default:
       return SeasonItems[2];

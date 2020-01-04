@@ -49,12 +49,13 @@ class OceanOpportunitiesRanker implements IMatchRanker {
           ranking.rankingPoints += rp + match.coopertition_bonus;
           ranking.totalPoints += points;
           ranking.coopertitionPoints += match.coopertition_bonus;
-          if (redTeam && redWin) {
-            ranking.wins++;
-          } else if (!redTeam && !redWin) {
-            ranking.wins++;
-          } else if (match.red_score === match.blue_score) {
+
+          if (match.red_score === match.blue_score) {
             ranking.ties++;
+          } else if (redTeam && redWin) {
+            ranking.wins++;
+          }else if (!redTeam && !redWin) {
+            ranking.wins++;
           } else {
             ranking.losses++;
           }

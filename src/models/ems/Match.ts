@@ -139,6 +139,8 @@ export default class Match implements IPostableObject {
   get abbreviatedName(): string {
     if (this.tournamentLevel >= 10) {
       switch (this.tournamentLevel) {
+        case 2:
+          return this.matchName.replace("Round ", "R").replace("Match ", "");
         case 10:
           return "OF 1";
         case 11:

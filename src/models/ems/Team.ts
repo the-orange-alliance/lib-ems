@@ -32,6 +32,8 @@ export default class Team implements IPostableObject {
         return this.teamKey;
       case "team_name_short":
         return this.teamNameShort;
+      case "combined_country":
+        return `${this.country} - ${this.city}`;
       default:
         return this.teamKey;
     }

@@ -1,5 +1,8 @@
 const EMS = require("../");
-EMS.FGCProvider.initialize("127.0.0.1", 8088);
-EMS.FGCProvider.getHighestScoringMatch("2019", "quals", false).then((res) => {
-  console.log(res.participants.map((p) => p.team));
+
+EMS.EMSProvider.initialize("192.168.1.200", 8008);
+EMS.EMSProvider.getRankings("fgc_2019").then((rankings) => {
+  for (const ranking of rankings.sort((a, b) => a.teamKey - b.teamKey)) {
+    console.log(ranking.wins);
+  }
 });
