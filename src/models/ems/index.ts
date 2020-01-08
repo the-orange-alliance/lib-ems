@@ -45,14 +45,14 @@ import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
 import RoverRuckusRanker from "./games/rover-ruckus/RoverRuckusRanker";
 import RoverRuckusRefereeData from "./games/rover-ruckus/RoverRuckusRefereeData";
 
-// Destination: Deep Space
-import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
-import DeepSpaceRanking from "./games/deep-space/DeepSpaceRanking";
 
 // Oceanic Opportunities
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 import OceanOpportunitiesRank from "./games/ocean-opportunities/OceanOpportunitiesRank";
 import OceanOpportunitiesRanker from "./games/ocean-opportunities/OceanOpportunitiesRanker";
+
+// Infinite Recharge
+import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
 
 export {
   AppError,
@@ -93,11 +93,10 @@ export {
   RoverRuckusRank,
   RoverRuckusRanker,
   RoverRuckusRefereeData,
-  DeepSpaceMatchDetails,
-  DeepSpaceRanking,
   OceanOpportunitiesMatchDetails,
   OceanOpportunitiesRank,
   OceanOpportunitiesRanker,
+  InfiniteRechargeMatchDetails,
   FGC_CONFIG,
   FTC_CONFIG,
   FTC_ROVER_PRESET,
