@@ -3,9 +3,9 @@ import IPostableObject from "../../../IPostableObject";
 
 export default class InfiniteRechargeMatchDetails extends MatchDetails implements IPostableObject {
 
-  private static STATUS_NONE: number = 0;
-  private static STATUS_PARKED: number = 1;
-  private static STATUS_HANGING: number = 2;
+  public static STATUS_NONE: number = 0;
+  public static STATUS_PARKED: number = 1;
+  public static STATUS_HANGING: number = 2;
 
   private _redAutoBottomCells: number;
   private _redAutoOuterCells: number;
