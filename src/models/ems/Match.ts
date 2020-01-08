@@ -5,8 +5,8 @@ import MatchDetails from "./MatchDetails";
 import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetails";
 import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDetails";
 import AllianceMember from "./AllianceMember";
-import DeepSpaceMatchDetails from "./games/deep-space/DeepSpaceMatchDetails";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
+import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
 
 export default class Match implements IPostableObject {
 
@@ -83,8 +83,8 @@ export default class Match implements IPostableObject {
         return new OceanOpportunitiesMatchDetails();
       case 1819:
         return new RoverRuckusMatchDetails();
-      case 19:
-        return new DeepSpaceMatchDetails();
+      case 20:
+        return new InfiniteRechargeMatchDetails();
       default:
         return new MatchDetails();
     }
