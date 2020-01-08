@@ -134,6 +134,8 @@ export default class InfiniteRechargeMatchDetails extends MatchDetails implement
 
   public fromJSON(json: any): InfiniteRechargeMatchDetails {
     const details: InfiniteRechargeMatchDetails = new InfiniteRechargeMatchDetails();
+    details.matchKey = json.match_key;
+    details.matchDetailKey = json.match_detail_key;
     details.redAutoBottomCells = json.red_auto_bottom_cells;
     details.redAutoOuterCells = json.red_auto_bottom_cells;
     details.redAutoInnerCells = json.red_auto_inner_cells;
