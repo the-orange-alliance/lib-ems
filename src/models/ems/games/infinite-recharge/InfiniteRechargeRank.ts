@@ -2,6 +2,7 @@ import Ranking from "../../Ranking";
 import Team from "../../Team";
 
 export default class InfiniteRechargeRank extends Ranking {
+  private _rankingPoints: number;
   private _rankingScore: number;
   private _autoPoints: number;
   private _endPoints: number;
@@ -9,6 +10,7 @@ export default class InfiniteRechargeRank extends Ranking {
 
   constructor() {
     super();
+    this._rankingPoints = 0;
     this._rankingScore = 0;
     this._autoPoints = 0;
     this._endPoints = 0;
@@ -25,6 +27,7 @@ export default class InfiniteRechargeRank extends Ranking {
       wins: this.wins,
       losses: this.losses,
       ties: this.ties,
+      ranking_points: this.rankingPoints,
       ranking_score: this.rankingScore,
       auto_points: this.autoPoints,
       end_points: this.endPoints,
@@ -44,6 +47,7 @@ export default class InfiniteRechargeRank extends Ranking {
     rank.losses = json.losses;
     rank.ties = json.ties;
     rank.played = json.played;
+    rank.rankingPoints = json.ranking_points;
     rank.rankingScore = json.ranking_score;
     rank.autoPoints = json.auto_points;
     rank.endPoints = json.end_points;
@@ -54,6 +58,14 @@ export default class InfiniteRechargeRank extends Ranking {
       rank.team = undefined;
     }
     return rank;
+  }
+
+  get rankingPoints(): number {
+    return this._rankingPoints;
+  }
+
+  set rankingPoints(value: number) {
+    this._rankingPoints = value;
   }
 
   get rankingScore(): number {

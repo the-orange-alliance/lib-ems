@@ -177,6 +177,95 @@ export default class InfiniteRechargeMatchDetails extends MatchDetails implement
     return details;
   }
 
+  public getRedScore(minPen: number, majPen: number): number {
+    return this.getRedAutoScore() + this.getRedTeleScore() + this.getRedEndScore() + this.getBluePenalty(minPen, majPen);
+  }
+
+  public getRedAutoScore(): number {
+    let points: number = 0;
+    points += this.redAutoRobotOneCrossed ? 5 : 0;
+    points += this.redAutoRobotTwoCrossed ? 5 : 0;
+    points += this.redAutoRobotThreeCrossed ? 5 : 0;
+    points += this.redAutoBottomCells * 2;
+    points += this.redAutoOuterCells * 4;
+    points += this.redAutoInnerCells * 6;
+    return points;
+  }
+
+  public getRedTeleScore(): number {
+    let points: number = 0;
+    points += this.redTeleBottomCells;
+    points += this.redTeleOuterCells * 2;
+    points += this.redTeleInnerCells * 3;
+    points += this.redRotationControl ? 10 : 0;
+    points += this.redPositionControl ? 20 : 0;
+    return points;
+  }
+
+  public getRedEndScore(): number {
+    let points: number = 0;
+    points += this.getEndStatusPoints(this.redEndRobotOneStatus);
+    points += this.getEndStatusPoints(this.redEndRobotTwoStatus);
+    points += this.getEndStatusPoints(this.redEndRobotThreeStatus);
+    points += this.redEndEqualized ? 15 : 0;
+    return points;
+  }
+
+  public getRedPenalty(minPen: number, majPen: number): number {
+    return (minPen * 3) + (majPen * 15);
+  }
+
+  public getBlueScore(minPen: number, majPen: number): number {
+    return this.getBlueAutoScore() + this.getBlueTeleScore() + this.getBlueEndScore() + this.getRedPenalty(minPen, majPen);
+  }
+
+  public getBlueAutoScore(): number {
+    let points: number = 0;
+    points += this.blueAutoRobotOneCrossed ? 5 : 0;
+    points += this.blueAutoRobotTwoCrossed ? 5 : 0;
+    points += this.blueAutoRobotThreeCrossed ? 5 : 0;
+    points += this.blueAutoBottomCells * 2;
+    points += this.blueAutoOuterCells * 4;
+    points += this.blueAutoInnerCells * 6;
+    return points;
+  }
+
+  public getBlueTeleScore(): number {
+    let points: number = 0;
+    points += this.blueTeleBottomCells;
+    points += this.blueTeleOuterCells * 2;
+    points += this.blueTeleInnerCells * 3;
+    points += this.blueRotationControl ? 10 : 0;
+    points += this.bluePositionControl ? 20 : 0;
+    return points;
+  }
+
+  public getBlueEndScore(): number {
+    let points: number = 0;
+    points += this.getEndStatusPoints(this.blueEndRobotOneStatus);
+    points += this.getEndStatusPoints(this.blueEndRobotTwoStatus);
+    points += this.getEndStatusPoints(this.blueEndRobotThreeStatus);
+    points += this.blueEndEqualized ? 15 : 0;
+    return points;
+  }
+
+  public getBluePenalty(minPen: number, majPen: number): number {
+    return (minPen * 3) + (majPen * 15);
+  }
+
+  private getEndStatusPoints(status: number): number {
+    switch (status) {
+      case InfiniteRechargeMatchDetails.STATUS_NONE:
+        return 0;
+      case InfiniteRechargeMatchDetails.STATUS_PARKED:
+        return 5;
+      case InfiniteRechargeMatchDetails.STATUS_HANGING:
+        return 25;
+      default:
+        return 0;
+    }
+  }
+
   get redAutoBottomCells(): number {
     return this._redAutoBottomCells;
   }

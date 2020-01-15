@@ -53,6 +53,8 @@ import OceanOpportunitiesRanker from "./games/ocean-opportunities/OceanOpportuni
 
 // Infinite Recharge
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
+import InfiniteRechargeRank from "./games/infinite-recharge/InfiniteRechargeRank";
+import InfiniteRechargeRanker from "./games/infinite-recharge/InfiniteRechargeRanker";
 
 export {
   AppError,
@@ -97,6 +99,8 @@ export {
   OceanOpportunitiesRank,
   OceanOpportunitiesRanker,
   InfiniteRechargeMatchDetails,
+  InfiniteRechargeRank,
+  InfiniteRechargeRanker,
   FGC_CONFIG,
   FTC_CONFIG,
   FTC_ROVER_PRESET,

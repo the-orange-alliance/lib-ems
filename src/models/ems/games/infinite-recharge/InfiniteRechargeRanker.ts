@@ -1,6 +1,7 @@
 import IMatchRanker from "../../../IMatchRanker";
 import IPostableObject from "../../../IPostableObject";
 import InfiniteRechargeRank from "./InfiniteRechargeRank";
+import InfiniteRechargeMatchDetails from "./InfiniteRechargeMatchDetails";
 
 class OceanOpportunitiesRanker implements IMatchRanker {
   private static _instance: OceanOpportunitiesRanker;
@@ -43,13 +44,26 @@ class OceanOpportunitiesRanker implements IMatchRanker {
         const ranking = rankingsMap.get(parseInt(participants[i])) as InfiniteRechargeRank;
         if (!isSurrogate && cardStatus <= 1 && !isDisqualified && match.red_score >= 0 && match.blue_score >= 0) { // TODO - Implement the cleaner 'result' way
           const redTeam = i < (participants.length / 2);
-
+          const details: InfiniteRechargeMatchDetails = new InfiniteRechargeMatchDetails().fromJSON(match);
           const outcomeRp = redTeam && redWin ? 2 : tie ? 1 : !redTeam && !redWin ? 2 : 0;
-          
-          // const points = redTeam ? match.red_score : match.blue_score;
-          // ranking.rankingPoints += rp + match.coopertition_bonus;
-          ranking.totalPoints += points;
-          ranking.coopertitionPoints += match.coopertition_bonus;
+          const redEnergizedRp = (details.redStageOneCells >= 9 && details.redStageTwoCells >= 20 && details.redStageThreeCells >= 20 && details.redRotationControl && details.redPositionControl && details.redStage === 3) ? 1 : 0;
+          const redOperationalRp = (details.getRedEndScore() >= 65 && details.redEndEqualized) ? 1 : 0;
+          const blueEnergizedRp = (details.blueStageOneCells >= 9 && details.blueStageTwoCells >= 20 && details.blueStageThreeCells >= 20 && details.blueRotationControl && details.bluePositionControl && details.blueStage === 3) ? 1 : 0;
+          const blueOperationalRp = (details.getBlueEndScore() >= 65 && details.blueEndEqualized) ? 1 : 0;
+          ranking.rankingPoints += outcomeRp;
+          if (redTeam) {
+            ranking.rankingPoints += redEnergizedRp + redOperationalRp;
+            ranking.autoPoints += details.getRedAutoScore();
+            ranking.telePoints += details.getRedTeleScore();
+            ranking.endPoints += details.getRedEndScore();
+          }
+
+          if (!redTeam) {
+            ranking.rankingPoints += blueEnergizedRp + blueOperationalRp;
+            ranking.autoPoints += details.getBlueAutoScore();
+            ranking.telePoints += details.getBlueTeleScore();
+            ranking.endPoints += details.getBlueEndScore();
+          }
 
           if (match.red_score === match.blue_score) {
             ranking.ties++;
@@ -64,6 +78,7 @@ class OceanOpportunitiesRanker implements IMatchRanker {
 
         if (match.red_score >= 0 && match.blue_score >= 0) {
           ranking.played++;
+          ranking.rankingScore = (ranking.rankingPoints / ranking.played);
         }
       }
     }
@@ -100,40 +115,52 @@ class OceanOpportunitiesRanker implements IMatchRanker {
   }
 
   private shouldSwap(rank1: InfiniteRechargeRank, rank2: InfiniteRechargeRank) {
-    if (rank2.rankingPoints === null) {
+    if (rank2.rankingScore === null) {
       return 1;
     }
 
-    if (rank2.totalPoints === null) {
+    if (rank2.autoPoints === null) {
       return 1;
     }
 
-    if (rank2.coopertitionPoints === null) {
+    if (rank2.endPoints === null) {
       return 1;
     }
 
-    if (rank1.rankingPoints < rank2.rankingPoints) {
+    if (rank2.telePoints === null) {
+      return 1;
+    }
+
+    if (rank1.rankingScore < rank2.rankingScore) {
       return -1;
     } else {
-      if (rank1.rankingPoints > rank2.rankingPoints) {
+      if (rank1.rankingScore > rank2.rankingScore) {
         return 1;
       } else {
-        if (rank1.totalPoints < rank2.totalPoints) {
+        if (rank1.autoPoints < rank2.autoPoints) {
           return -1;
         } else {
-          if (rank1.totalPoints > rank2.totalPoints) {
+          if (rank1.autoPoints > rank2.autoPoints) {
             return 1;
           } else {
-            if (rank1.coopertitionPoints < rank2.coopertitionPoints) {
+            if (rank1.endPoints < rank2.endPoints) {
               return -1;
             } else {
-              if (rank1.coopertitionPoints > rank2.coopertitionPoints) {
+              if (rank1.endPoints > rank2.endPoints) {
                 return 1;
               } else {
-                if (rank1.played < rank2.played) {
+                if (rank1.telePoints < rank2.telePoints) {
                   return -1;
                 } else {
-                  return 1;
+                  if (rank1.telePoints > rank2.telePoints) {
+                    return 1;
+                  } else {
+                    if (rank1.played < rank2.played) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  }
                 }
               }
             }

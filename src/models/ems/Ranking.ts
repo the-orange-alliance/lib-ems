@@ -2,6 +2,7 @@ import IPostableObject from "../IPostableObject";
 import Team from "./Team";
 import {EnergyImpactRanking, OceanOpportunitiesRank, RoverRuckusRank} from "./";
 import {EventType} from "../../Types";
+import InfiniteRechargeRank from "./games/infinite-recharge/InfiniteRechargeRank";
 
 export default class Ranking implements IPostableObject {
   private _rankKey: string;
@@ -152,6 +153,8 @@ export function getRankingByEventType(eventType?: EventType): Ranking {
       return new OceanOpportunitiesRank();
     case "ftc_1819":
       return new RoverRuckusRank();
+    case "frc_20":
+      return new InfiniteRechargeRank();
     default:
       return new Ranking();
   }
@@ -165,6 +168,8 @@ export function getRankingBySeasonKey(seasonKey: string): Ranking {
       return new OceanOpportunitiesRank();
     case "1819":
       return new RoverRuckusRank();
+    case "20":
+      return new InfiniteRechargeRank();
     default:
       return new Ranking();
   }
