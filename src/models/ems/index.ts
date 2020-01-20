@@ -28,8 +28,8 @@ import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./
 
 // Miscellaneous Classes
 import {MatchState} from "./MatchState";
-import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
-import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG} from "./MatchConfiguration";
+import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
+import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG, FRC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
 import LiveStream from "./LiveStream";
 
@@ -103,8 +103,10 @@ export {
   InfiniteRechargeRanker,
   FGC_CONFIG,
   FTC_CONFIG,
+  FRC_CONFIG,
   FTC_ROVER_PRESET,
   FGC_PRESET,
+  FRC_PRESET,
   FTC_RELIC_PRESET,
   DEFAULT_RESET,
   ELIMINATIONS_PRESET,

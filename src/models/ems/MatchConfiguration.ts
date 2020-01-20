@@ -91,3 +91,9 @@ FGC_CONFIG.delayTime = 0;
 FGC_CONFIG.autoTime = 0;
 FGC_CONFIG.teleTime = 150;
 FGC_CONFIG.endTime = 30;
+
+export const FRC_CONFIG = new MatchConfiguration();
+FRC_CONFIG.delayTime = 0;
+FRC_CONFIG.autoTime = 15;
+FRC_CONFIG.teleTime = 135;
+FRC_CONFIG.endTime = 30;
