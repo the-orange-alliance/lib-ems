@@ -165,6 +165,21 @@ export const OceanOpportunitiesEndItems = [
   }
 ];
 
+export const InfiniteRechargeEndItems = [
+  {
+    text: "None",
+    value: 0
+  },
+  {
+    text: "Parked",
+    value: 1
+  },
+  {
+    text: "Hanging",
+    value: 2
+  }
+];
+
 export const HubFunctionItems = [
   {
     text: "Motor",

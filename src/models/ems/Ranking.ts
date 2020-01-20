@@ -1,8 +1,7 @@
 import IPostableObject from "../IPostableObject";
 import Team from "./Team";
-import {EnergyImpactRanking, OceanOpportunitiesRank, RoverRuckusRank} from "./";
+import {EnergyImpactRanking, InfiniteRechargeRank, OceanOpportunitiesRank, RoverRuckusRank} from "./";
 import {EventType} from "../../Types";
-import InfiniteRechargeRank from "./games/infinite-recharge/InfiniteRechargeRank";
 
 export default class Ranking implements IPostableObject {
   private _rankKey: string;
