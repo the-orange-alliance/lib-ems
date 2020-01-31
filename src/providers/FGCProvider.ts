@@ -36,8 +36,8 @@ class FGCProvider {
    * This method must be called before retrieving data. Since this class implements the singleton design
    * and the network of EMS may change, the provider must be manually initialized at runtime.
    */
-  public initialize(host: string, port: number): void {
-    this._host = "http://" + host + ":" + (port) + "/";
+  public initialize(host: string, port: number, protocol: string = 'http'): void {
+    this._host = protocol + "://" + host + ":" + (port) + "/";
     this._config = {
       baseURL: this._host,
       timeout: 5000,
