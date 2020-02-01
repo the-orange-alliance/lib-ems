@@ -91,44 +91,46 @@ export default class InfiniteRechargeMatchDetails extends MatchDetails implement
 
   public toJSON(): object {
     return {
-      red_auto_bottom_cells: this._redAutoBottomCells,
-      red_auto_outer_cells: this._redAutoOuterCells,
-      red_auto_inner_cells: this._redAutoInnerCells,
-      red_auto_robot_one_crossed: this._redAutoRobotOneCrossed ? 1 : 0,
-      red_auto_robot_two_crossed: this._redAutoRobotTwoCrossed ? 1 : 0,
-      red_auto_robot_three_crossed: this._redAutoRobotThreeCrossed ? 1 : 0,
-      red_tele_bottom_cells: this._redTeleBottomCells,
-      red_tele_outer_cells: this._redTeleOuterCells,
-      red_tele_inner_cells: this._redTeleInnerCells,
-      red_end_robot_one_status: this._redEndRobotOneStatus,
-      red_end_robot_two_status: this._redEndRobotTwoStatus,
-      red_end_robot_three_status: this._redEndRobotThreeStatus,
-      red_end_equalized: this._redEndEqualized ? 1 : 0,
-      red_stage_one_cells: this._redStageOneCells,
-      red_stage_two_cells: this._redStageTwoCells,
-      red_stage_three_cells: this._redStageThreeCells,
-      red_rotation_control: this._redRotationControl ? 1 : 0,
-      red_position_control: this._redPositionControl ? 1 : 0,
-      red_stage: this._redStage,
-      blue_auto_bottom_cells: this._blueAutoBottomCells,
-      blue_auto_outer_cells: this._blueAutoOuterCells,
-      blue_auto_inner_cells: this._blueAutoInnerCells,
-      blue_auto_robot_one_crossed: this._blueAutoRobotOneCrossed ? 1 : 0,
-      blue_auto_robot_two_crossed: this._blueAutoRobotTwoCrossed ? 1 : 0,
-      blue_auto_robot_three_crossed: this._blueAutoRobotThreeCrossed ? 1 : 0,
-      blue_tele_bottom_cells: this._blueTeleBottomCells,
-      blue_tele_outer_cells: this._blueTeleOuterCells,
-      blue_tele_inner_cells: this._blueTeleInnerCells,
-      blue_end_robot_one_status: this._blueEndRobotOneStatus,
-      blue_end_robot_two_status: this._blueEndRobotTwoStatus,
-      blue_end_robot_three_status: this._blueEndRobotThreeStatus,
-      blue_end_equalized: this._blueEndEqualized ? 1 : 0,
-      blue_stage_one_cells: this._blueStageOneCells,
-      blue_stage_two_cells: this._blueStageTwoCells,
-      blue_stage_three_cells: this._blueStageThreeCells,
-      blue_rotation_control: this._blueRotationControl ? 1 : 0,
-      blue_position_control: this._bluePositionControl ? 1 : 0,
-      blue_stage: this._blueStage,
+      match_key: this.matchKey,
+      match_detail_key: this.matchDetailKey,
+      red_auto_bottom_cells: this.redAutoBottomCells,
+      red_auto_outer_cells: this.redAutoOuterCells,
+      red_auto_inner_cells: this.redAutoInnerCells,
+      red_auto_robot_one_crossed: this.redAutoRobotOneCrossed ? 1 : 0,
+      red_auto_robot_two_crossed: this.redAutoRobotTwoCrossed ? 1 : 0,
+      red_auto_robot_three_crossed: this.redAutoRobotThreeCrossed ? 1 : 0,
+      red_tele_bottom_cells: this.redTeleBottomCells,
+      red_tele_outer_cells: this.redTeleOuterCells,
+      red_tele_inner_cells: this.redTeleInnerCells,
+      red_end_robot_one_status: this.redEndRobotOneStatus,
+      red_end_robot_two_status: this.redEndRobotTwoStatus,
+      red_end_robot_three_status: this.redEndRobotThreeStatus,
+      red_end_equalized: this.redEndEqualized ? 1 : 0,
+      red_stage_one_cells: this.redStageOneCells,
+      red_stage_two_cells: this.redStageTwoCells,
+      red_stage_three_cells: this.redStageThreeCells,
+      red_rotation_control: this.redRotationControl ? 1 : 0,
+      red_position_control: this.redPositionControl ? 1 : 0,
+      red_stage: this.redStage,
+      blue_auto_bottom_cells: this.blueAutoBottomCells,
+      blue_auto_outer_cells: this.blueAutoOuterCells,
+      blue_auto_inner_cells: this.blueAutoInnerCells,
+      blue_auto_robot_one_crossed: this.blueAutoRobotOneCrossed ? 1 : 0,
+      blue_auto_robot_two_crossed: this.blueAutoRobotTwoCrossed ? 1 : 0,
+      blue_auto_robot_three_crossed: this.blueAutoRobotThreeCrossed ? 1 : 0,
+      blue_tele_bottom_cells: this.blueTeleBottomCells,
+      blue_tele_outer_cells: this.blueTeleOuterCells,
+      blue_tele_inner_cells: this.blueTeleInnerCells,
+      blue_end_robot_one_status: this.blueEndRobotOneStatus,
+      blue_end_robot_two_status: this.blueEndRobotTwoStatus,
+      blue_end_robot_three_status: this.blueEndRobotThreeStatus,
+      blue_end_equalized: this.blueEndEqualized ? 1 : 0,
+      blue_stage_one_cells: this.blueStageOneCells,
+      blue_stage_two_cells: this.blueStageTwoCells,
+      blue_stage_three_cells: this.blueStageThreeCells,
+      blue_rotation_control: this.blueRotationControl ? 1 : 0,
+      blue_position_control: this.bluePositionControl ? 1 : 0,
+      blue_stage: this.blueStage,
     };
   }
 
@@ -137,7 +139,7 @@ export default class InfiniteRechargeMatchDetails extends MatchDetails implement
     details.matchKey = json.match_key;
     details.matchDetailKey = json.match_detail_key;
     details.redAutoBottomCells = json.red_auto_bottom_cells;
-    details.redAutoOuterCells = json.red_auto_bottom_cells;
+    details.redAutoOuterCells = json.red_auto_outer_cells;
     details.redAutoInnerCells = json.red_auto_inner_cells;
     details.redAutoRobotOneCrossed = json.red_auto_robot_one_crossed === 1;
     details.redAutoRobotTwoCrossed = json.red_auto_robot_two_crossed === 1;
@@ -156,7 +158,7 @@ export default class InfiniteRechargeMatchDetails extends MatchDetails implement
     details.redPositionControl = json.red_position_control === 1;
     details.redStage = json.red_stage;
     details.blueAutoBottomCells = json.blue_auto_bottom_cells;
-    details.blueAutoOuterCells = json.blue_auto_bottom_cells;
+    details.blueAutoOuterCells = json.blue_auto_outer_cells;
     details.blueAutoInnerCells = json.blue_auto_inner_cells;
     details.blueAutoRobotOneCrossed = json.blue_auto_robot_one_crossed === 1;
     details.blueAutoRobotTwoCrossed = json.blue_auto_robot_two_crossed === 1;
