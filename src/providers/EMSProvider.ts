@@ -5,6 +5,7 @@ import {
   Team
 } from "../models/ems";
 import {EventType, TournamentType} from "../Types";
+import WPAKey from "../models/ems/WPAKey";
 
 const PORT = process.env.REACT_APP_EMS_API_PORT;
 
@@ -174,6 +175,14 @@ class EMSProvider {
     return new Promise<Team[]>((resolve, reject) => {
       this.get("api/team").then((res: any) => {
         resolve(res.map((teamJSON: any) => new Team().fromJSON(teamJSON)));
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public getWpaKeys(): Promise<WPAKey[]> {
+    return new Promise<WPAKey[]>((resolve, reject) => {
+      this.get("api/team/wpakeys").then((res: any) => {
+        resolve(res.map((wpaJson: any) => new WPAKey().fromJSON(wpaJson)));
       }).catch((error: HttpError) => reject(error));
     });
   }
