@@ -99,7 +99,8 @@ class EMSProvider {
           records.push(record.toJSON());
         }
       } else {
-        records.push(body.toJSON());
+        if(body.hasOwnProperty(`toJSON`)) records.push(body.toJSON());
+        else records.push(body);
       }
       this._axios.post(url, {records: records}).then((response: AxiosResponse) => {
         resolve(response);
@@ -183,6 +184,14 @@ class EMSProvider {
     return new Promise<WPAKey[]>((resolve, reject) => {
       this.get("api/team/wpakeys").then((res: any) => {
         resolve(res.map((wpaJson: any) => new WPAKey().fromJSON(wpaJson)));
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public getAdvNetConfig(eventKey: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.get("api/event/" + eventKey + "/networking").then((res: any) => {
+        resolve(res);
       }).catch((error: HttpError) => reject(error));
     });
   }
@@ -328,6 +337,14 @@ class EMSProvider {
   public postEvent(event: Event): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.post("api/event", event).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public postAdvNetConfig(eventKey: string, config: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.post(`api/event/${eventKey}/networking`, config).then((res: any) => {
         resolve(res);
       }).catch((error: HttpError) => reject(error));
     });

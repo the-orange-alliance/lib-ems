@@ -24,6 +24,7 @@ import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
 import Team from "./Team";
+import WPAKey from "./WPAKey";
 import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./IFieldControl";
 
 // Miscellaneous Classes
@@ -113,5 +114,6 @@ export {
   ROUND_ROBIN_PRESET,
   RANKING_PRESET,
   getRankingByEventType,
-  getRankingBySeasonKey
+  getRankingBySeasonKey,
+  WPAKey
 };
