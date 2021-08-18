@@ -23,7 +23,10 @@ import MatchParticipant from "./MatchParticipant";
 import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
+import ResetPassword from "./ResetPassword";
 import Team from "./Team";
+import User from "./User";
+import Username from "./Username";
 import WPAKey from "./WPAKey";
 import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./IFieldControl";
 
@@ -45,7 +48,6 @@ import RoverRuckusMatchDetails from "./games/rover-ruckus/RoverRuckusMatchDetail
 import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
 import RoverRuckusRanker from "./games/rover-ruckus/RoverRuckusRanker";
 import RoverRuckusRefereeData from "./games/rover-ruckus/RoverRuckusRefereeData";
-
 
 // Oceanic Opportunities
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
@@ -80,6 +82,7 @@ export {
   Season,
   Region,
   Team,
+  User,
   IFieldControlPacket,
   HubFunctions,
   IHubMessage,
@@ -115,5 +118,7 @@ export {
   RANKING_PRESET,
   getRankingByEventType,
   getRankingBySeasonKey,
-  WPAKey
+  WPAKey,
+  ResetPassword,
+  Username
 };

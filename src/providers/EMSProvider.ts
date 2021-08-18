@@ -2,7 +2,7 @@ import IPostableObject from "../models/IPostableObject";
 import {default as Axios, AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse} from "axios";
 import {
   AllianceMember, Event, getRankingByEventType, HttpError, Match, MatchDetails, MatchParticipant, Ranking, ScheduleItem,
-  Team
+  Team, ResetPassword, User, Username
 } from "../models/ems";
 import {EventType, TournamentType} from "../Types";
 import WPAKey from "../models/ems/WPAKey";
@@ -15,6 +15,8 @@ class EMSProvider {
   private _axios: AxiosInstance;
   private _config: AxiosRequestConfig;
   private _host: string;
+  private _key: string;
+  private _keyExpires: Date;
 
   public static getInstance(): EMSProvider {
     if (typeof EMSProvider._instance === "undefined") {
@@ -42,11 +44,14 @@ class EMSProvider {
   }
 
   private get(url: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (typeof this._axios === "undefined" || typeof this._host === "undefined") {
         reject(new HttpError(500, "ERR_PROVIDER_UNDEFINED", "The provider's host address has not been initialized."));
       }
-      this._axios.get(url, {data: {}}).then((response: AxiosResponse) => {
+      // If the expiration is in less than an hour, refresh the token
+      if(this._keyExpires && this._keyExpires.valueOf() - Date.now() < (60 * 60 * 1000)) await this.authApiRefresh();
+      let headers = {authorization: `Bearer ${this._key}`};
+      this._axios.get(url, {data: {}, headers: headers}).then((response: AxiosResponse) => {
         if (typeof response.data !== "undefined") {
           if (typeof response.data.payload !== "undefined") {
             resolve(response.data.payload);
@@ -68,12 +73,15 @@ class EMSProvider {
     });
   }
 
-  private delete(url: string): Promise<AxiosResponse> {
-    return new Promise((resolve, reject) => {
+  private delete(url: string): Promise<any> {
+    return new Promise(async (resolve, reject) => {
       if (typeof this._axios === "undefined" || typeof this._host === "undefined") {
         reject(new HttpError(500, "ERR_PROVIDER_UNDEFINED", "The provider's host address has not been initialized."));
       }
-      this._axios.delete(url, {data: {}}).then((response: AxiosResponse) => {
+      // If the expiration is in less than an hour, refresh the token
+      if(this._keyExpires && this._keyExpires.valueOf() - Date.now() < (60 * 60 * 1000)) await this.authApiRefresh();
+      let headers = {authorization: `Bearer ${this._key}`};
+      this._axios.delete(url, {data: {}, headers: headers}).then((response: AxiosResponse) => {
         if (typeof response.data !== "undefined") {
           resolve(response.data.payload);
         } else {
@@ -92,7 +100,7 @@ class EMSProvider {
   }
 
   public post(url: string, body: IPostableObject | IPostableObject[]): Promise<AxiosResponse> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const records: object[] = [];
       if (body instanceof Array) {
         for (const record of body) {
@@ -102,7 +110,9 @@ class EMSProvider {
         if(body.hasOwnProperty(`toJSON`)) records.push(body.toJSON());
         else records.push(body);
       }
-      this._axios.post(url, {records: records}).then((response: AxiosResponse) => {
+      if(this._keyExpires && this._keyExpires.valueOf() - Date.now() < (60 * 60 * 1000)) await this.authApiRefresh();
+      let headers = {authorization: `Bearer ${this._key}`};
+      this._axios.post(url, {records: records}, {headers: headers}).then((response: AxiosResponse) => {
         resolve(response);
       }).catch((error) => {
         if (error.response) {
@@ -117,7 +127,7 @@ class EMSProvider {
   }
 
   public put(url: string, body: IPostableObject | IPostableObject[]): Promise<AxiosResponse> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const records: object[] = [];
       if (body instanceof Array) {
         for (const record of body) {
@@ -126,7 +136,9 @@ class EMSProvider {
       } else {
         records.push(body.toJSON());
       }
-      this._axios.put(url, {records: records}).then((response: AxiosResponse) => {
+      if(this._keyExpires && this._keyExpires.valueOf() - Date.now() < (60 * 60 * 1000)) await this.authApiRefresh();
+      let headers = {authorization: `Bearer ${this._key}`};
+      this._axios.put(url, {records: records}, {headers: headers}).then((response: AxiosResponse) => {
         resolve(response);
       }).catch((error) => {
         if (error.response) {
@@ -145,6 +157,217 @@ class EMSProvider {
       this.get("ping").then((res: any) => {
         resolve(res.res);
       }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public getAuthorization(): string {
+    return this._key
+  }
+
+  /**
+   * Verify an API token key
+   * @param fullKey Full API Key, including "Bearer "
+   */
+  public verifyAuth(fullKey: string): Promise<User> {
+    return new Promise<User>((resolve, reject) => {
+      if (!fullKey) return reject(false);
+      this._axios.get('api/account/whoami', {data: {}, headers: {authorization: fullKey}}).then((response: AxiosResponse) => {
+        if(response.status > 199 && response.status < 211 && response.data) {
+          resolve(new User().fromJSON(response.data));
+        } else {
+          reject(false);
+        }
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+  }
+
+  public getUsers(): Promise<User[]> {
+    return new Promise<User[]>((resolve, reject) => {
+      this.get('api/account/users').then((data) => {
+        if(data&& Array.isArray(data)) {
+          resolve(data.map((userJSON: any) => new User().fromJSON(userJSON)));
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public getApiKeys(): Promise<User[]> {
+    return new Promise<User[]>((resolve, reject) => {
+      this.get('api/account/apikeys').then((data) => {
+        if(data&& Array.isArray(data)) {
+          resolve(data.map((userJSON: any) => new User().fromJSON(userJSON)));
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public checkUsername(username: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const un = new Username().fromJSON({username: username});
+      this.post('api/account/checkusername', un).then((data: AxiosResponse<{payload: {available: boolean}}>) => {
+        if(data.status > 199 && data.status < 211) {
+          resolve(data.data.payload.available);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public createUser(user: User | User[]): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.post('api/account/createuser', user).then((data: AxiosResponse<{payload: any}>) => {
+        if(data.status > 199 && data.status < 211) {
+          resolve(data.data.payload);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public deleteUser(username: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.delete(`api/account/${username}/deleteuser`).then((data: any) => {
+        if(data.ok) {
+          // todo: emit to socket server that user is deleted, so it can be cleared
+          resolve(true);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public deleteKey(key: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.delete(`api/account/${key}/deleteapikey`).then((data: any) => {
+        if(data.ok) {
+          // todo: emit to socket server that user is deleted, so it can be cleared
+          resolve(true);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public updateUser(user: User): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.put(`api/account/${user.username}/updateuser`, user).then((data: AxiosResponse<{payload: {ok: boolean}}>) => {
+        if(data) {
+          resolve(data.data.payload.ok);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public updateApiKey(user: User): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.put(`api/account/${user.apiKey}/updateuser`, user).then((data: AxiosResponse<{payload: {ok: boolean}}>) => {
+        if(data) {
+          resolve(data.data.payload.ok);
+        } else {
+          reject();
+        }
+      });
+    });
+  }
+
+  public resetPassword(passwords: ResetPassword): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.post('api/account/changepassword', passwords).then((resp: AxiosResponse<{success: boolean}>) => {
+        if(resp.status > 199 && resp.status < 211) {
+          resolve(resp.data.success);
+        } else {
+          reject();
+        }
+      });
+    })
+  }
+
+  public whoAmI(): Promise<User> { // todo: use User model
+    return new Promise<User>((resolve, reject) => {
+      this.get('api/account/whoami').then((resp: AxiosResponse<any>) => {
+        if(resp.status > 199 && resp.status < 211) {
+          resolve(new User().fromJSON(resp.data));
+        } else {
+          reject();
+        }
+      });
+    })
+  }
+
+  public authPassword(username: string, password: string): Promise<string> {
+    const body = {
+      username: username,
+      password: password,
+      auth_type: 'password'
+    };
+    return this.doApiAuth(body, false);
+  }
+
+  public authApiKey(key: string): Promise<string> {
+    const body = {
+      api_key: key,
+      auth_type: 'apikey'
+    };
+    return this.doApiAuth(body, false);
+  }
+
+  public authOldKey(oldKey: string): Promise<string> {
+    const body = {
+      old_token: oldKey,
+      auth_type: 'refresh'
+    };
+    return this.doApiAuth(body, false);
+  }
+
+  public authApiRefresh(): Promise<string> {
+    const body = {
+      old_token: this._key,
+      auth_type: 'refresh'
+    };
+    return this.doApiAuth(body, false);
+  }
+
+  public authApiRevoke(): Promise<string> {
+    const body = {
+      old_token: this._key,
+      auth_type: 'revoke'
+    };
+    return this.doApiAuth(body, true);
+  }
+
+  private doApiAuth(body: any, isRevoke: boolean): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this._axios.post('api/auth/token',  body).then((response: AxiosResponse) => {
+        if(response.status > 199 && response.status < 211) {
+          if(isRevoke && response.data.success) {
+            this._key = null;
+            this._keyExpires = null;
+            resolve(this._key);
+          } else if (response.data.token) {
+            this._key = response.data.token;
+            this._keyExpires = new Date(Date.now() + (response.data.expires) * 1000);
+            resolve(this._key);
+          } else {
+            reject();
+          }
+        } else {
+          reject();
+        }
+      }).catch(() => {
+        reject();
+      })
     });
   }
 

@@ -1,8 +1,10 @@
 import * as socket from "socket.io-client";
+import EMSProvider from "./EMSProvider";
 
 class SocketProvider {
   private static _instance: SocketProvider;
   private _client: SocketIOClient.Socket;
+  private _emsToFollow: typeof EMSProvider;
 
   public static getInstance(): SocketProvider {
     if (typeof SocketProvider._instance === "undefined") {
@@ -13,11 +15,33 @@ class SocketProvider {
 
   private constructor() {}
 
-  public initialize(host: string) {
+  /**
+   * Initialize Socket. Port is set through the Environment variable `process.env.REACT_APP_EMS_SCK_PORT`
+   * @param host EMS Socket Server URL (e.g. 10.0.100.5)
+   * @param emsToFollow EMSProvider to follow for Authorization headers
+   */
+  public initialize(host: string, emsToFollow: typeof EMSProvider) {
+    this._emsToFollow = emsToFollow;
+
     if (typeof this._client !== "undefined") {
       this._client.close();
     }
-    this._client = socket(`http://${host}:${process.env.REACT_APP_EMS_SCK_PORT}/`);
+
+    // Connect to server
+    this._client = socket(`http://${host}:${process.env.REACT_APP_EMS_SCK_PORT}/`, {
+      query: {authorization: `Bearer ${emsToFollow.getAuthorization()}`}
+    });
+    this._client.open();
+
+    // Update authorization every time we reconnect because it may have changed (renewed)
+    this._client.on('reconnect_attempt', () => {
+      this._client.io.opts.query = {authorization: `Bearer ${emsToFollow.getAuthorization()}`};
+    });
+  }
+
+  public reconnect(): void {
+    this._client.disconnect();
+    this._client.io.opts.query = {authorization: `Bearer ${this._emsToFollow.getAuthorization()}`};
     this._client.open();
   }
 
