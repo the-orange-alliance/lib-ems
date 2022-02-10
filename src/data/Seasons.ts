@@ -18,6 +18,10 @@ const seasonsList = [
   {
     "season_key": 20,
     "season_desc": "FRC Infinite Recharge"
+  },
+  {
+    "season_key": 22,
+    "season_desc": "FRC Rapid React"
   }
 ];
 
@@ -34,6 +38,8 @@ export function getFromEventType(eventType: EventType): DropdownProps {
       return SeasonItems[2];
     case "frc_20":
       return SeasonItems[3];
+    case "frc_22":
+      return SeasonItems[4];
     default:
       return SeasonItems[2];
   }

@@ -152,13 +152,21 @@ FTC_ROVER_PRESET.teamsPerAlliance = 2;
 FTC_ROVER_PRESET.tournamentConfig = "elims";
 FTC_ROVER_PRESET.tournament = [ELIMINATIONS_PRESET];
 
-export const FRC_PRESET = new EventConfiguration();
-FRC_PRESET.eventType = "frc_20";
-FRC_PRESET.teamIdentifier = "team_key";
-FRC_PRESET.requiresTOA = false;
-FRC_PRESET.teamsPerAlliance = 3;
-FRC_PRESET.tournamentConfig = "elims";
-FRC_PRESET.tournament = ELIMINATIONS_PRESET;
+export const FRC_IR_PRESET = new EventConfiguration();
+FRC_IR_PRESET.eventType = "frc_20";
+FRC_IR_PRESET.teamIdentifier = "team_key";
+FRC_IR_PRESET.requiresTOA = false;
+FRC_IR_PRESET.teamsPerAlliance = 3;
+FRC_IR_PRESET.tournamentConfig = "elims";
+FRC_IR_PRESET.tournament = ELIMINATIONS_PRESET;
+
+export const FRC_RR_PRESET = new EventConfiguration();
+FRC_RR_PRESET.eventType = "frc_22";
+FRC_RR_PRESET.teamIdentifier = "team_key";
+FRC_RR_PRESET.requiresTOA = false;
+FRC_RR_PRESET.teamsPerAlliance = 3;
+FRC_RR_PRESET.tournamentConfig = "elims";
+FRC_RR_PRESET.tournament = ELIMINATIONS_PRESET;
 
 export const DEFAULT_RESET = new EventConfiguration();
 DEFAULT_RESET.eventType = "ftc_1819";

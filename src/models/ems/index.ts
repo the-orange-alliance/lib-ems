@@ -23,13 +23,16 @@ import MatchParticipant from "./MatchParticipant";
 import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
 import Season from "./Season";
 import Region from "./Region";
+import ResetPassword from "./ResetPassword";
 import Team from "./Team";
+import User from "./User";
+import Username from "./Username";
 import WPAKey from "./WPAKey";
 import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./IFieldControl";
 
 // Miscellaneous Classes
 import {MatchState} from "./MatchState";
-import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
+import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_IR_PRESET, FRC_RR_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
 import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG, FRC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
 import LiveStream from "./LiveStream";
@@ -46,7 +49,6 @@ import RoverRuckusRank from "./games/rover-ruckus/RoverRuckusRank";
 import RoverRuckusRanker from "./games/rover-ruckus/RoverRuckusRanker";
 import RoverRuckusRefereeData from "./games/rover-ruckus/RoverRuckusRefereeData";
 
-
 // Oceanic Opportunities
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 import OceanOpportunitiesRank from "./games/ocean-opportunities/OceanOpportunitiesRank";
@@ -56,6 +58,11 @@ import OceanOpportunitiesRanker from "./games/ocean-opportunities/OceanOpportuni
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
 import InfiniteRechargeRank from "./games/infinite-recharge/InfiniteRechargeRank";
 import InfiniteRechargeRanker from "./games/infinite-recharge/InfiniteRechargeRanker";
+
+// Rapid React
+import RapidReactMatchDetails from "./games/frc22-rapid-react/RapidReactMatchDetails";
+import RapidReactRank from "./games/frc22-rapid-react/RapidReactRank";
+import RapidReactRanker from "./games/frc22-rapid-react/RapidReactRanker";
 
 export {
   AppError,
@@ -80,6 +87,7 @@ export {
   Season,
   Region,
   Team,
+  User,
   IFieldControlPacket,
   HubFunctions,
   IHubMessage,
@@ -102,12 +110,16 @@ export {
   InfiniteRechargeMatchDetails,
   InfiniteRechargeRank,
   InfiniteRechargeRanker,
+  RapidReactMatchDetails,
+  RapidReactRank,
+  RapidReactRanker,
   FGC_CONFIG,
   FTC_CONFIG,
   FRC_CONFIG,
   FTC_ROVER_PRESET,
   FGC_PRESET,
-  FRC_PRESET,
+  FRC_IR_PRESET,
+  FRC_RR_PRESET,
   FTC_RELIC_PRESET,
   DEFAULT_RESET,
   ELIMINATIONS_PRESET,
@@ -115,5 +127,7 @@ export {
   RANKING_PRESET,
   getRankingByEventType,
   getRankingBySeasonKey,
-  WPAKey
+  WPAKey,
+  ResetPassword,
+  Username
 };
