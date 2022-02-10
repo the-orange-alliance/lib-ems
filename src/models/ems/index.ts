@@ -32,7 +32,7 @@ import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./
 
 // Miscellaneous Classes
 import {MatchState} from "./MatchState";
-import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
+import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_IR_PRESET, FRC_RR_PRESET, FTC_ROVER_PRESET} from "./EventConfiguration";
 import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG, FRC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
 import LiveStream from "./LiveStream";
@@ -58,6 +58,11 @@ import OceanOpportunitiesRanker from "./games/ocean-opportunities/OceanOpportuni
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
 import InfiniteRechargeRank from "./games/infinite-recharge/InfiniteRechargeRank";
 import InfiniteRechargeRanker from "./games/infinite-recharge/InfiniteRechargeRanker";
+
+// Rapid React
+import RapidReactMatchDetails from "./games/frc22-rapid-react/RapidReactMatchDetails";
+import RapidReactRank from "./games/frc22-rapid-react/RapidReactRank";
+import RapidReactRanker from "./games/frc22-rapid-react/RapidReactRanker";
 
 export {
   AppError,
@@ -105,12 +110,16 @@ export {
   InfiniteRechargeMatchDetails,
   InfiniteRechargeRank,
   InfiniteRechargeRanker,
+  RapidReactMatchDetails,
+  RapidReactRank,
+  RapidReactRanker,
   FGC_CONFIG,
   FTC_CONFIG,
   FRC_CONFIG,
   FTC_ROVER_PRESET,
   FGC_PRESET,
-  FRC_PRESET,
+  FRC_IR_PRESET,
+  FRC_RR_PRESET,
   FTC_RELIC_PRESET,
   DEFAULT_RESET,
   ELIMINATIONS_PRESET,
