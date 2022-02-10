@@ -180,6 +180,29 @@ export const InfiniteRechargeEndItems = [
   }
 ];
 
+export const RapidReactEndItems = [
+  {
+    text: "None",
+    value: 0
+  },
+  {
+    text: "Low Rung",
+    value: 1
+  },
+  {
+    text: "Mid Rung",
+    value: 2
+  },
+  {
+    text: "High Rung",
+    value: 3
+  },
+  {
+    text: "Traversal Rung",
+    value: 4
+  }
+];
+
 export const HubFunctionItems = [
   {
     text: "Motor",
