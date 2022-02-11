@@ -1,3 +1,5 @@
+import {RapidReactMatchDetails} from "../models";
+
 export const PostQualItems = [
   {
     text: "Eliminations",
@@ -187,19 +189,19 @@ export const RapidReactEndItems = [
   },
   {
     text: "Low Rung",
-    value: 1
+    value: RapidReactMatchDetails.HANGAR_LOW
   },
   {
     text: "Mid Rung",
-    value: 2
+    value: RapidReactMatchDetails.HANGAR_MID
   },
   {
     text: "High Rung",
-    value: 3
+    value: RapidReactMatchDetails.HANGAR_HIGH
   },
   {
     text: "Traversal Rung",
-    value: 4
+    value: RapidReactMatchDetails.HANGAR_TRAVERSAL
   }
 ];
 
