@@ -7,6 +7,7 @@ import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDet
 import AllianceMember from "./AllianceMember";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
+import RapidReactMatchDetails from "./games/frc22-rapid-react/RapidReactMatchDetails";
 
 export default class Match implements IPostableObject {
 
@@ -85,6 +86,8 @@ export default class Match implements IPostableObject {
         return new RoverRuckusMatchDetails();
       case 20:
         return new InfiniteRechargeMatchDetails();
+      case 22:
+        return new RapidReactMatchDetails();
       default:
         return new MatchDetails();
     }
