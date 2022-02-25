@@ -1,5 +1,6 @@
 import IPostableObject from "../IPostableObject";
 import {TeamIdentifier} from "../../Types";
+import {Team as TBATeam} from "tba-api-v3client-ts/lib/esm/models/Team"
 
 export default class Team implements IPostableObject {
   private _teamKey: number;
@@ -10,6 +11,7 @@ export default class Team implements IPostableObject {
   private _hasCard: boolean;
   private _city: string;
   private _stateProv: string;
+  private _postalCode: string;
   private _country: string;
   private _countryCode: string;
 
@@ -20,6 +22,7 @@ export default class Team implements IPostableObject {
     this.robotName = "";
     this.city = "";
     this.stateProv = "";
+    this.postalCode = "";
     this.country = "";
     this.countryCode = "";
   }
@@ -67,6 +70,31 @@ export default class Team implements IPostableObject {
     t.country = json.country;
     t.countryCode = json.country_code;
     return t;
+  }
+
+  public fromTBA(tba: TBATeam): Team {
+    const team = new Team();
+    team.teamKey = tba.team_number;
+    team.teamNameLong = tba.name;
+    team.teamNameShort = tba.nickname;
+    team.city = tba.city;
+    team.stateProv = tba.state_prov;
+    team.country = tba.country;
+    team.postalCode = tba.postal_code;
+    return team;
+  }
+
+  public toTBA(): TBATeam {
+    return {
+      city: this.city,
+      country: this.country,
+      key: "frc" + this.teamKey,
+      name: this.teamNameLong,
+      nickname: this.teamNameShort,
+      postal_code: this.postalCode,
+      state_prov: this.postalCode,
+      team_number: this.teamKey
+    };
   }
 
   get teamKey(): number {
@@ -139,6 +167,14 @@ export default class Team implements IPostableObject {
 
   set country(value: string) {
     this._country = value;
+  }
+
+  get postalCode(): string {
+    return this._postalCode;
+  }
+
+  set postalCode(value: string) {
+    this._postalCode = value;
   }
 
   get location(): string {

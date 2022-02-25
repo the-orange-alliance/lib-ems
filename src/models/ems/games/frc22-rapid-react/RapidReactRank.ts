@@ -1,5 +1,7 @@
 import Ranking from "../../Ranking";
 import Team from "../../Team";
+import {Event_Ranking as TBARank} from "tba-api-v3client-ts/lib/esm/models/Event_Ranking";
+import {WLT_Record} from "tba-api-v3client-ts/lib/esm/models/WLT_Record";
 
 export default class RapidReactRank extends Ranking {
   private _rankingPoints: number;
@@ -57,6 +59,27 @@ export default class RapidReactRank extends Ranking {
     } catch {
       rank.team = undefined;
     }
+    return rank;
+  }
+
+  public toTBA(): any{
+    return {
+      matches_played: this.played,
+      record: {wins: this.wins, ties: this.ties, losses: this.losses},
+      rank: this.rank,
+      dq: 0,
+      team_key: "frc" + this.teamKey,
+    }
+  }
+
+  public fromTBA(tba: any): RapidReactRank {
+    const rank = new RapidReactRank();
+    rank.rank = tba.rank;
+    rank.teamKey = parseInt(tba.team_key.substr(3));
+    rank.wins = tba.record.wins;
+    rank.ties = tba.record.ties;
+    rank.losses = tba.record.losses;
+    rank.played = tba.matches_played;
     return rank;
   }
 
