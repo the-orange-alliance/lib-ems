@@ -153,10 +153,13 @@ export default class Team implements IPostableObject {
     return this._countryCode;
   }
 
+  // Technically the logo identifier
   set countryCode(value: string) {
+    /*
     if (value.length > 2) {
       value = value.substring(0, 2);
     }
+    */
     this._countryCode = value.toLowerCase();
   }
 }
