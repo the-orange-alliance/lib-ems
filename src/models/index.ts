@@ -7,5 +7,8 @@ export {IMatchRanker, IPostableObject};
 // TOA Classes
 export * from "./toa";
 
+// TBA Classes
+export * from "./tba";
+
 // EMS Classes
 export * from "./ems";

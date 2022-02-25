@@ -11,6 +11,10 @@ const regionsList = [
     "description": "FIRST Collegiate"
   },
   {
+    "region_key": "FRC",
+    "description": "FIRST Robotics Competition"
+  },
+  {
     "region_key": "AK",
     "description": "Alaska"
   },

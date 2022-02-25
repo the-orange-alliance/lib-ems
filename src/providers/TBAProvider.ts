@@ -15,7 +15,8 @@ import {Ranking} from "../models";
 
 class TBAProvider {
   private static _instance: TBAProvider;
-  private _tbaConfig: {clientId: string, secret: string};
+  private _clientId: string;
+  private _secret: string;
 
   private constructor() {
   }
@@ -38,8 +39,8 @@ class TBAProvider {
     OpenAPI.HEADERS = {
       "X-TBA-Auth-Key": secret,
     }
-    this._tbaConfig.secret = secret;
-    this._tbaConfig.clientId = clientId;
+    this._secret = secret;
+    this._clientId = clientId;
   }
 
   /* GET requests. */
@@ -204,7 +205,7 @@ class TBAProvider {
    * @returns The response from the server
    */
   private post(endpoint: string, data: any) {
-    const {clientId, secret} = this._tbaConfig;
+    const {_clientId: clientId, _secret: secret} = this;
 
     const body = JSON.stringify(data);
     const md5Hash = createHash("md5")

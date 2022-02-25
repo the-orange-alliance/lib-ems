@@ -38,7 +38,7 @@ class TOAProvider {
       timeout: 5000,
       headers: {
         "Content-Type": "application/json",
-        "X-Application-Origin": "EMS-" + this._toaConfig.eventKey,
+        "X-Application-Origin": "Event Management System",
         "X-TOA-Key": this._toaConfig.apiKey
       }
     };

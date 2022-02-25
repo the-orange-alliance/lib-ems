@@ -28,6 +28,7 @@ import Team from "./Team";
 import User from "./User";
 import Username from "./Username";
 import WPAKey from "./WPAKey";
+import UploadConfig from "./UploadConfig";
 import {IHubParameters, IHubMessage, HubFunctions, IFieldControlPacket} from "./IFieldControl";
 
 // Miscellaneous Classes
@@ -113,6 +114,7 @@ export {
   RapidReactMatchDetails,
   RapidReactRank,
   RapidReactRanker,
+  UploadConfig,
   FGC_CONFIG,
   FTC_CONFIG,
   FRC_CONFIG,
