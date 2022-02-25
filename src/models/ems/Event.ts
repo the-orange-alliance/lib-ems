@@ -4,6 +4,8 @@ import Season from "./Season";
 import * as Regions from "../../data/Regions";
 import * as Seasons from "../../data/Seasons";
 import {EventType} from "../../";
+import {getFromSeasonKey} from "../../data/Seasons";
+import {Event as TBAEvent} from "tba-api-v3client-ts/lib/esm/models/Event"
 
 export default class Event implements IPostableObject {
 
@@ -11,6 +13,7 @@ export default class Event implements IPostableObject {
   private _region: Region;
   private _eventType: EventType;
   private _eventTypeKey: string;
+  private _eventTypeString: string;
   private _eventCode: string;
   private _eventName: string;
   private _venue: string;
@@ -28,6 +31,7 @@ export default class Event implements IPostableObject {
     this._region = new Region("", "");
     this._eventType = "generic";
     this._eventTypeKey = "";
+    this._eventTypeString = "";
     this._eventCode = "";
     this._eventName = "";
     this._venue = "";
@@ -37,8 +41,13 @@ export default class Event implements IPostableObject {
     this._fieldCount = 0;
     this._website = "";
     this._divisionName = "";
+<<<<<<< HEAD
+    this._startDate = new Date();
+    this._endDate = new Date();
+=======
     this._startDate = new Date(0);
     this._endDate = new Date(0);
+>>>>>>> 43e0813a4ba74d2a58cff935787886fa4f680b19
   }
 
   public toJSON(): object {
@@ -81,6 +90,38 @@ export default class Event implements IPostableObject {
     return e;
   }
 
+  public fromTBA(tbaEvent: TBAEvent) {
+    const emsEvent = new Event();
+    emsEvent.season = getFromSeasonKey((tbaEvent.year + "").substr(2));
+    emsEvent.eventType = `frc_${emsEvent.season.seasonKey}` as EventType;
+    emsEvent.eventTypeKey = tbaEvent.event_type + "";
+    emsEvent.eventCode = tbaEvent.event_code;
+    emsEvent.eventTypeString = tbaEvent.event_type_string;
+    emsEvent.eventName = tbaEvent.name;
+    emsEvent.venue = tbaEvent.location_name;
+    emsEvent.city = tbaEvent.city;
+    emsEvent.stateProv = tbaEvent.state_prov;
+    emsEvent.country = tbaEvent.country;
+    emsEvent.fieldCount = 1;
+    emsEvent.website = tbaEvent.website;
+    emsEvent.startDate = new Date(tbaEvent.start_date);
+    emsEvent.endDate = new Date(tbaEvent.end_date);
+    return emsEvent;
+  }
+
+  public toTBA(): TBAEvent {
+    return {
+      end_date: this.endDate.toISOString(),
+      event_code: this.eventCode,
+      event_type: parseInt(this.eventTypeKey),
+      event_type_string: this.eventTypeString,
+      key: this.eventKey,
+      name: this.eventName,
+      start_date: this.startDate.toISOString(),
+      year: 20 + (this.season.seasonKey)
+    };
+  }
+
   get season(): Season {
     return this._season;
   }
@@ -111,6 +152,14 @@ export default class Event implements IPostableObject {
 
   set eventTypeKey(value: string) {
     this._eventTypeKey = value;
+  }
+
+  get eventTypeString(): string {
+    return this._eventTypeString;
+  }
+
+  set eventTypeString(value: string) {
+    this._eventTypeString = value;
   }
 
   get eventCode(): string {
@@ -210,4 +259,8 @@ export default class Event implements IPostableObject {
   set endDate(value: Date) {
     this._endDate = value;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 43e0813a4ba74d2a58cff935787886fa4f680b19

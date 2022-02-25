@@ -7,7 +7,9 @@ import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDet
 import AllianceMember from "./AllianceMember";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
-import RapidReactMatchDetails from "./games/frc22-rapid-react/RapidReactMatchDetails";
+import {Match as TBAMatch} from "tba-api-v3client-ts/lib/esm/models/Match"
+import {Match_alliance} from "tba-api-v3client-ts/lib/esm/models/Match_alliance";
+import {RapidReactMatchDetails} from "./index";
 
 export default class Match implements IPostableObject {
 
@@ -136,6 +138,149 @@ export default class Match implements IPostableObject {
     match.active = json.active;
     match.result = json.result;
     match.uploaded = json.uploaded === 1;
+    return match;
+  }
+
+  public getTBATournamentLevel(): TBAMatch.comp_level {
+    if(this.tournamentLevel >= Match.FINAL_LEVEL) return TBAMatch.comp_level.F;
+    if(this.tournamentLevel >= Match.SEMIFINALS_level) return TBAMatch.comp_level.SF;
+    if(this.tournamentLevel >= Match.QUARTERFINALS_LEVEL) return TBAMatch.comp_level.QF;
+    if(this.tournamentLevel >= Match.OCTOFINALS_LEVEL) return TBAMatch.comp_level.EF;
+    if(this.tournamentLevel === Match.QUALIFICATION_LEVEL) return TBAMatch.comp_level.QM;
+
+    // Default to Quals
+    return TBAMatch.comp_level.QM;
+  }
+
+  public getTournamentLevelFromTBA(tournLevel: string, setNumber: number): number {
+    if(tournLevel === TBAMatch.comp_level.F) return Match.FINAL_LEVEL + setNumber;
+    if(tournLevel === TBAMatch.comp_level.SF) return Match.SEMIFINALS_level + setNumber;
+    if(tournLevel === TBAMatch.comp_level.QF) return Match.QUARTERFINALS_LEVEL + setNumber;
+    if(tournLevel === TBAMatch.comp_level.EF) return Match.OCTOFINALS_LEVEL + setNumber;
+    return Match.QUALIFICATION_LEVEL;
+  }
+
+  public getSetNumber(): number {
+    if(this.tournamentLevel >= Match.FINAL_LEVEL) return this.tournamentLevel - Match.FINAL_LEVEL;
+    if(this.tournamentLevel >= Match.SEMIFINALS_level) return this.tournamentLevel - Match.SEMIFINALS_level;
+    if(this.tournamentLevel >= Match.QUARTERFINALS_LEVEL) return this.tournamentLevel - Match.QUARTERFINALS_LEVEL;
+    if(this.tournamentLevel >= Match.OCTOFINALS_LEVEL) return this.tournamentLevel - Match.OCTOFINALS_LEVEL;
+    // Qual, practice, and test matches have set of 0
+    return 0;
+  }
+
+  public getTBAAlliances(): {red: Match_alliance, blue: Match_alliance} {
+    const redAlliance: Match_alliance = {
+      team_keys: [],
+      dq_team_keys: [],
+      score: this.redScore,
+      surrogate_team_keys: [],
+    };
+    const blueAlliance: Match_alliance = {
+      team_keys: [],
+      dq_team_keys: [],
+      score: this.redScore,
+      surrogate_team_keys: [],
+    };
+    for(const par of this.participants) {
+      if(par.station < 20) { // Red alliance
+        redAlliance.team_keys.push("frc" + par.teamKey);
+        if(par.surrogate) redAlliance.surrogate_team_keys.push("frc" + par.teamKey);
+        if(par.cardStatus === MatchParticipant.RED_CARD) redAlliance.dq_team_keys.push("frc" + par.teamKey);
+      } else {
+        blueAlliance.team_keys.push("frc" + par.teamKey);
+        if(par.surrogate) blueAlliance.surrogate_team_keys.push("frc" + par.teamKey);
+        if(par.cardStatus === MatchParticipant.RED_CARD) blueAlliance.dq_team_keys.push("frc" + par.teamKey);
+      }
+    }
+
+    return {red: redAlliance, blue: blueAlliance};
+  }
+
+  public getParticipantsFromTBA(tba: {red?: Match_alliance, blue?: Match_alliance}): MatchParticipant[] {
+    const participants: MatchParticipant[] = [];
+    let station = 1;
+    if(tba.red) {
+      for(let team of tba.red.team_keys) {
+        const par = new MatchParticipant();
+        par.teamKey = parseInt(team.substr(3));
+        par.cardStatus = tba.red.dq_team_keys.includes(team) ? MatchParticipant.RED_CARD : MatchParticipant.NO_CARD;
+        par.surrogate = tba.red.surrogate_team_keys.includes(team);
+        par.station = 10 + station;
+        station++;
+        participants.push(par);
+      }
+    }
+
+    station = 1;
+    if(tba.blue) {
+      for(let team of tba.blue.team_keys) {
+        const par = new MatchParticipant();
+        par.teamKey = parseInt(team.substr(3));
+        par.cardStatus = tba.blue.dq_team_keys.includes(team) ? MatchParticipant.RED_CARD : MatchParticipant.NO_CARD;
+        par.surrogate = tba.blue.surrogate_team_keys.includes(team);
+        par.station = 20 + station;
+        station++;
+        participants.push(par);
+      }
+    }
+
+    return participants;
+  }
+
+  public getTBABreakdown(eventKey: string, minRedPen: number, majRedPen: number, minBluePen: number, majBluePen: number) {
+    if(this.matchDetails) {
+      if(eventKey.startsWith("2022")) {
+        const md: RapidReactMatchDetails = this.matchDetails as RapidReactMatchDetails;
+        return md.toTBA(minRedPen, majRedPen, minBluePen, majBluePen);
+      }
+    }
+
+    return undefined;
+  }
+
+  public toTBA(eventKey: string, minRedPen: number, majRedPen: number, minBluePen: number, majBluePen: number): TBAMatch {
+    const compLvl = this.getTBATournamentLevel();
+    const matchKeySplit = this.matchKey.split('-');
+    const matchNumber = parseInt(matchKeySplit[matchKeySplit.length - 1].substr(1));
+    const matchKey = `${eventKey}_${compLvl}m${matchNumber}`;
+    let scoreBreakdown = this.getTBABreakdown(eventKey, minRedPen, majRedPen, minBluePen, majBluePen);
+
+    return {
+      actual_time: this.startTime.valueOf(),
+      alliances: this.getTBAAlliances(),
+      comp_level: compLvl,
+      event_key: eventKey,
+      key: matchKey,
+      match_number: matchNumber,
+      time: this.scheduledStartTime.valueOf(),
+      score_breakdown: scoreBreakdown,
+      set_number: this.getSetNumber(),
+    };
+  }
+
+  public fromTBA(tba: TBAMatch): Match {
+    const tournLevel = this.getTournamentLevelFromTBA(tba.comp_level, tba.set_number);
+    const seasonKey = tba.event_key.substr(2, tba.event_key.length - 2);
+    const eventKey = tba.event_key.substr(4);
+    const seriesLevel = tournLevel === Match.QUALIFICATION_LEVEL ? 'Q' : 'E';
+    const matchKey = `${seasonKey}-${eventKey}-${seriesLevel}-${tournLevel}${tba.match_number}`
+
+    let details;
+    if(tba.score_breakdown) {
+      if(tba.event_key.startsWith("2022")) {
+        details = new RapidReactMatchDetails().fromTBA(tba.score_breakdown, matchKey);
+      }
+    }
+
+    const match = new Match();
+    match.startTime = moment(tba.actual_time);
+    match.scheduledStartTime = moment(tba.time);
+    match.tournamentLevel = tournLevel;
+    match.participants = this.getParticipantsFromTBA(tba.alliances);
+    match.matchDetails = details;
+    match.matchKey = matchKey;
+
     return match;
   }
 
