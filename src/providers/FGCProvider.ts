@@ -9,17 +9,12 @@ import MatchParticipant from "../models/ems/MatchParticipant";
 import Ranking, {getRankingBySeasonKey, getRankingByEventType} from "../models/ems/Ranking";
 import LiveStream from "../models/ems/LiveStream";
 import {EventType} from "../Types";
+import {Providers} from "../models/ems/EventConfiguration";
 
 export interface ICompleteTeamResponse {
   team: Team;
   matches: Match[];
   rankings: Ranking[];
-}
-
-export enum Providers {
-  FGA,
-  FCA,
-  CUSTOM
 }
 
 export interface CustomProvider {
