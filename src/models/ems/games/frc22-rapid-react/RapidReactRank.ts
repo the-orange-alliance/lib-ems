@@ -1,7 +1,5 @@
 import Ranking from "../../Ranking";
 import Team from "../../Team";
-import {Event_Ranking as TBARank} from "tba-api-v3client-ts/lib/esm/models/Event_Ranking";
-import {WLT_Record} from "tba-api-v3client-ts/lib/esm/models/WLT_Record";
 
 export default class RapidReactRank extends Ranking {
   private _rankingPoints: number;

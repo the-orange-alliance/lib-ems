@@ -9,8 +9,10 @@ import MatchParticipant from "../models/ems/MatchParticipant";
 import Ranking, {getRankingBySeasonKey, getRankingByEventType} from "../models/ems/Ranking";
 import LiveStream from "../models/ems/LiveStream";
 import {EventType} from "../Types";
-import {EventService, OpenAPI, TeamService, MatchService} from "tba-api-v3client-ts";
+import {EventService, OpenAPI, TeamService} from "tba-api-v3client-ts";
 import {RapidReactRank} from "../models/ems";
+import * as WriteTBA from "./TBAHelper";
+import {DEFAULT_BREAKDOWNS, WritableRankings} from "../models/tba/WritableRanks";
 
 export interface ICompleteTeamResponse {
   team: Team;
@@ -76,6 +78,7 @@ class FGCProvider {
   private _axios: AxiosInstance;
   private _config: AxiosRequestConfig;
   private _useTBA: boolean = false;
+  private _tbaConfig: WriteTBA.TBAWriteCredentials = {clientId: undefined, secret: undefined};
 
   public static getInstance(): FGCProvider {
     if (typeof FGCProvider._instance === "undefined") {
@@ -89,6 +92,8 @@ class FGCProvider {
   /**
    * This method must be called before retrieving data. Since this class implements the singleton design
    * and the network of EMS may change, the provider must be manually initialized at runtime.
+   *
+   * For TBA, key is client secret and customAppOrigin is AuthID
    */
   public initialize(provider: Providers, key?: string, customAppOrigin?: string, customProvider?: CustomProvider): void {
     // Set config values from templates
@@ -125,6 +130,8 @@ class FGCProvider {
       OpenAPI.HEADERS = {
         "X-TBA-Auth-Key": key,
       }
+      this._tbaConfig.secret = key;
+      this._tbaConfig.clientId = customAppOrigin;
     }
   }
 
@@ -484,57 +491,123 @@ class FGCProvider {
     if(!this._useTBA) {
       return this.delete("api/event/" + eventKey + "/participants");
     } else {
-      // MatchService.
+      return WriteTBA.postTeams(eventKey, [], this._tbaConfig);
     }
   }
 
-  public deleteMatchData(eventKey: string, tournamentLevel: number, tournamentKey: string): Promise<AxiosResponse> {
-    const keyQuery: string = tournamentKey ? `&tournament_key=${tournamentKey}` : ``;
-    return this.delete(`api/match/${eventKey}/all?level=${tournamentLevel}${keyQuery}`);
+  public deleteMatchData(eventKey: string, tournamentLevel: number, tournamentKey: string): Promise<AxiosResponse | AxiosResponse[]> {
+    if(!this._useTBA) {
+      const keyQuery: string = tournamentKey ? `&tournament_key=${tournamentKey}` : ``;
+      return this.delete(`api/match/${eventKey}/all?level=${tournamentLevel}${keyQuery}`);
+    } else {
+      return EventService.getEventMatchesKeys(eventKey).then(data => {
+        return WriteTBA.deleteMatches(eventKey, data, this._tbaConfig);
+      })
+    }
   }
 
   public deleteRankings(eventKey: string): Promise<AxiosResponse> {
-    return this.delete("api/rank/" + eventKey);
+    if(!this._useTBA) {
+      return this.delete("api/rank/" + eventKey);
+    } else {
+      return WriteTBA.postRankings(eventKey, {rankings: [], breakdowns: DEFAULT_BREAKDOWNS}, this._tbaConfig)
+    }
   }
 
   public deleteRankingsByLevel(eventKey: string, tournamentLevel: number): Promise<AxiosResponse> {
-    return this.delete(`api/rank/${eventKey}?level=${tournamentLevel}`);
+    if(!this._useTBA) {
+      return this.delete(`api/rank/${eventKey}?level=${tournamentLevel}`);
+    } else {
+      // We'll just pretend this does the same thing
+      return WriteTBA.postRankings(eventKey, {rankings: [], breakdowns: DEFAULT_BREAKDOWNS}, this._tbaConfig)
+    }
   }
 
   public postEventParticipants(eventKey: string, participants: Team[]): Promise<AxiosResponse> {
-    return this.post("api/event/" + eventKey + "/participants", participants);
+    if(!this._useTBA) {
+      return this.post("api/event/" + eventKey + "/participants", participants);
+    } else {
+      const tbaTeams = participants.map(p => "frc" + p.teamKey);
+      return WriteTBA.postTeams(eventKey, tbaTeams, this._tbaConfig);
+    }
   }
 
   public postMatches(eventKey: string, matches: Match[]): Promise<AxiosResponse> {
-    return this.post("api/match/" + eventKey, matches);
+    if(!this._useTBA) {
+      return this.post("api/match/" + eventKey, matches);
+    } else {
+      const tbaMatches = matches.map(m => m.toTBA(eventKey));
+      return WriteTBA.postMatches(eventKey, tbaMatches, this._tbaConfig);
+    }
   }
 
   public postMatchDetails(eventKey: string, matches: MatchDetails[]): Promise<AxiosResponse> {
-    return this.post("api/match/" + eventKey + "/details", matches);
+    if(!this._useTBA) {
+      return this.post("api/match/" + eventKey + "/details", matches);
+    } else {
+      // Breakdowns are uploaded with the match data
+      return new Promise(resolve => resolve(null));
+    }
   }
 
   public postMatchParticipants(eventKey: string, participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.post("api/match/" + eventKey + "/participants", participants);
+    if(!this._useTBA) {
+      return this.post("api/match/" + eventKey + "/participants", participants);
+    } else {
+      // Participants are uploaded with the match data
+      return new Promise(resolve => resolve(null));
+    }
+  }
+
+  private postTBARanks(eventKey: string, rankings: Ranking[]): Promise<AxiosResponse> {
+    const ranks = rankings.map(r => r.toTBA());
+    const tbaPostable: WritableRankings = {
+      breakdowns: DEFAULT_BREAKDOWNS,
+      rankings: ranks
+    }
+    return WriteTBA.postRankings(eventKey, tbaPostable, this._tbaConfig);
   }
 
   public postRankings(eventKey: string, rankings: Ranking[]): Promise<AxiosResponse> {
-    return this.post("api/rank/" + eventKey, rankings);
+    if(!this._useTBA) {
+      return this.post("api/rank/" + eventKey, rankings);
+    } else {
+      return this.postTBARanks(eventKey, rankings);
+    }
   }
 
   public postRankingsByLevel(eventKey: string, rankings: Ranking[], tournamentLevel: number): Promise<AxiosResponse> {
-    return this.post(`api/rank/${eventKey}?level=${tournamentLevel}`, rankings);
+    if(!this._useTBA) {
+      return this.post(`api/rank/${eventKey}?level=${tournamentLevel}`, rankings);
+    } else {
+      return this.postTBARanks(eventKey, rankings);
+    }
   }
 
   public putMatchResults(eventKey: string, match: Match): Promise<AxiosResponse> {
-    return this.put("api/match/" + match.matchKey, match);
+    if(!this._useTBA) {
+      return this.put("api/match/" + match.matchKey, match);
+    } else {
+      return WriteTBA.postMatch(eventKey, match.toTBA(eventKey), this._tbaConfig);
+    }
   }
 
   public putMatchDetails(eventKey: string, matchDetails: MatchDetails): Promise<AxiosResponse> {
-    return this.put("api/match/" + matchDetails.matchKey + "/details", matchDetails)
+    if(!this._useTBA) {
+      return this.put("api/match/" + matchDetails.matchKey + "/details", matchDetails)
+    } else {
+      // Details are uploaded with the match data
+      return new Promise(resolve => resolve(null));
+    }
   }
 
   public putMatchParticipants(eventKey: string, participants: MatchParticipant[]): Promise<AxiosResponse> {
-    return this.put("api/match/" + participants[0].matchKey + "/participants", participants);
+    if(!this._useTBA) {
+      return this.put("api/match/" + participants[0].matchKey + "/participants", participants);
+    } else {
+      // Participants are uploaded with the match data
+      return new Promise(resolve => resolve(null));
+    }
   }
 }
 

@@ -10,6 +10,7 @@ import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRech
 import {Match as TBAMatch} from "tba-api-v3client-ts/lib/esm/models/Match"
 import {Match_alliance} from "tba-api-v3client-ts/lib/esm/models/Match_alliance";
 import {RapidReactMatchDetails} from "./index";
+import {WritableAlliance, WritableAlliances, WritableMatch} from "../tba/WritableMatch";
 
 export default class Match implements IPostableObject {
 
@@ -169,28 +170,28 @@ export default class Match implements IPostableObject {
     return 0;
   }
 
-  public getTBAAlliances(): {red: Match_alliance, blue: Match_alliance} {
-    const redAlliance: Match_alliance = {
-      team_keys: [],
-      dq_team_keys: [],
+  public getTBAAlliances(): WritableAlliances {
+    const redAlliance: WritableAlliance = {
+      teams: [],
+      dqs: [],
       score: this.redScore,
-      surrogate_team_keys: [],
+      surrogates: [],
     };
-    const blueAlliance: Match_alliance = {
-      team_keys: [],
-      dq_team_keys: [],
-      score: this.redScore,
-      surrogate_team_keys: [],
+    const blueAlliance: WritableAlliance = {
+      teams: [],
+      dqs: [],
+      score: this.blueScore,
+      surrogates: [],
     };
     for(const par of this.participants) {
       if(par.station < 20) { // Red alliance
-        redAlliance.team_keys.push("frc" + par.teamKey);
-        if(par.surrogate) redAlliance.surrogate_team_keys.push("frc" + par.teamKey);
-        if(par.cardStatus === MatchParticipant.RED_CARD) redAlliance.dq_team_keys.push("frc" + par.teamKey);
+        redAlliance.teams.push("frc" + par.teamKey);
+        if(par.surrogate) redAlliance.surrogates.push("frc" + par.teamKey);
+        if(par.cardStatus === MatchParticipant.RED_CARD) redAlliance.dqs.push("frc" + par.teamKey);
       } else {
-        blueAlliance.team_keys.push("frc" + par.teamKey);
-        if(par.surrogate) blueAlliance.surrogate_team_keys.push("frc" + par.teamKey);
-        if(par.cardStatus === MatchParticipant.RED_CARD) blueAlliance.dq_team_keys.push("frc" + par.teamKey);
+        blueAlliance.teams.push("frc" + par.teamKey);
+        if(par.surrogate) blueAlliance.surrogates.push("frc" + par.teamKey);
+        if(par.cardStatus === MatchParticipant.RED_CARD) blueAlliance.dqs.push("frc" + par.teamKey);
       }
     }
 
@@ -239,21 +240,21 @@ export default class Match implements IPostableObject {
     return undefined;
   }
 
-  public toTBA(eventKey: string, minRedPen: number, majRedPen: number, minBluePen: number, majBluePen: number): TBAMatch {
+  public toTBA(eventKey: string): WritableMatch<any> {
     const compLvl = this.getTBATournamentLevel();
     const matchKeySplit = this.matchKey.split('-');
     const matchNumber = parseInt(matchKeySplit[matchKeySplit.length - 1].substr(1));
     const matchKey = `${eventKey}_${compLvl}m${matchNumber}`;
-    let scoreBreakdown = this.getTBABreakdown(eventKey, minRedPen, majRedPen, minBluePen, majBluePen);
+    let scoreBreakdown = this.getTBABreakdown(eventKey, this.redMinPen, this.redMajPen, this.blueMinPen, this.blueMajPen);
 
     return {
-      actual_time: this.startTime.valueOf(),
+      // actual_time: this.startTime.valueOf(),
       alliances: this.getTBAAlliances(),
       comp_level: compLvl,
       event_key: eventKey,
       key: matchKey,
       match_number: matchNumber,
-      time: this.scheduledStartTime.valueOf(),
+      time_utc: this.scheduledStartTime.toDate().toUTCString(),
       score_breakdown: scoreBreakdown,
       set_number: this.getSetNumber(),
     };

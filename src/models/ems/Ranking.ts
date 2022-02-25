@@ -1,7 +1,8 @@
 import IPostableObject from "../IPostableObject";
 import Team from "./Team";
-import {EnergyImpactRanking, InfiniteRechargeRank, OceanOpportunitiesRank, RoverRuckusRank, RapidReactRank} from "./";
+import {EnergyImpactRanking, InfiniteRechargeRank, OceanOpportunitiesRank, RapidReactRank, RoverRuckusRank} from "./";
 import {EventType} from "../../Types";
+import {WritableRank} from "../tba/WritableRanks";
 
 export default class Ranking implements IPostableObject {
   private _rankKey: string;
@@ -61,6 +62,18 @@ export default class Ranking implements IPostableObject {
       ranking.team = undefined;
     }
     return ranking;
+  }
+
+  public toTBA(): WritableRank {
+    return {
+      dqs: 0,
+      losses: this.losses,
+      played: this.played,
+      rank: this.rank,
+      team_key: "frc" + this.teamKey,
+      ties: this.ties,
+      wins: this.wins
+    };
   }
 
   get rankKey(): string {
