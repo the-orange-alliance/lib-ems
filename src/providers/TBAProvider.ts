@@ -273,12 +273,13 @@ class TBAProvider {
     return this.post(endpoint, matchNumbers);
   };
 
+
   /**
    * Update event info
    * @param eventKey
    * @param bracketType
    * @private
-   */
+   */   // @ts-ignore
   private eventData(eventKey: string, bracketType: number) {
     const endpoint = `/event/${eventKey}/info/update`;
     const data = {
@@ -300,7 +301,7 @@ class TBAProvider {
    * @param eventKey
    * @param alliances
    * @private
-   */
+   */   // @ts-ignore
   private uploadAlliances(eventKey: string, alliances: string[][]) {
     const endpoint = `/event/${eventKey}/alliance_selections/update`;
     return this.post(endpoint, alliances);
