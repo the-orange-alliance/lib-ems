@@ -41,8 +41,13 @@ export default class Event implements IPostableObject {
     this._fieldCount = 0;
     this._website = "";
     this._divisionName = "";
+<<<<<<< HEAD
     this._startDate = new Date();
     this._endDate = new Date();
+=======
+    this._startDate = new Date(0);
+    this._endDate = new Date(0);
+>>>>>>> 43e0813a4ba74d2a58cff935787886fa4f680b19
   }
 
   public toJSON(): object {
@@ -59,7 +64,9 @@ export default class Event implements IPostableObject {
       country: this.country,
       field_count: this.fieldCount,
       website: this.website,
-      division_name: this.divisionName
+      division_name: this.divisionName,
+      start_date: this.startDate,
+      end_date: this.endDate
     };
   }
 
@@ -78,6 +85,8 @@ export default class Event implements IPostableObject {
     e.fieldCount = json.field_count;
     e.website = json.website;
     e.divisionName = json.division_name;
+    e.startDate = new Date(json.start_date);
+    e.endDate = new Date(json.end_date);
     return e;
   }
 
@@ -250,4 +259,8 @@ export default class Event implements IPostableObject {
   set endDate(value: Date) {
     this._endDate = value;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 43e0813a4ba74d2a58cff935787886fa4f680b19

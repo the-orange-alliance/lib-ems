@@ -1,3 +1,5 @@
+import {RapidReactMatchDetails} from "../models";
+
 export const PostQualItems = [
   {
     text: "Eliminations",
@@ -177,6 +179,29 @@ export const InfiniteRechargeEndItems = [
   {
     text: "Hanging",
     value: 2
+  }
+];
+
+export const RapidReactEndItems = [
+  {
+    text: "None",
+    value: 0
+  },
+  {
+    text: "Low Rung",
+    value: RapidReactMatchDetails.HANGAR_LOW
+  },
+  {
+    text: "Mid Rung",
+    value: RapidReactMatchDetails.HANGAR_MID
+  },
+  {
+    text: "High Rung",
+    value: RapidReactMatchDetails.HANGAR_HIGH
+  },
+  {
+    text: "Traversal Rung",
+    value: RapidReactMatchDetails.HANGAR_TRAVERSAL
   }
 ];
 

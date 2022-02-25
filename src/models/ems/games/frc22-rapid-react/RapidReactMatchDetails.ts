@@ -144,6 +144,148 @@ export default class RapidReactMatchDetails extends MatchDetails implements IPos
     return details;
   }
 
+  public toTBA(majRedPen: number, minRedPen: number, majBluePen: number, minBluePen: number): any {
+    return {
+      red: {
+        taxiRobot1: this.redAutoTaxiRobot1 ? "Yes" : "No",
+        endgameRobot1: this.endStatusToString(this.redHangerRobot1),
+        taxiRobot2: this.redAutoTaxiRobot2 ? "Yes" : "No",
+        endgameRobot2: this.endStatusToString(this.redHangerRobot2),
+        taxiRobot3: this.redAutoTaxiRobot3 ? "Yes" : "No",
+        endgameRobot3: this.endStatusToString(this.redHangerRobot3),
+        autoCargoLowerNear: 0,
+        autoCargoLowerFar: 0,
+        autoCargoLowerBlue: 0, // this.blueAutoCargoLow,
+        autoCargoLowerRed: this.redAutoCargoLow,
+        autoCargoUpperNear: 0,
+        autoCargoUpperFar: 0,
+        autoCargoUpperBlue: 0, // this.blueAutoCargoHigh,
+        autoCargoUpperRed: this.redAutoCargoHigh,
+        autoCargoTotal: this.redAutoCargoLow + this.redAutoCargoHigh,
+        teleopCargoLowerNear: 0,
+        teleopCargoLowerFar: 0,
+        teleopCargoLowerBlue: 0, // this.blueTeleCargoLow,
+        teleopCargoLowerRed: this.redTeleCargoLow,
+        teleopCargoUpperNear: 0,
+        teleopCargoUpperFar: 0,
+        teleopCargoUpperBlue: 0, // this.blueTeleCargoHigh,
+        teleopCargoUpperRed: this.redTeleCargoHigh,
+        teleopCargoTotal: this.redTeleCargoLow + this.redTeleCargoHigh,
+        matchCargoTotal: this.redAutoCargoHigh + this.redAutoCargoLow + this.redTeleCargoHigh + this.redTeleCargoLow,
+        autoTaxiPoints: this.getRedAutoScore() - ((this.redAutoCargoLow * 2) + (this.redAutoCargoHigh * 4)),
+        autoCargoPoints: (this.redAutoCargoLow * 2) + (this.redAutoCargoHigh * 4),
+        autoPoints: this.getRedAutoScore(),
+        quintetAchieved: false,
+        teleopCargoPoints: this.redTeleCargoLow + (this.redTeleCargoHigh * 2),
+        endgamePoints: this.getRedEndScore(),
+        teleopPoints: this.getRedTeleScore(),
+        cargoBonusRankingPoint: this.redCargoBonus,
+        hangarBonusRankingPoint: this.redHangarBonus,
+        foulCount: minRedPen,
+        techFoulCount: majRedPen,
+        adjustPoints: 0,
+        foulPoints: this.getRedPenalty(minRedPen, majRedPen),
+        rp: 0 + (this.redCargoBonus ? 1 : 0) + (this.redHangarBonus ? 1 : 0),
+        totalPoints: this.getRedScore(minBluePen, majBluePen),
+      },
+      blue: {
+        taxiRobot1: this.blueAutoTaxiRobot1 ? "Yes" : "No",
+        endgameRobot1: this.endStatusToString(this.blueHangerRobot1),
+        taxiRobot2: this.blueAutoTaxiRobot2 ? "Yes" : "No",
+        endgameRobot2: this.endStatusToString(this.blueHangerRobot2),
+        taxiRobot3: this.blueAutoTaxiRobot3 ? "Yes" : "No",
+        endgameRobot3: this.endStatusToString(this.blueHangerRobot3),
+        autoCargoLowerNear: 0,
+        autoCargoLowerFar: 0,
+        autoCargoLowerBlue: this.blueAutoCargoLow,
+        autoCargoLowerRed: 0, // this.redAutoCargoLow,
+        autoCargoUpperNear: 0,
+        autoCargoUpperFar: 0,
+        autoCargoUpperBlue: this.blueAutoCargoHigh,
+        autoCargoUpperRed: 0, // this.redAutoCargoHigh,
+        autoCargoTotal: this.blueAutoCargoLow + this.blueAutoCargoHigh,
+        teleopCargoLowerNear: 0,
+        teleopCargoLowerFar: 0,
+        teleopCargoLowerBlue: this.blueTeleCargoLow,
+        teleopCargoLowerRed: 0, // this.redTeleCargoLow,
+        teleopCargoUpperNear: 0,
+        teleopCargoUpperFar: 0,
+        teleopCargoUpperBlue: this.blueTeleCargoHigh,
+        teleopCargoUpperRed: 0, // this.redTeleCargoHigh,
+        teleopCargoTotal: this.blueTeleCargoLow + this.blueTeleCargoHigh,
+        matchCargoTotal: this.blueAutoCargoHigh + this.blueAutoCargoLow + this.blueTeleCargoHigh + this.blueTeleCargoLow,
+        autoTaxiPoints: this.getBlueAutoScore() - ((this.blueAutoCargoLow * 2) + (this.blueAutoCargoHigh * 4)),
+        autoCargoPoints: (this.blueAutoCargoLow * 2) + (this.blueAutoCargoHigh * 4),
+        autoPoints: this.getBlueAutoScore(),
+        quintetAchieved: false,
+        teleopCargoPoints: this.blueTeleCargoLow + (this.blueTeleCargoHigh * 2),
+        endgamePoints: this.getBlueEndScore(),
+        teleopPoints: this.getBlueTeleScore(),
+        cargoBonusRankingPoint: this.blueCargoBonus,
+        hangarBonusRankingPoint: this.blueHangarBonus,
+        foulCount: minRedPen,
+        techFoulCount: majRedPen,
+        adjustPoints: 0,
+        foulPoints: this.getBluePenalty(minRedPen, majRedPen),
+        rp: 0 + (this.blueCargoBonus ? 1 : 0) + (this.blueHangarBonus ? 1 : 0),
+        totalPoints: this.getBlueScore(minRedPen, majRedPen),
+      }
+    }
+  }
+
+  public fromTBA(tba: any, matchKey: string): RapidReactMatchDetails {
+    const details = new RapidReactMatchDetails();
+    details.matchKey = matchKey;
+    details.matchDetailKey = matchKey + "D";
+    // Red
+    details.redAutoTaxiRobot1 = tba.red.taxiRobot1 === "Yes";
+    details.redAutoTaxiRobot2 = tba.red.taxiRobot2 === "Yes";
+    details.redAutoTaxiRobot3 = tba.red.taxiRobot3 === "Yes";
+    details.redAutoCargoLow = tba.red.autoCargoLowerRed;
+    details.redAutoCargoHigh = tba.red.autoCargoUpperRed;
+    details.redTeleCargoLow = tba.red.teleopCargoLowerRed;
+    details.redTeleCargoHigh = tba.red.teleopCargoUpperRed;
+    details.redHangerRobot1 = this.endStatusFromString(tba.red.endgameRobot1);
+    details.redHangerRobot2 = this.endStatusFromString(tba.red.endgameRobot2);
+    details.redHangerRobot3 = this.endStatusFromString(tba.red.endgameRobot3);
+    details.redCargoBonus = tba.red.cargoBonusRankingPoint;
+    details.redHangarBonus = tba.red.hangarBonusRankingPoint;
+    // Blue
+    details.blueAutoTaxiRobot1 = tba.blue.taxiRobot1 === "Yes";
+    details.blueAutoTaxiRobot2 = tba.blue.taxiRobot2 === "Yes";
+    details.blueAutoTaxiRobot3 = tba.blue.taxiRobot3 === "Yes";
+    details.blueAutoCargoLow = tba.blue.autoCargoLowerBlue;
+    details.blueAutoCargoHigh = tba.blue.autoCargoUpperBlue;
+    details.blueTeleCargoLow = tba.blue.teleopCargoLowerBlue;
+    details.blueTeleCargoHigh = tba.blue.teleopCargoUpperBlue;
+    details.blueHangerRobot1 = this.endStatusFromString(tba.blue.endgameRobot1);
+    details.blueHangerRobot2 = this.endStatusFromString(tba.blue.endgameRobot2);
+    details.blueHangerRobot3 = this.endStatusFromString(tba.blue.endgameRobot3);
+    details.blueCargoBonus = tba.blue.cargoBonusRankingPoint;
+    details.blueHangarBonus = tba.blue.hangarBonusRankingPoint;
+    return details;
+  }
+
+  public endStatusToString(ptValue: number): string {
+    switch(ptValue) {
+      case RapidReactMatchDetails.HANGAR_LOW: return "Low";
+      case RapidReactMatchDetails.HANGAR_MID: return "Mid";
+      case RapidReactMatchDetails.HANGAR_HIGH: return "High";
+      case RapidReactMatchDetails.HANGAR_TRAVERSAL: return "Traversal";
+      default: return "None";
+    }
+  }
+
+  public endStatusFromString(stringValue: string): number {
+    switch(stringValue) {
+      case "Low": return RapidReactMatchDetails.HANGAR_LOW;
+      case "Mid": return RapidReactMatchDetails.HANGAR_MID;
+      case "High": return RapidReactMatchDetails.HANGAR_HIGH;
+      case "Traversal": return RapidReactMatchDetails.HANGAR_TRAVERSAL;
+      default: return 0;
+    }
+  }
+
   public getRedScore(minPen: number, majPen: number): number {
     return this.getRedAutoScore() + this.getRedTeleScore() + this.getRedEndScore() + this.getBluePenalty(minPen, majPen);
   }

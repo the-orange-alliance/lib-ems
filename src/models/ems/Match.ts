@@ -88,6 +88,8 @@ export default class Match implements IPostableObject {
         return new RoverRuckusMatchDetails();
       case 20:
         return new InfiniteRechargeMatchDetails();
+      case 22:
+        return new RapidReactMatchDetails();
       default:
         return new MatchDetails();
     }
