@@ -5,7 +5,7 @@ import * as Regions from "../../data/Regions";
 import * as Seasons from "../../data/Seasons";
 import {EventType} from "../../";
 import {getFromSeasonKey} from "../../data/Seasons";
-import {Event as TBAEvent} from "tba-api-v3client-ts/lib/esm/models/Event"
+import {Event as TBAEvent} from "tba-api-v3client-ts/lib/cjs/models/Event"
 
 export default class Event implements IPostableObject {
 

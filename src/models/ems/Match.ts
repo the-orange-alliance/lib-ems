@@ -7,8 +7,8 @@ import EnergyImpactMatchDetails from "./games/energy-impact/EnergyImpactMatchDet
 import AllianceMember from "./AllianceMember";
 import OceanOpportunitiesMatchDetails from "./games/ocean-opportunities/OceanOpportunitiesMatchDetails";
 import InfiniteRechargeMatchDetails from "./games/infinite-recharge/InfiniteRechargeMatchDetails";
-import {Match as TBAMatch} from "tba-api-v3client-ts/lib/esm/models/Match"
-import {Match_alliance} from "tba-api-v3client-ts/lib/esm/models/Match_alliance";
+import {Match as TBAMatch} from "tba-api-v3client-ts/lib/cjs/models/Match"
+import {Match_alliance} from "tba-api-v3client-ts/lib/cjs/models/Match_alliance";
 import {RapidReactMatchDetails} from "./index";
 import {WritableAlliance, WritableAlliances, WritableMatch} from "../tba/WritableMatch";
 

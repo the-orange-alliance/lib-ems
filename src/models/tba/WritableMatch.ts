@@ -1,4 +1,4 @@
-import {Match} from "tba-api-v3client-ts";
+import {Match} from "tba-api-v3client-ts/lib/cjs";
 
 export interface WritableMatch<T> {
   key: string;

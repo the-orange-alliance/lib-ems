@@ -6,7 +6,7 @@ import Match from "../models/ems/Match";
 import MatchDetails from "../models/ems/MatchDetails";
 import MatchParticipant from "../models/ems/MatchParticipant";
 import {EventType} from "../Types";
-import {EventService, MatchService, OpenAPI, TeamService} from "tba-api-v3client-ts";
+import {EventService, MatchService, OpenAPI, TeamService} from "tba-api-v3client-ts/lib/cjs";
 import {RapidReactRank} from "../models/ems";
 import {DEFAULT_BREAKDOWNS, WritableRankings} from "../models/tba/WritableRanks";
 import {createHash} from "crypto";

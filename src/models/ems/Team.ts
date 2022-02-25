@@ -1,6 +1,6 @@
 import IPostableObject from "../IPostableObject";
 import {TeamIdentifier} from "../../Types";
-import {Team as TBATeam} from "tba-api-v3client-ts/lib/esm/models/Team"
+import {Team as TBATeam} from "tba-api-v3client-ts/lib/cjs/models/Team"
 
 export default class Team implements IPostableObject {
   private _teamKey: number;
