@@ -20,7 +20,8 @@ import Event from "./Event";
 import Match from "./Match";
 import MatchDetails from "./MatchDetails";
 import MatchParticipant from "./MatchParticipant";
-import Ranking, {getRankingByEventType, getRankingBySeasonKey} from "./Ranking";
+import Ranking from "./Ranking";
+import { getRankingByEventType, getRankingBySeasonKey } from "./GetRankings";
 import Season from "./Season";
 import Region from "./Region";
 import ResetPassword from "./ResetPassword";
@@ -37,6 +38,11 @@ import EventConfiguration, {DEFAULT_RESET, FTC_RELIC_PRESET, FGC_PRESET, FRC_IR_
 import MatchConfiguration, {FTC_CONFIG, FGC_CONFIG, FRC_CONFIG} from "./MatchConfiguration";
 import Process from "./Process";
 import LiveStream from "./LiveStream";
+import {AllProcesses, AllProcessOperations} from "./Process"
+import Host from "./Host";
+import MatchMakerTeams from "./MatchMakerTeams";
+import UpdateSingleConfig from "./UpdateSingleConfig";
+import MatchMakerConfig from "./MatchMakerConfig";
 
 // Game-Specific Classes
 // Energy Impact
@@ -131,5 +137,11 @@ export {
   getRankingBySeasonKey,
   WPAKey,
   ResetPassword,
-  Username
+  Username,
+  AllProcesses,
+  AllProcessOperations,
+  Host,
+  MatchMakerTeams,
+  UpdateSingleConfig,
+  MatchMakerConfig
 };

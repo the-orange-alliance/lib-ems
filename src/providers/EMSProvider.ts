@@ -6,6 +6,11 @@ import {
 } from "../models/ems";
 import {EventType, TournamentType} from "../Types";
 import WPAKey from "../models/ems/WPAKey";
+import {MatchMakerConfig, MatchMakerTeams, Process} from "../models";
+import Host from "../models/ems/Host";
+import {AllProcesses, AllProcessOperations} from "../models/ems/Process";
+import UpdateSingleConfig from "../models/ems/UpdateSingleConfig";
+import CustomData from "../models/ems/CustomData";
 
 const PORT = process.env.REACT_APP_EMS_API_PORT;
 
@@ -659,6 +664,77 @@ class EMSProvider {
         resolve(res);
       }).catch((error: HttpError) => reject(error));
     });
+  }
+
+  public listEcosystem(): Promise<Process[]> {
+    return new Promise<any>((resolve, reject) => {
+      this.get("api/services").then((res: any) => {
+        resolve(res.map((p: any) => new Process().fromJSON(p)));
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public killEcosystem(): Promise<boolean> {
+    return new Promise<any>((resolve, reject) => {
+      this.delete("api/services/killEcosystem").then((res: any) => {
+        resolve(res.ok);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public manageProcess(procOp: AllProcessOperations, procName: AllProcesses, host?: Host): Promise<Process> {
+    if(!host) host = new Host('');
+    return new Promise<any>((resolve, reject) => {
+      this.post(`api/services/${procOp}/${procName}`, host).then((res: any) => {
+        resolve(new Process().fromJSON(res));
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public getConfig(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.get(`api/config`).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public setConfig(data: any): Promise<any> {
+    const conf = new CustomData(data);
+    return new Promise<any>((resolve, reject) => {
+      this.post(`api/config/set/all`, conf).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public updateSingleConfig(key: string, data: any): Promise<any> {
+    const toUpdate = new UpdateSingleConfig(key, data);
+    return new Promise<any>((resolve, reject) => {
+      this.post(`api/config/set/single`, toUpdate).then((res: any) => {
+        resolve(res);
+      }).catch((error: HttpError) => reject(error));
+    });
+  }
+
+  public matchMakerTeams(tournamentType: TournamentType, teams: number[]): Promise<string> {
+    const mmt = new MatchMakerTeams();
+    mmt.teams = teams;
+    mmt.tournamentType = tournamentType;
+    return new Promise(((resolve, reject) => {
+      this.post('api/matchmaker/teams', mmt).then((res) => {
+        resolve(res.data.path);
+      }).catch((error: HttpError) => reject(error));
+    }));
+  }
+
+  public matchMaker(config: MatchMakerConfig): Promise<Match[]> {
+    return new Promise(((resolve, reject) => {
+      this.post('api/matchmaker/run', config).then((res) => {
+        if(!Array.isArray(res.data)) reject("MatchMaker response is not an array")
+        else resolve(res.data.map(m => new Match().fromJSON(m)));
+      }).catch((error: HttpError) => reject(error));
+    }));
   }
 
 }

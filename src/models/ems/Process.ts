@@ -1,4 +1,9 @@
-export default class Process {
+import IPostableObject from "../IPostableObject";
+
+export type AllProcesses = 'ems-fms'| 'ems-sck' | 'ems-web';
+export type AllProcessOperations = 'start'| 'stop' | 'restart';
+
+export default class Process implements IPostableObject{
   private _name: string;
   private _id: number;
   private _pid: number;
@@ -8,6 +13,7 @@ export default class Process {
   private _envMode: string;
   private _address: string;
   private _port: number;
+
 
   public static fromPM2(pm2Proc: any, host?: string): Process {
     const newProcess = new Process();
@@ -31,6 +37,34 @@ export default class Process {
       return 0.0;
     }
     return bytes / 1048576.0;
+  }
+
+  fromJSON(json: any): IPostableObject {
+    const process = new Process();
+    process.name = json.name;
+    process.id = json.id;
+    process.pid = json.pid;
+    process.status = json.status;
+    process.cpu = json.cpu;
+    process.mem = json.mem;
+    process.envMode = json.envMode;
+    process.address = json.address;
+    process.port = json.port;
+    return process;
+  }
+
+  toJSON(): object {
+    return {
+      name: this.name,
+      id: this.id,
+      pid: this.pid,
+      status: this.status,
+      cpu: this.cpu,
+      mem: this.mem,
+      envMode: this.envMode,
+      address: this.address,
+      port: this.port,
+    };
   }
 
   get name(): string {

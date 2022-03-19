@@ -1,8 +1,6 @@
 import IPostableObject from "../IPostableObject";
 import Team from "./Team";
-import {EnergyImpactRanking, InfiniteRechargeRank, OceanOpportunitiesRank, RapidReactRank, RoverRuckusRank} from "./";
-import {EventType} from "../../Types";
-import {WritableRank} from "../tba/WritableRanks";
+import {WritableRank} from "../tba";
 
 export default class Ranking implements IPostableObject {
   private _rankKey: string;
@@ -154,39 +152,5 @@ export default class Ranking implements IPostableObject {
 
   set team(value: Team) {
     this._team = value;
-  }
-}
-
-export function getRankingByEventType(eventType?: EventType): Ranking {
-  switch (eventType) {
-    case "fgc_2018":
-      return new EnergyImpactRanking();
-    case "fgc_2019":
-      return new OceanOpportunitiesRank();
-    case "ftc_1819":
-      return new RoverRuckusRank();
-    case "frc_20":
-      return new InfiniteRechargeRank();
-    case "frc_22":
-      return new RapidReactRank();
-    default:
-      return new Ranking();
-  }
-}
-
-export function getRankingBySeasonKey(seasonKey: string): Ranking {
-  switch (seasonKey) {
-    case "2018":
-      return new EnergyImpactRanking();
-    case "2019":
-      return new OceanOpportunitiesRank();
-    case "1819":
-      return new RoverRuckusRank();
-    case "20":
-      return new InfiniteRechargeRank();
-    case "22":
-      return new RapidReactRank();
-    default:
-      return new Ranking();
   }
 }

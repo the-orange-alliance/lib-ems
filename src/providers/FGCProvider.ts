@@ -6,10 +6,11 @@ import Team from "../models/ems/Team";
 import Match from "../models/ems/Match";
 import MatchDetails from "../models/ems/MatchDetails";
 import MatchParticipant from "../models/ems/MatchParticipant";
-import Ranking, {getRankingBySeasonKey, getRankingByEventType} from "../models/ems/Ranking";
+import Ranking from "../models/ems/Ranking";
 import LiveStream from "../models/ems/LiveStream";
 import {EventType} from "../Types";
 import {Providers} from "../models/ems/EventConfiguration";
+import {getRankingByEventType, getRankingBySeasonKey} from "../models";
 
 export interface ICompleteTeamResponse {
   team: Team;
